@@ -46,7 +46,7 @@ class LoginController extends Controller
         // Access Status
 
         if($access == UsersProvider::ACCESS_ADMIN){
-            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/admin');
+            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/admin/');
         }
 
         if($access == UsersProvider::ACCESS_ORGANIZATION){

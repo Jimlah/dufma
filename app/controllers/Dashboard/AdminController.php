@@ -8,8 +8,9 @@ use App\Core\Http\Controller;
 
 class AdminController extends Controller
 {
-    public function default(Request $request, Response $response)
+    public function index(Request $request, Response $response)
     {   
-        
+
+        $response->view('/dashboard/admin/index',[]);
     }
 }
