@@ -20,19 +20,19 @@
 					<div
 						class="page-title-box">
 						{# <div class="page-title-right">
-												                                        <ol class="breadcrumb m-0">
-												                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-												                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-												                                            <li class="breadcrumb-item active">Products</li>
-												                                        </ol>
-												                                    </div> #}
+																		                                        <ol class="breadcrumb m-0">
+																		                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+																		                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
+																		                                            <li class="breadcrumb-item active">Products</li>
+																		                                        </ol>
+																		                                    </div> #}
 						<h4 class="page-title">Organization</h4>
 					</div>
 				</div>
 			</div>
 			<!-- end page title -->
 
-            {{get_notification()}}
+			{{get_notification()}}
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -131,22 +131,24 @@
 											<th>Email</th>
 											<th>Username</th>
 											<th>Status</th>
-                                            <th>Date</th>
+											<th>Date</th>
 										</tr>
 									</thead>
 
 
 									<tbody>
-										<tr>
-											<td>Tiger Nixon</td>
-											<td>System Architect</td>
-											<td>Edinburgh</td>
-											<td>61</td>
-											<td>2011/04/25</td>
-											<td>$320,800</td>
-                                            <td>$320,800</td>
-										</tr>
-										
+
+										{% for item in org %}
+											<tr>
+												<td>{{item.firstname}}</td>
+												<td>{{item.firstname}}</td>
+												<td>{{item.lastname}}</td>
+												<td>{{item.email}}</td>
+												<td>{{item.username}}</td>
+												<td>{{item.status == 0 ? 'INACTIVE' : 'ACTIVE' }}</td>
+												<td>{{item.created_at | date('d M Y')}}</td>
+											</tr>
+										{% endfor %}
 									</tbody>
 								</table>
 							</div>
