@@ -8,6 +8,7 @@
 
 
 {% block main %}
+
     <div class="container">
         <div class="logo_holder">
             <img src="public/images/favicon.png" alt="">
@@ -15,7 +16,7 @@
         <div class="wrapper">
             <div class="options">
                 <div class="organization selector active">
-                    <h2>Log in as an organization</h2>
+                    <h2>Log in as an organization {{get_notification()}}</h2>
                     <div class="svg">
                         <img src="{{asset('images/organization.svg')}}" alt="organization">
                     </div>

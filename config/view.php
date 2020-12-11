@@ -19,7 +19,8 @@ return array(
     
     #Functions allowed in views
     'functions' => array(
-        'var_dump'
+        'var_dump',
+        'get_notification'
     ),
 
     #Filters allowed in view

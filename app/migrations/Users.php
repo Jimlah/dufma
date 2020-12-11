@@ -25,7 +25,8 @@ class Users implements MigrationInterface
                 $table->field("lastname")->varchar();
                 $table->field("email")->varchar();
                 $table->field("password")->varchar();
-                $table->field("type")->tinyint();
+                $table->field("access")->tinyint();
+                $table->field("status")->tinyint();
             });
     }
 

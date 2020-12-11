@@ -4,7 +4,6 @@ namespace App\Middlewares;
 
 use App\Core\Http\Request;
 use App\Core\Interfaces\MiddlewareInterface;
-
 use App\Core\Tools\Auth;
 
 class Authentication implements MiddlewareInterface
@@ -19,14 +18,10 @@ class Authentication implements MiddlewareInterface
     public function trigger(Request $request, ?array $args = null)
     {   
         $user = Auth::user();
-
-        if(!$user) {
+        if(!$user){
             return redirect('/login');
         }
-
-        $request->setCustomMethod('user', function () use ($user) {
-            return $user;
-        });
+        $request->setCustomMethod('user', fn() => $user);
 
         return $request;
     }
