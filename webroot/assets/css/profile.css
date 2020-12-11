@@ -1,0 +1,232 @@
+:root{
+    --light_green:#1ab394;
+    --dark_blue:#2f4050;
+}
+
+ul{padding:0;list-style: none;}
+
+.ads{
+    margin-top:50px;
+}
+
+.proceed_to_dashboard_cta{
+  color:#fff;
+  background:#1ab394;
+  display:block;
+  padding:0.8rem 0;
+  text-align:center;
+  border-radius:3px;
+  box-shadow:1px 2px 3px grey;
+}
+
+.dashboard-header{
+    background:#eefffc86;
+    background: #2f4050f1;
+    color:#fff;
+}
+
+
+.profile_header{
+    width:100%;
+    position: relative;
+    background:linear-gradient(to right,rgba(0,0,0,0.5),rgba(0,0,0,0.4)),url("../images/harvests.jpg");
+    height:150px;
+    border-radius: 5px;
+    margin-bottom:2rem;
+}
+
+.image_circle{
+    height:100px;
+    width:100px;
+    border:2px solid #fff;
+    border-radius:50%;
+    overflow:hidden;
+    position: absolute;
+    left:2rem;
+    bottom:-10px;
+}
+
+.image_circle img{
+    height:100%;
+    width:100%;
+    z-index:1;
+    position:absolute;
+}
+
+.image_circle i{
+    z-index:2;
+    position:absolute;
+    bottom:0.5rem;
+    left:45%;
+}
+
+.user_info{
+    position: absolute;
+    left:calc(3rem + 103px);
+    bottom:50px;
+}
+
+/* Bank set up */
+.bank_set_up{
+    background:#fff;
+    height:100px;
+    color:#000;
+    padding:0.3rem 1rem;
+    display:flex;
+    align-items:center;
+    border-radius:10px;
+    box-shadow: 0px 2px 4px rgb(77, 73, 73);
+    position: relative;
+}
+.circle_bank_icon{
+    margin-right:2rem;
+    height:30px;
+    width:30px;
+    border-radius:50%;
+    border:1px solid var(--light_green);
+    display:flex;
+    align-items:center;
+    justify-content: center;
+}
+
+.bank_set_up h3,.major_header{
+    color:rgb(102, 101, 101);
+    font-weight:400;
+    text-transform:uppercase;
+    font-size:1.2rem;
+    letter-spacing:1px;
+}
+
+.bank_set_up i{
+    color:var(--light_green);
+}
+
+.util p{
+    display:inline;
+}
+
+.set_bank_btn{
+    position: absolute;
+    right:2rem;
+    padding:0.5rem 1rem;
+    border-radius:22px;
+    background:var(--light_green);
+    color:#fff;
+    transform:translateY(-7px);
+    -webkit-transform:translateY(-7px);
+    margin-left:20px;
+}
+
+.set_bank_btn:hover{
+    color:#fff;
+}
+
+.other_info{
+    margin-top:16px;
+    display:grid;
+    grid-template-columns: repeat(2,1fr);
+    /* justify-items:center; */
+    grid-gap:20px;
+    margin-bottom:2rem;
+}
+
+/* User info */
+.user_full_info_wrapper,.access_list,.accounts_and_profiles{
+    background:#fff;
+    color:#000;
+    border-radius:6px;
+    padding:0.5rem 0.6rem 0 0 ;
+}
+
+.user_full_info li,.access_list ul li,.accounts_and_profiles ul li{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    text-transform:uppercase;
+    margin-bottom:1.5rem;
+    padding-left:0.8rem;
+}
+
+
+.user_full_info li span{
+    text-transform: lowercase;
+    font-size:0.95rem;
+    margin-right:0.5rem;
+}
+
+
+.user_full_info i,.other_info i{color:var(--light_green);}
+.major_header{padding-left:0.8rem;}
+.edit{margin-left:auto;}
+.access_list{
+    height:fit-content;
+}
+
+.access_list h3{font-weight:bold;}
+.access_list ul li{
+    font-weight:600;
+    margin-bottom:2rem;
+    text-transform:capitalize;
+    color:rgb(70, 64, 64);
+}
+
+.access_list ul li span{
+    color:#22685a;
+    background:#1ab39450;
+    padding:3px 5px;
+    font-size:0.95rem;
+    border-radius:6px;
+    cursor:pointer;
+    width:50px;
+    text-align:center;
+    font-weight:bold;
+}
+
+.accounts_and_profiles ul li{
+    font-size: 0.9em;
+    display:flex;
+    align-items:center;
+    justify-content:flex-start;
+}
+
+.accounts_and_profiles ul li span i{
+    margin-left:10px;
+}
+
+hr{
+    margin-top:0;
+    margin-bottom:5px;
+}
+
+.sidebar-container .setings-item,
+.sidebar-container ul.sidebar-list li,
+.sidebar-container .sidebar-message{
+    background:#fff;
+}
+
+@media(max-width:854px){
+    .set_bank_btn{
+        position:static;
+        transform:translateY(0);
+        -webkit-transform:translateY(0);
+        margin-left:0;
+    }
+
+    .util p{
+        display:block;
+    }
+
+}
+
+@media(max-width:594px){
+    .other_info{
+        grid-template-columns:1fr;
+    }
+}
+
+@media(max-width:540px){
+    .bank_set_up{
+        height:140px;
+    }
+}
+

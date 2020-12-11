@@ -1,0 +1,365 @@
+/* Wallet.php styling */
+
+*{box-sizing: border-box;}
+
+
+
+.workzone{
+    height:100%;
+    width: 100%;
+    display:grid;
+    grid-template-columns: 20% 80%;
+    grid-gap:30px;
+}
+
+.mini_side_nav{
+    padding-left:30px;
+    padding-top:5rem;
+}
+
+.mini_side_nav h3{margin-bottom:0.5rem;font-weight:400;font-size:15px;}
+.mini_side_nav h2{margin-top:0.5rem;}
+
+.transaction_actions{
+    margin-top:100px;
+    padding:0;
+}
+
+.transaction_actions li{
+    font-size:15px;
+    margin-bottom:2rem;
+    border-bottom:1px solid rgba(131, 255, 238, 0.239);
+    cursor:pointer;
+    border-radius:5px;
+    padding:5px 0 5px 5px;
+    transition: all 0.3s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+
+.transaction_actions li:hover{
+    background:#1ab394;
+    color:#fff;
+}
+
+.right{
+    margin-right:1rem;
+}
+
+.mini-headers{
+    display:grid;
+    grid-template-columns: repeat(3,1fr);
+    width:90%;
+    
+}
+
+.mini-headers div{
+    padding:0.5rem 0 0.5rem 0 ;
+    text-align: center;
+    border:1px solid #000;
+    border-radius:3px;
+    margin-right:5px;
+    cursor: pointer;
+    
+}
+
+.mini-headers div.active{
+    background:#1ab394;
+    color:#fff;
+    border-color:#1ab394;
+}
+
+
+.payment_summaries{
+    display: flex;
+    margin-top:2.5rem;
+    flex-wrap:wrap;
+    ms-flex-wrap:wrap;
+
+}
+
+.payment_summaries > div{
+    background:#fff;
+    width:250px;
+    height:150px;
+    border-radius:10px;
+    padding:0.5rem 1rem;
+    background:#f3f3f4;
+    box-shadow: -10px 10px 20px #bebebe, 
+    10px -10px 10px #929090;
+    margin-bottom:1rem;
+}
+
+.transaction,.credit{
+    margin-right:2rem;
+}
+
+
+.payment_summaries > div > h3{
+    font-weight:400;
+    color:#000;
+}
+
+.graph{
+    height:8px;
+    width:100%;
+    margin-bottom: 2rem;
+    margin-top:5rem;
+    border-radius:10px;
+    overflow:hidden;
+    position: relative;
+    background:rgba(128, 128, 128, 0.198);
+}
+
+.liner{
+    position:absolute;
+    height:100%;
+    border-radius: 5px;
+}
+
+.transaction .liner{
+    width:80%;
+    background:purple;
+}
+
+.credit .liner{
+    width:90%;
+    background:green;
+}
+
+.debit .liner{
+    width:97%;
+    background:red;
+}
+
+.rate{float:right;}
+.rate h3{display:inline;font-size:26px;color: rgb(39, 38, 38);}
+.rate .line_100{display:inline;}
+
+.transaction_header{
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    margin-top:3rem;
+    background:rgba(128, 128, 128, 0.26);
+    justify-items: center;
+    padding:0.5rem 0;
+    border-radius: 4px;
+    color:rgb(39, 38, 38);
+    width:90%;
+}
+
+.transaction_header > span{
+    font-size:1rem;
+}
+
+.transactions{margin-top:1rem;width:90%;}
+.transactions li{
+    display:grid;
+    grid-template-columns: repeat(5,1fr);
+    justify-items: center;
+    padding:1rem 0.2rem;
+    border:1px solid rgba(128, 128, 128, 0.26);
+    border-radius:3px;
+    margin-top:1rem;
+    cursor:pointer;
+    position: relative;
+    overflow:hidden;
+    transition: all 0.2s ease-in-out;
+    background:rgba(255, 255, 255, 0.212);    
+
+}
+
+.transactions li:hover{
+    background:#1ab394;
+    color:#fff;
+    overflow:visible;
+}
+
+
+
+.transaction_details{
+    transition:all 0.3s ease-in;
+    color:#fff;
+    display:flex;
+    justify-content: space-around; 
+    align-items:center; 
+    height:0;
+    overflow:hidden;
+    width:100%;
+    grid-column:1/6;
+}
+
+.transactions li:hover .transaction_details{
+    height:100px;
+}
+
+.transaction_details h1{margin-top:0.4rem;margin-bottom: 0.4rem;}
+.transaction_details h3,.transaction_details h2{margin-top:0.4rem;margin-bottom: 0.4rem;}
+
+.transaction_details > div{text-align:center;}
+.paid,.pay_cta{
+    padding:5px 2rem;
+    border:1px solid #fff;
+    border-radius:22px;
+    color:#fff;
+}
+
+.pay_cta{
+    background:#97d3c79a;
+    transition:all 0.3s ease-in-out;
+}
+
+.pay_cta:hover{
+    background:#fff;
+    color:#1ab394;
+}
+
+
+/* Media Queries */
+@media(max-width:940px){
+    .transaction_details h2{font-size:18px;}
+    .transaction_details h3{font-size:16px;}
+    .transaction_details h1{font-size:20px;}
+}
+
+@media(max-width:544px){
+    .workzone{
+        grid-template-columns: 1fr;
+        grid-gap:5px;
+    }
+    .transaction_actions{margin-top:1rem;}
+    .transaction_actions li{margin-bottom:auto;}
+    .payment_summaries{justify-content: center;justify-content: center;}
+.transaction,.credit{margin-right:0;}
+.headers h1{padding-left:1.5rem;}
+.mini-headers{width:100%;}
+.payment_summaries > div{height:auto;}
+.transaction_header{
+    margin-left:1rem;
+    width:100%;
+}
+.transactions{
+    width:100%;
+    margin-left:1rem;
+}
+
+.mini_side_nav{
+    padding-top:10px;
+}
+}
+
+
+
+/* Toggling of display of transactions */
+.transactions{
+    display:none;
+}
+
+.transactions.showing{
+    display:block;
+}
+
+.wallet_backdrop{
+    height:100vh;
+    width:100vw;
+    position: fixed;
+    background:rgba(0, 0, 0, 0.239);
+    z-index:10;
+    cursor: pointer;
+    transition: 0.4s ease-in-out;
+}
+
+.not_visible{
+    opacity:0;
+    pointer-events: none;
+}
+
+.visible{
+    opacity:1;
+    pointer-events: all;
+}
+
+
+.wallet_fund,.uic_transfer,.fund_withdraw{
+    position: absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    z-index:11;
+    background:#fff;
+    /* min-width:250px; */
+    min-width:300px;
+    padding:1rem 3rem 2rem 3rem;
+    border-radius:5px;
+    box-shadow:0 20px 40px 3px rgba(204, 204, 204, 0.171);
+}
+
+.wallet_fund_form,.uic_transfer_form,.fund_withdraw_form{
+    margin:auto;
+    display: block;
+}
+
+.fund_withdraw_form #email_address,
+.uic_transfer_form #email_address,
+.wallet_fund_form #email_address,
+.wallet_fund_form #amount{
+    padding:0.5rem 0.2rem;
+    width:100%;
+    border-radius:3px;
+    border:2px solid #ccc;
+}
+
+.wallet_fund_form input,
+.uic_transfer_form input,
+.fund_withdraw_form input
+{
+    margin-bottom:1rem;
+    display:block;
+    outline:none;
+}
+
+.wallet_fund_form input[type='submit'],
+.uic_transfer_form input[type='submit'],
+.fund_withdraw_form input[type='submit']
+{
+    background:#1ab394;
+    color:#fff;
+    border:none;
+    padding:0.8rem 1rem;
+    margin:auto;
+    border-radius:2px;
+}
+
+.wallet .panel,
+.wallet .panel-body{
+    background:#fff;
+}
+
+.mini-headers div{
+color:#000;}
+
+
+.transactions{
+color:#000;}
+
+
+
+
+
+.notification-table h5{
+    color:#000;
+}
+
+.wallet .right{
+    background:#fff !important;
+}
+
+.wallet .line_100{
+    color:#000;
+}
+
+.panel-body{
+    overflow:auto;
+}
+
+
+

@@ -1,0 +1,68 @@
+.hero{height:420px;background:#000;margin-top:75px}
+.bubbles{margin:auto;text-align:center;margin-top:10px}
+.bubbles span{height:10px;width:10px;background:#ccc;display:inline-block;border-radius:50%}
+.bubbles span.active{background:#626262}
+.info{margin-top:3rem;padding:0 100px;display:grid;grid-template-columns:repeat(2,1fr);grid-gap:2rem;padding-bottom:4rem}
+.text h2{font-size:2.6rem;margin-bottom:1.5rem;position:relative;width:fit-content;text-transform:uppercase;color:#626262}
+.text h2 span{display:block;position:absolute;left:0;bottom:-3px;width:90%;height:2px;background:#626262}
+.text p{line-height:1.4rem}
+.illustr img{width:100%;height:100%;object-fit:cover}
+.demo_req{background:#fff;padding:2rem 100px}
+.demo_req h2{text-align:center}
+.demo_req_content{display:grid;grid-template-columns:repeat(2,1fr);margin-top:2rem}
+.form{justify-items:center;margin-left:2rem}
+.form input::placeholder,.form textarea::placeholder{font-size:0.9rem;}
+.demo_req .form input,.demo_req .form textarea{display:block;width:350px;border:none;border-radius:3px;outline:0;margin-bottom:1rem;font-family:Montserrat;font-size:1.05rem;border:1px solid #ccc;padding:.3rem .4rem}
+.demo_req .form textarea{padding:.3rem;max-width:400px}
+.demo_req .form input:not([type=submit]){padding-bottom:.3rem}
+.demo_req .form input[type=submit]{border:none;border-radius:3px;padding:.5rem 1rem;background:#1ab394;color:#fff;width:fit-content;cursor:pointer;margin:0}
+.content p{margin-top:1rem}
+.small{height:200px;object-fit:cover;float:right}
+.solutions h2{position:relative;text-align:center;margin-top:1.6rem;margin-bottom:1.5rem}
+.solutions h2 span{position:absolute;bottom:-3px;height:2px;background:#000;width:80px;left:50%;transform:translateX(-50%)}
+.cards{display:grid;grid-template-columns:repeat(4,1fr);max-width:800px;margin:auto;justify-items:center;grid-gap:1rem;padding-bottom:3rem}
+.card{height:170px;width:145px;border-radius:5px;box-shadow:2px 20px 40px #cccccc3b;background:#fff;display:grid;grid-template-rows:75% 25%;text-align:center;padding-bottom:.3rem}
+.card_image{height:100px;width:100px;border-radius:50%;background:#a3f1d05e;margin:auto}
+.card_image img{height:65px;width:65px;object-fit:cover}
+.card_text p{font-weight:600}
+.newsletter{height:300px;background:#fff}
+.newsletter>div{background:#a3f1d05e;max-width:70%;display:grid;grid-template-columns:40% 60%;padding:3rem 5rem;justify-items:center;border-radius:4px;box-shadow:0 20px 40px rgba(204,204,204,.767)}
+.newsletter form input[type=email]{padding:.5rem 1rem;outline:0;border:1px solid #ccc;border-radius:5px}
+.newsletter form input[type=submit]{padding:.3rem 1rem;margin-left:.3rem;border-radius:5px;background:#1ab394;cursor:pointer;color:#fff;outline:0;border:none}
+.hero{position:relative;overflow:hidden}
+.hero::before{content:'';background:rgba(0,0,0,.383);z-index:5;left:0;top:0;width:100%;height:100%;position:absolute}
+.hero img{height:100%;width:100%;object-fit:cover;position:absolute;left:0;top:0;transition:.4s ease}
+.hero img.float{top:-100%}
+.hero .text{position:absolute;top:50%;left:3rem;transform:translateY(-50%);z-index:6;color:#fff}
+.hero .text2{opacity:0}
+.hero .text3{opacity:0}
+.hero .text a{margin-top:1rem;color:#fff;display:inline-block;background:#1ab394;border-radius:2px;padding:.5rem 1rem}
+.hero .text h1{font-size:3rem}
+@media(max-width:897px){
+.newsletter>div{grid-template-columns:1fr}
+.news_form{margin-top:1rem}
+}
+@media(max-width:820px){
+.demo_req_content,.info{grid-template-columns:1fr}
+.content img{transform:scale(.5)}
+.form{justify-items:center;margin:auto;margin-top:2rem}
+.small{display:none}
+.demo_req_content{text-align:center;margin-top:0}
+.form input[type=submit]{margin:auto;display:inline-block}
+}
+@media(max-width:556px){
+.cards{grid-template-columns:repeat(2,1fr)}
+.info{padding:0 20px}
+.demo_req{padding:1rem 20px}
+.hero{height:280px}
+.newsletter>div{max-width:96%;padding:3rem 2rem}
+.main_nav{padding:0 20px}
+h1{font-size:1.6rem!important}
+h2{font-size:1.4rem!important}
+.hero .text{left:1.2rem}
+.text p{margin-right:1rem}
+.demo_req_content{display:flex;flex-direction:column}
+.demo_req .form input,.demo_req .form textarea{width:100%}
+}
+.card_text p{color:#3a3939;font-weight:400}
+.content p,.text .erp_info{line-height:1.6rem}

@@ -1,0 +1,95 @@
+.forma > *{
+    padding:0;
+    margin:0;
+    font-family:Montserrat;
+    box-sizing: border-box;
+}
+
+.forma{
+    padding:30px 50px;
+    background:#1ab394;
+    width:350px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items:center;
+    border-radius:5px;
+    box-shadow:0 3px 5px 2px rgba(0, 0, 0, 0.301);
+    margin:auto;
+}
+
+.forma p{
+    margin-bottom:1rem;
+    /* width:100%; */
+}
+
+.forma p label,.forma p input{
+    display:block;
+    width:100%;
+}
+
+.forma p label{
+    color:#fff;
+    margin-bottom:0.2rem;
+}
+
+.forma p input,.forma input[name="add_parameters"]{
+    padding:0.4rem 1rem;
+    border-radius: 5px;
+    border:none;
+
+}
+
+
+
+.forma a{
+    padding:3px 20px;
+    background:#fff;
+}
+
+#add_selected{
+    padding:5px 10px;
+    border:none;
+    outline:none;
+    border-radius:3px;
+}
+
+.forma button[type="submit"]{
+    border:none;
+    outline:none;
+    border-radius:5px;
+    padding:9px 30px;
+    width:100%;
+    background:#fff;
+    cursor:pointer;
+    text-transform:uppercase;
+    box-shadow:0 2px 6px 3px rgba(0, 0, 0, 0.253);
+    transition:background 0.2s ease-in,
+    color 0.2s ease-in;
+    font-weight:bold;
+}
+
+.forma select{
+    border-radius:5px;
+    padding:0.4rem 0.5rem;
+    outline:none;
+}
+
+.forma label[for="add_parameters"]{
+    color:rgb(231, 231, 231);
+}
+
+.forma button[type="submit"]:hover{
+    background:rgb(127, 200, 127);
+    color:#fff;
+}
+
+
+
+/* Overwrite workzone grid property */
+.workzone{display:flex;
+    flex-direction:column;
+            align-items:center;
+        justify-content:center;}
+
+.workzone h1{font-size:3.5rem;text-transform:uppercase;}

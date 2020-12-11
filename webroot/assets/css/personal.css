@@ -1,0 +1,311 @@
+* {box-sizing:border-box}
+a:hover{color:#192c29;}
+/* Slideshow container */
+.slideshow-container {
+  max-width: 1000px;
+  position: relative;
+  margin: auto;
+}
+ul{padding:0;list-style:none;}
+
+/* Hide the images by default */
+.mySlides,.mySlides2 {
+  display: none;
+  height:20vh;
+}
+
+/* Next & previous buttons */
+.prev, .nett {
+  cursor: pointer;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  margin-top: -22px;
+  padding: 16px;
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  transition: 0.6s ease;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+}
+
+/* Position the "next button" to the right */
+.nett {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .nett:hover {
+  background-color: rgba(0,0,0,0.8);
+}
+
+.mySlides img,.mySlides2 img{
+    height:100%;
+    width:100%;
+}
+
+/* Caption text */
+.text {
+  color: #f2f2f2;
+  font-size: 15px;
+  padding: 8px 12px;
+  position: absolute;
+  bottom: 8px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+/* Fading animation */
+.faded {
+  -webkit-animation-name: fade;
+  -webkit-animation-duration: 1.5s;
+  animation-name: fade;
+  animation-duration: 1.5s;
+}
+
+@-webkit-keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+@keyframes fade {
+  from {opacity: .4}
+  to {opacity: 1}
+}
+
+.ads{
+    margin-top:50px;
+}
+
+.proceed_to_dashboard_cta{
+  color:#fff;
+  background:#1ab394;
+  display:block;
+  padding:0.8rem 0;
+  text-align:center;
+  border-radius:3px;
+  box-shadow:1px 2px 3px grey;
+}
+
+.services{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  grid-auto-rows:minmax(150px,auto);
+  padding-left:0;
+  padding-right:0;
+  grid-gap:15px;
+}
+
+.services > div{
+  background:#fff;
+  border-radius:5px;
+  box-shadow:1px 1px 2px 2px rgba(207, 201, 201, 0.319),
+              -1px -2px 2px 2px rgba(207, 201, 201, 0.156);
+
+}
+
+.services h5{padding:5px 0 7px 5px;margin-bottom:0;}
+.services hr{margin:0;}
+.risk_management{
+  grid-column:1/3;
+}
+
+
+.inventory_management,.monitoring_eval{
+  grid-row:2/4;
+}
+
+
+.context{
+  padding:0.5rem 1rem;
+}
+
+.check_location,.im_btn{
+  background:#1ab394;
+  color:#fff;
+  padding:0.5rem 1rem;
+  border-radius:5px;
+  margin-top:5px;
+  box-shadow:0px 0px 2px 2px rgba(207, 201, 201, 0.319);
+}
+
+.map{float:right;}
+.fin_management{
+  background:#1ab394 !important;
+  color:#fff;
+}
+
+.fin_management h1{
+  margin-top:10px;
+}
+
+.fin_management h3,.fin_management h1{
+  font-weight:400;
+}
+
+.fin_management .context{
+  text-align:center;
+}
+
+.fin_management .im_btn{
+  color:#1ab394;
+  background:#fff;
+}
+
+
+
+
+/****************************
+*      Background Colors        *
+****************************/
+.bk-primary {
+  background: #325d88;
+}
+.bk-success {
+  background: #93c54b;
+}
+.bk-warning {
+  background: #f47c3c;
+}
+.bk-danger {
+  background: #d9534f;
+}
+.bk-info {
+  background: #29abe0;
+}
+.bk-white,
+.bk-light {
+  background: #fff;
+}
+.bk-brand {
+  background: #37a6c4;
+}
+.bk-dark {
+  background: #222;
+}
+.bk-blue {
+  background: #0010ce;
+}
+.bk-alt {
+  background: #f7f7f7;
+}
+.bk-ghost {
+  background: transparent;
+}
+.bk-img {
+  position: relative;
+  width: 100%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url(../../img/login-bg.jpg);
+}
+.bk-fixed {
+  background-attachment: fixed;
+}
+.hr-green {
+  height: 2px;
+  background: #37a6c4;
+}
+.hr-grey {
+  height: 2px;
+  background: #f0f0f0;
+}
+.hr-dashed {
+  background-color: transparent;
+  border-top: 1px dotted #edf0f5;
+  color: transparent;
+  height: 1px;
+  margin: 20px 0;
+}
+.panel {
+  overflow: hidden;
+}
+/****************************
+*      Border        *
+****************************/
+.block-anchor {
+  display: block;
+}
+
+.text-white,
+.text-light {
+  color: #fff !important;
+}
+
+
+/* Scrollbar fixes */
+.sidebar-collapse{
+  height:100vh;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
+.sidebar-collapse::-webkit-scrollbar-thumb,
+.grid2-evaluation::-webkit-scrollbar-thumb{
+  background:#1ab394;
+  width:5px;
+  height:40px;
+  transition:background 0.5s ease-in-out;
+  border-radius:5px;
+
+}
+
+
+
+.sidebar-collapse::-webkit-scrollbar,
+.grid2-evaluation::-webkit-scrollbar{
+  width:8px;
+  /* background:#1ab394; */
+}
+
+.sidebar-collapse::-webkit-scrollbar-thumb:hover,
+.grid2-evaluation::-webkit-scrollbar-thumb:hover
+{
+  background:#1ee2bb;
+}
+
+.parentd > ul{
+  display:none;
+}
+
+.parentd > a > .arrow{
+  transform:rotate(-90deg);
+}
+
+.opened > a > .arrow{
+  transform: rotate(90deg);
+}
+
+.opened > ul{
+  display:block;
+}
+
+

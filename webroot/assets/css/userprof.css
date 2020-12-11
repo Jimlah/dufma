@@ -1,0 +1,54 @@
+.your_info,.contract_info{
+    box-shadow: 1px 1px 1px 2px #1ab39410,
+    -1px -1px 1px 2px #1ab39410;
+    ;
+    padding: 0;
+    margin:1rem;
+    border-radius:6px;
+}
+
+.your_info li,.contract_info li{
+    background:rgba(148, 139, 139, 0.143);
+    padding:1.5rem;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+.contract_info li{
+    background:#1ab39417;
+}
+
+.editor{
+    height:30px;
+    width:30px;
+    border-radius: 50%;
+    display:flex;
+    align-items: center;
+    justify-content: center;
+    background:#1ab394;
+    cursor: pointer;
+}
+
+
+.your_info .editing{
+    background:#fff;
+}
+/* 
+.explicit_dets{
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    justify-items: center;
+    margin:1rem 0 2rem 0;
+}
+
+.explicit_dets > div{
+    background:#fff;
+    padding:1rem 1.5rem;
+    border-radius: 6px;
+} */
+
+@media(max-width:820px){
+    .other_info{
+        grid-template-columns: 1fr !important;
+    }
+}

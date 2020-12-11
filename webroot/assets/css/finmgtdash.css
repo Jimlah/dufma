@@ -1,0 +1,26 @@
+.neg-text > h2{
+    color:#ff8c8c;
+}
+
+
+
+.pos-text > h2{
+    color:#1ab394;
+}
+
+.total_header{
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.flex-center{
+    display:flex;
+    align-items: center;
+}
+
+.chart{margin:0;}
+
+.farm-details ul li{
+    grid-template-columns:1fr 1fr 1fr;
+}

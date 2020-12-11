@@ -1,0 +1,201 @@
+
+{% extends "layouts/landing.twig" %}
+
+{% block style %}
+    {{css('solutions')}}
+{% endblock %}
+
+{% block main %}
+
+     <header>
+      <div class="landing-img">
+        <h3>DUFMA GreenHouse</h3>
+      </div>
+    </header>
+
+    <!--Video Section-->
+    <section class="video-area">
+      <div class="video-text">
+        <h3>DUFMA</h3>
+      </div>
+
+      <div class="video-section">
+      <div class="video">
+        <iframe
+          width="600"
+          height="300"
+          src="https://www.youtube.com/embed/opvCf5-LZZM"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <div class="some-content">
+        <div class="box">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, totam sed quidem eum nesciunt dolores minima consectetur dolorum veniam eveniet!</p>
+        </div>
+        <div class="box">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, totam sed quidem eum nesciunt dolores minima consectetur dolorum veniam eveniet!</p>
+        </div>
+        <div class="box">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Itaque, totam sed quidem eum nesciunt dolores minima consectetur dolorum veniam eveniet!</p>
+        </div>
+        
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="circle">
+      <div class="circle1"></div>
+      <div class="circle2"></div>
+      <div class="circle3"></div>
+
+    </div>
+    <div class="triangle">
+      <div class="triangle1"></div>
+      <div class="triangle2"></div>
+      <div class="triangle3"></div>
+    </div>
+    </section>
+
+    <!--Read More Section-->
+    <section class="read-more">
+      <div class="read-more-row">
+        <div class="read-more-col">
+          <img src="{{asset('images/favicon.png')}}" alt="" />
+          <h3>Farm Produce Traceable</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad beatae,
+            cum delectus fugit sint dolorum nobis sunt distinctio rerum quae
+            officiis
+          </p>
+          <button>Read More</button>
+        </div>
+        <div class="read-more-col">
+          <img src="{{asset('images/favicon.png')}}" alt="" />
+          <h3>Farm Data Management</h3>
+          <p>
+            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ad beatae,
+            cum delectus fugit sint dolorum nobis sunt distinctio rerum quae
+            officiis
+          </p>
+          <button>Read More</button>
+        </div>
+      </div>
+    </section>
+
+    <!--Information Section-->
+    <section id="about">
+      <div class="about-left-col">
+        <img src="{{asset('images/erwan-hesry-1q75BReKpms-unsplash.jpg')}}" alt="" />
+      </div>
+      <div class="about-right-col">
+        <div class="about-text">
+          <h1>About Dufma greenhouse</h1>
+          <span class="square"></span>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti,
+            maiores! Laudantium corporis tempore, voluptatibus fugit ab nemo?
+            Magnam iste pariatur iusto quam aliquam voluptates necessitatibus,
+            blanditiis tempora quis molestias libero!
+          </p>
+          <br />
+
+          <h2>
+            "Learning is not attained by chance, it must be sought for with
+            ardoe and attended to with diligence"
+          </h2>
+          <h3>---Abigail Adams</h3>
+        </div>
+      </div>
+    </section>
+<!--More info-->
+    <section id="About2">
+      <div class="about2-row">
+        <div class="about2-left-col">
+          <div class="about2-text">
+            <h1>Browse our top resources</h1>
+            <span class="square"></span>
+            <p>
+              Contrary to popular belief, Lorem Ipsum is not simply random text.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus,
+              incidunt.
+            </p>
+            <button class="common-btn">View More Info</button>
+            
+          </div>
+        </div>
+        <div class="about2-right-col">
+          <img src="{{asset('images/wilsan-u-BCATbA86WAw-unsplash.jpg')}}" alt="farmer" />
+        </div>
+      </div>
+    </section>
+{% endblock %}
+
+{% block footer %}
+    <div class="footer">
+			<div class="footer_wrapper">
+				<div class="location">
+					<h3>Contacts/Locations</h3>
+					<ul>
+						<li>
+							<i class="fa fa-envelope"></i>
+							<span>info@dufma.ng</span>
+						</li>
+						<li>
+							<i class="fa fa-map-marker"></i>
+							<span>
+								No 1, Lonlo street, Abule Egba, Lagos State.
+							</span>
+						</li>
+						<li>
+							<i class="fa fa-phone"></i>
+							<span>+2348162313162, +2348137913430</span>
+						</li>
+					</ul>
+				</div>
+				<div class="services">
+					<h3>Services</h3>
+					<ul>
+						<li>Farm Investment</li>
+						<li>Farm Clinic</li>
+						<li>Farm Training</li>
+						<li>Management System</li>
+					</ul>
+				</div>
+				<div class="company">
+					<h3>Our company</h3>
+					<ul>
+						<li>Dermisho</li>
+						<li>Seller's Hub</li>
+						<li>Market</li>
+						<li>About us</li>
+						<li>
+							<a href="/admin/index.php">Admin</a>
+						</li>
+					</ul>
+				</div>
+				<div class="social-buttons">
+					<a href="#" class="social-buttons__button social-button social-button--facebook" aria-label="Facebook">
+						<span class="social-button__inner">
+							<i class="fa fa-facebook"></i>
+						</span>
+					</a>
+					<a href="#" class="social-buttons__button social-button social-button--linkedin" aria-label="LinkedIn">
+						<span class="social-button__inner">
+							<i class="fa fa-linkedin"></i>
+						</span>
+					</a>
+					<a href="#" class="social-buttons__button social-button social-button--twitter" aria-label="Twitter">
+						<span class="social-button__inner">
+							<i class="fa fa-twitter"></i>
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block js %}
+    {{jscript('landing')}}
+{% endblock %}
+

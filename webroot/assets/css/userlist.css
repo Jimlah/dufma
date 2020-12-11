@@ -1,0 +1,30 @@
+.table_container{
+    background:#f0f0f0  ;
+}
+
+.table_container thead tr{
+    background:#098d73;
+    border-radius:3px;
+}
+
+.table_container thead tr th{
+    padding:10px 0;
+    color:#fff;
+    margin-bottom: 1rem;
+}
+
+.table_container tbody tr:hover{
+    background:#fff;
+}
+
+.table_container tbody tr td{
+    padding:10px 0;
+}
+
+.confirm{
+    color:green !important;
+}
+
+.unconfirm{
+    color:red !important;
+}

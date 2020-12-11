@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>DUFMA</title>
+		{{css('presets')}}
+		{{ block("style") }}
+		{{css('preloader')}}
+		<link rel="stylesheet" href="{{asset('font-awesome/css/font-awesome.min.css')}}">
+		<link rel="shortcut icon" href="{{asset('images/favicon.png')}}" type="image/x-icon">
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+	</head>
+
+	<body>
+		<nav class="main_nav flex a_cent">
+			<a href="/">
+				<div class="logo flex a_cent">
+					<img src="{{asset('images/favicon.png')}}" alt="">
+					<span class="ufma" style="color:#000;">ufma</span>
+				</div>
+			</a>
+			<ul class="right_nav">
+				<li class="active">
+					<a href="/">Home</a>
+				</li>
+				<li class="parent">
+					<a href="/solutions">Solutions
+						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+							<path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/>
+						</svg>
+					</a>
+					<ul class="child">
+						<a href="/media">
+							<li>Media</li>
+						</a>
+						<a href="/case_studies">
+							<li>Case Studies</li>
+						</a>
+						<a href="/">
+							<li>Webinars</li>
+						</a>
+					</ul>
+				</li>
+				<li>
+					<a href="#demo_request">Request a Demo</a>
+				</li>
+				<li class="parent">
+					<a href="#">Contact us
+						<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+							<path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/>
+						</svg>
+					</a>
+					<ul class="child">
+						<a href="#">
+							<li>Careers</li>
+						</a>
+						<a href="#">
+							<li>Services</li>
+						</a>
+					</ul>
+				</li>
+				<li>
+					<a href="/sign_in">Login</a>
+				</li>
+			</ul>
+			<li class="mobile_ham flex column">
+				<span></span>
+				<span></span>
+			</li>
+		</nav>
+		<ul class="mobile_nav">
+			<li>
+				<a href="/">Home</a>
+			</li>
+			<li class="parent1 parent">
+				<a href="/solutions">Solutions
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+						<path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/>
+					</svg>
+				</a>
+
+			</li>
+			<ul class="child1">
+				<li>
+					<a href="/media">Media</a>
+				</li>
+				<li>
+					<a href="/landing/case_studies">Case Studies</a>
+				</li>
+				<li>
+					<a href="/">Webinars</a>
+				</li>
+			</ul>
+			<li>
+				<a href="#demo_request">Request A Demo</a>
+			</li>
+			<li class="parent2 parent">
+				<a href="/">Contact Us
+					<svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 320 512">
+						<path d="M143 352.3L7 216.3c-9.4-9.4-9.4-24.6 0-33.9l22.6-22.6c9.4-9.4 24.6-9.4 33.9 0l96.4 96.4 96.4-96.4c9.4-9.4 24.6-9.4 33.9 0l22.6 22.6c9.4 9.4 9.4 24.6 0 33.9l-136 136c-9.2 9.4-24.4 9.4-33.8 0z"/>
+					</svg>
+				</a>
+			</li>
+			<ul class="child2">
+				<li>
+					<a href="/media">Media</a>
+				</li>
+				<li>
+					<a href="/case_studies">Case Studies</a>
+				</li>
+				<li>
+					<a href="#">Webinars</a>
+				</li>
+			</ul>
+			<li>
+				<a href="/sign_in">Login</a>
+			</li>
+		</ul>
+
+		{% block main %}{% endblock %}
+
+		{% block footer %}{% endblock %}
+	</body>
+	<!-- Preloader -->
+	<!-- End preloader -->
+	<div class="pre-loader">
+		<div class="lds-roller">
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		</div>
+	</div>
+	{{jscript('gsap.min')}}
+	{{ block("js") }}
+	{{jscript('preloader')}}
+</html>

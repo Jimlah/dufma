@@ -1,0 +1,114 @@
+{% extends "layouts/landing.twig" %}
+
+{% block style %}
+    {{css('login_main')}}
+    
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+{% endblock %}
+
+
+{% block main %}
+    <div class="container">
+        <div class="logo_holder">
+            <img src="public/images/favicon.png" alt="">
+        </div>
+        <div class="wrapper">
+            <div class="options">
+                <div class="organization selector active">
+                    <h2>Log in as an organization</h2>
+                    <div class="svg">
+                        <img src="{{asset('images/organization.svg')}}" alt="organization">
+                    </div>
+                </div>
+                <div class="investor selector">
+                    <h2>Log in as an investor</h2>
+                    <div class="svg">
+                        <img src="{{asset('images/investor.svg')}}" alt="investor">
+                    </div>
+                </div>
+                <div class="employee selector">
+                    <h2>Log in as an employee</h2>
+                    <div class="svg">
+                        <img src="{{asset('images/employee.svg')}}" alt="employee">
+                    </div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="forms">
+                <!-- organization form -->
+                <form action="" class="organization_form active" method="POST">
+                    <h2>Organization form</h2>
+                    <div>
+                        <label for="username"><span>Username</span><i class="fa fa-user"></i> </label>
+                        <input type="text" name="username" id="username">
+                    </div>
+
+                    <div>
+                        <label for="password"><span>Password</span><i class="fa fa-lock"></i> </label>
+                        <input type="password" name="password" id="password" class="password">
+                        <i class="fa fa-eye float-right showpassword"></i>
+                        </input>
+                    </div>
+
+                    <button type="submit" class="submit" name="login">
+                        <span>Login <i class="fa space fa-angle-right"></i></span>
+                    </button>
+                </form>
+                <!-- end organization form  -->
+
+                <!-- investor form -->
+                <form action="" class="investor_form" method="POST">
+                    <h2>Investor form</h2>
+                    <div>
+                        <label for="username"><span>Username</span><i class="fa fa-user"></i> </label>
+                        <input type="text" name="username" id="username">
+                    </div>
+
+                    <div>
+                        <label for="password"><span>Password</span><i class="fa fa-lock"></i> </label>
+                        <input type="password" name="password" id="password" class="password">
+                        <i class="fa fa-eye float-right showpassword"></i>
+                        </input>
+                    </div>
+
+                    <button type="submit" class="submit" name="login">
+                        <span>Login <i class="fa space fa-angle-right"></i></span>
+                    </button>
+                </form>
+                <!-- end investor form -->
+
+
+
+                <!-- employee form -->
+                <form action="" class="employee_form" method="POST">
+                    <h2>Employee form</h2>
+                    <div>
+                        <label for="username"><span>Username</span><i class="fa fa-user"></i> </label>
+                        <input type="text" name="username" id="username">
+                    </div>
+
+                    <div>
+                        <label for="password"><span>Password</span><i class="fa fa-lock"></i> </label>
+                        <input type="password" name="password" id="password" class="password">
+                        <i class="fa fa-eye float-right showpassword"></i>
+                        </input>
+                    </div>
+
+                    <button type="submit" class="submit" name="login">
+                        <span>Login <i class="fa space fa-angle-right"></i></span>
+                    </button>
+                </form>
+                <!-- end employee form -->
+
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+
+
+{% block js %}
+    {{jscript('landing')}}
+    {{jscript('login_main')}}
+{% endblock %}

@@ -1,25 +1,240 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Cube</title>
-    {{css('styles')}}
-    {{jscript('cube')}}
-</head>
-<body>
-    <h1 class="title">
-        {{env.project_name}}
-    </h1>
-    <div class="cube-welcome">
-        Welcome to PHP Cube.
-    </div>
-    <div class="cube-version">
-        v{{env.cube_version}}
-    </div>
-    <div class="cube-docs">
-        <a target="_blank" href="https://bitbucket.org/brainex/php-cube/src/master/readme.md">Read the documentation</a>
-    </div>
-</body>
-</html>
+{% extends "layouts/landing.twig" %}
+
+{% block style %}
+    {{css('landing')}}
+{% endblock %}
+
+{% block main %}
+
+	<div class="hero">
+		{{asset('images/slide1.jpg')}}
+		<img src="{{asset('images/slide1.jpg')}}" alt="" class="active">
+		<img src="{{asset('images/slide2.jpg')}}" alt="">
+		<img src="{{asset('images/slide3.jpg')}}" alt="">
+		<div class="text1 text">
+			<h1>Technology for your Agricultural Vision
+			</h1>
+			<p>
+				Nigerian’s first indigenous farm management solution powered by Machine Learning and Artificial
+				                Intelligence Technology
+			</p>
+			<a href="#">Read More</a>
+		</div>
+		<div class="text2 text">
+			<h1>Farm Accountability Equals Farm Profitability</h1>
+			<p>
+				DUFMA ERP helps you with seamless documentation of farm processes that make your business
+				                survive the woes of failed businesses
+			</p>
+			<a href="#">Book for a demo here</a>
+		</div>
+		<div class="text3 text">
+			<h1>The Future of Agricultural Digitization is here</h1>
+			<p>DUFMA ERP travels beyond your present to your future and put processes in place to ensure the
+				                success of your farm.</p>
+			<a href="#">Book for a demo here</a>
+		</div>
+	</div>
+	<div class="bubbles">
+		<span class="active"></span>
+		<span></span>
+		<span></span>
+	</div>
+	<div class="info">
+		<div class="text">
+			<h2>Dufma
+				<span></span>
+			</h2>
+			<p class="erp_info">
+				DUFMA ERP is a desirable tool which will help potential farmers, small farm holders and large-scale
+				                farm holders manage there enterprise; the toolset include inventory management, supply chain
+				                management, financial management, risk management and monitoring and evaluation services. All
+				                this services are seamlessly knitted into our DUFMA Advisory services and DUFMA FSB to provide an
+				                inclusive all-in-one service to help our client grow their business in a timely efficient and desirable
+				                manner.
+			</p>
+		</div>
+		<div class="illustr">
+			<img src="{{asset('images/illustr.jpg')}}" alt="">
+		</div>
+	</div>
+	<div class="demo_req" id="demo_request">
+		<h2>Request A Demo</h2>
+		<div class="demo_req_content">
+			<div class="content">
+				<p>
+					With over SME expanding in geometric proportion
+					                    across the country, efficient management software is
+					                    needed to push result and outcomes of Agricultural
+					                    business beyond the limit of conventional agricultural
+					                    management Principles. Lets DUFMA ERP take you on
+					                    this journey of discovery.
+				</p>
+
+				<img src="{{asset('images/8400.jpg')}}" alt="Image" class="small">
+			</div>
+			<form class="form">
+				<input type="email" name="email" id="email" placeholder="Email">
+				<input type="text" name="phone" id="phone" placeholder="Phone">
+				<input type="text" name="business_type" id="business_type" placeholder="Type of business">
+				<textarea name="message" id="message" placeholder='Message Here' cols="30" rows="10"></textarea>
+				<input type="submit" value="Submit">
+			</form>
+		</div>
+	</div>
+	<div class="solutions">
+		<h2>Solutions
+			<span></span>
+		</h2>
+		<div class="cards">
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/monitor.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Monitoring and Evaluation</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/money.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Financial Management</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/farmer-.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Inventory Management</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/risk.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Risk Management</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/smartphone_tech.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Supply Chain Management</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/supply_manag.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Farm Smart box</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/irrigation.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Smart Irritech</p>
+				</div>
+			</div>
+			<div class="card">
+				<div class="card_image flex a_cent j_cent">
+					<img src="{{asset('images/supply_manag.svg')}}" alt="">
+				</div>
+				<div class="card_text">
+					<p>Smart Farm Vision</p>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
+	<div class="newsletter flex a_cent j_cent">
+		<div>
+			<h1>Never Miss Out on Any Updates</h1>
+			<div class="news_form">
+				<p>Subscribe to Our Newsletter</p>
+				<form action="" class="flex">
+					<input type="email" name="Email" placeholder="Email" id="">
+					<input type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+
+{% endblock %}
+
+
+{% block footer %}
+    <div class="footer">
+			<div class="footer_wrapper">
+				<div class="location">
+					<h3>Contacts/Locations</h3>
+					<ul>
+						<li>
+							<i class="fa fa-envelope"></i>
+							<span>info@dufma.ng</span>
+						</li>
+						<li>
+							<i class="fa fa-map-marker"></i>
+							<span>
+								No 1, Lonlo street, Abule Egba, Lagos State.
+							</span>
+						</li>
+						<li>
+							<i class="fa fa-phone"></i>
+							<span>+2348162313162, +2348137913430</span>
+						</li>
+					</ul>
+				</div>
+				<div class="services">
+					<h3>Services</h3>
+					<ul>
+						<li>Farm Investment</li>
+						<li>Farm Clinic</li>
+						<li>Farm Training</li>
+						<li>Management System</li>
+					</ul>
+				</div>
+				<div class="company">
+					<h3>Our company</h3>
+					<ul>
+						<li>Dermisho</li>
+						<li>Seller's Hub</li>
+						<li>Market</li>
+						<li>About us</li>
+						<li>
+							<a href="/admin/index.php">Admin</a>
+						</li>
+					</ul>
+				</div>
+				<div class="social-buttons">
+					<a href="#" class="social-buttons__button social-button social-button--facebook" aria-label="Facebook">
+						<span class="social-button__inner">
+							<i class="fa fa-facebook"></i>
+						</span>
+					</a>
+					<a href="#" class="social-buttons__button social-button social-button--linkedin" aria-label="LinkedIn">
+						<span class="social-button__inner">
+							<i class="fa fa-linkedin"></i>
+						</span>
+					</a>
+					<a href="#" class="social-buttons__button social-button social-button--twitter" aria-label="Twitter">
+						<span class="social-button__inner">
+							<i class="fa fa-twitter"></i>
+						</span>
+					</a>
+				</div>
+			</div>
+		</div>
+{% endblock %}
+
+{% block js %}
+    {{jscript('landing')}}
+{% endblock %}
