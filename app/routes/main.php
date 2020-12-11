@@ -32,6 +32,10 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
     $router->group('/admin')->register(function(Router $router){
         $router->get('/', 'AdminController.index');
+        
+
+        $router->get('/organization', 'AdminController.organization');
+        $router->post('/organization', 'FunctionController.register');
     });
 
 });

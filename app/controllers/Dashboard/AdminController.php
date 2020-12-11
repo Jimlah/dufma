@@ -13,4 +13,9 @@ class AdminController extends Controller
 
         $response->view('/dashboard/admin/index',[]);
     }
+
+    public function organization(Request $request, Response $response)
+    {   
+        $response->view('/dashboard/admin/organization',[]);
+    }
 }

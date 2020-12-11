@@ -34,10 +34,10 @@
 				<!-- LOGO -->
 				<a href="index-2.html" class="topnav-logo">
 					<span class="topnav-logo-lg">
-						<img src="{{asset('images/logo-light.png')}}" alt="" height="16">
+						<img src="{{asset('images/logo.png')}}" alt="" height="16">
 					</span>
 					<span class="topnav-logo-sm">
-						<img src="{{asset('images/logo-light.png')}}" alt="" height="16">
+						<img src="{{asset('images/logo.png')}}" alt="" height="16">
 					</span>
 				</a>
 
@@ -167,12 +167,39 @@
 					<!--- Sidemenu -->
 
 					{% if req.user.access == 0 %}
+
+                    <ul class="metismenu side-nav">
+
+							<li class="side-nav-title side-nav-item">Navigation</li>
+
+							<li class="side-nav-item">
+								<a href="/dashboard/admin" class="side-nav-link">
+									<i class="uil-home-alt"></i>
+									<span>
+										Dashboard
+									</span>
+								</a>
+							</li>
+
+							<li class="side-nav-item">
+								<a href="/dashboard/admin/organization" class="side-nav-link">
+									<i class="uil-money-stack"></i>
+									<span>
+										Organization
+									</span>
+								</a>
+							</li>
+
+
+						</ul>
+						
+					{% elseif req.user.access == 1 %}
 						<ul class="metismenu side-nav">
 
 							<li class="side-nav-title side-nav-item">Navigation</li>
 
 							<li class="side-nav-item">
-								<a href="dashboard.php" class="side-nav-link">
+								<a href="/" class="side-nav-link">
 									<i class="uil-home-alt"></i>
 									<span>
 										Dashboard
@@ -458,8 +485,6 @@
 
 
 						</ul>
-					{% elseif req.user.access == 1 %}
-						Organization
 					{% elseif req.user.access == 2 %}
 						Employee
 					{% else %}

@@ -1,0 +1,211 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div
+						class="page-title-box">
+						{# <div class="page-title-right">
+												                                        <ol class="breadcrumb m-0">
+												                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+												                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
+												                                            <li class="breadcrumb-item active">Products</li>
+												                                        </ol>
+												                                    </div> #}
+						<h4 class="page-title">Organization</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+            {{get_notification()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
+										<i class="mdi mdi-plus-circle mr-2"></i>
+										Add Organization</a>
+									<!-- Standard modal -->
+									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="standard-modalLabel">Add Organization</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												</div>
+												<div class="modal-body">
+													<form action="" method="post">
+
+														<div class="form-group">
+															<label for="firstname">First Name</label>
+															<input type="text" id="firstname" class="form-control" name="firstname">
+														</div>
+														<div class="form-group">
+															<label for="lastname">Last Name</label>
+															<input type="text" id="lastname" class="form-control" name="lastname">
+														</div>
+
+														<div class="form-group">
+															<label for="username">User Name</label>
+															<input type="text" id="username" class="form-control" name="username">
+														</div>
+
+														<div class="form-group">
+															<label for="email">Email</label>
+															<input type="email" id="example-email" name="email" class="form-control" placeholder="Email">
+														</div>
+
+														<div class="form-group">
+															<label for="password">Show/Hide Password</label>
+															<div class="input-group input-group-merge">
+																<input type="password" id="password" class="form-control" placeholder="Enter your password" name="password">
+																<div class="input-group-append" data-password="false">
+																	<div class="input-group-text">
+																		<span class="password-eye"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label for="password1">Show/Hide Password</label>
+															<div class="input-group input-group-merge">
+																<input type="password" id="password1" class="form-control" name="password1" placeholder="Enter your password">
+																<div class="input-group-append" data-password="false">
+																	<div class="input-group-text">
+																		<span class="password-eye"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<button type="submit" class="btn btn-primary btn-block">Submit</button>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="btn btn-success mb-2 mr-1">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+										<button type="button" class="btn btn-light mb-2">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Firstname</th>
+											<th>Lastname</th>
+											<th>Email</th>
+											<th>Username</th>
+											<th>Status</th>
+                                            <th>Date</th>
+										</tr>
+									</thead>
+
+
+									<tbody>
+										<tr>
+											<td>Tiger Nixon</td>
+											<td>System Architect</td>
+											<td>Edinburgh</td>
+											<td>61</td>
+											<td>2011/04/25</td>
+											<td>$320,800</td>
+                                            <td>$320,800</td>
+										</tr>
+										
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end Footer -->
+
+	</div>
+	<!-- content-page -->
+
+
+{% endblock %}
+
+
+{% block js %}
+
+
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}
+	<!-- end demo js-->
+{% endblock %}
