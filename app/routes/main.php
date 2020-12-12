@@ -46,6 +46,12 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
     $router->group('/organization')->use('access.org')->register(function (Router $router) {
         $router->get('/', 'OrganizationController.index');
 
+
+        $router->get('/building', 'OrganizationController.building');
+        $router->post('/building', 'FunctionController.registerEmp');
+        $router->post('/building/edit', 'FunctionController.edit');
+        $router->post('/building/delete', 'FunctionController.delete');
+
         $router->get('/employee', 'OrganizationController.employee');
         $router->post('/employee', 'FunctionController.registerEmp');
         $router->post('/employee/edit', 'FunctionController.edit');

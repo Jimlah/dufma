@@ -17,6 +17,12 @@ class OrganizationController extends Controller
         $response->view('/dashboard/organization/index', []);
     }
 
+    public function building(Request $request, Response $response)
+    {
+
+        $response->view('/dashboard/organization/building', []);
+    }
+
     public function employee(Request $request, Response $response)
     {
         Auth::user();
