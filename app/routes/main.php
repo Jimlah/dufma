@@ -48,7 +48,7 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
 
         $router->get('/building', 'OrganizationController.building');
-        $router->post('/building', 'FunctionController.registerEmp');
+        $router->post('/building', 'FunctionController.register');
         $router->post('/building/edit', 'FunctionController.edit');
         $router->post('/building/delete', 'FunctionController.delete');
 
