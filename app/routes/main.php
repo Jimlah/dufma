@@ -57,7 +57,7 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
     // Employee
     $router->group('/employee')->use('access.emp')->register(function (Router $router) {
-        $router->get('/', 'AdminController.index');
+        $router->get('/', 'employeeController.index');
 
         $router->get('/organization', 'OrganizationController.organization');
         $router->post('/organization', 'FunctionController.register');
