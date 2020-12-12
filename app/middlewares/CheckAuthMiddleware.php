@@ -21,7 +21,6 @@ class CheckAuthMiddleware implements MiddlewareInterface
         $user = Auth::user();
 
         
-
        if ($user) {
         if($user->access() == UsersProvider::ACCESS_ADMIN) {
             return redirect('/dashboard/admin');

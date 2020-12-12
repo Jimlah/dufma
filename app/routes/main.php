@@ -8,9 +8,10 @@ $router = new Router();
 
 #Add routes
 $router->any('/', 'CubeController.home');
+$router->any('/404', 'CubeController._404');
 
-$router->group()->namespace('Auth')->use('checkAuth')->register(function(Router $router){
-    
+$router->group()->namespace('Auth')->use('checkAuth')->register(function (Router $router) {
+
     $router->get('/case_studies', '@landing.case_studies');
 
 
@@ -22,20 +23,53 @@ $router->group()->namespace('Auth')->use('checkAuth')->register(function(Router 
 
 
     $router->get('/solutions', '@landing.solutions');
-
 });
 
 
-$router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function(Router $router){
+$router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function (Router $router) {
 
     $router->get('/logout', 'FunctionController.logout');
 
-    $router->group('/admin')->register(function(Router $router){
+
+
+    // Administrator
+    $router->group('/admin')->use('access.admin')->register(function (Router $router) {
         $router->get('/', 'AdminController.index');
-        
 
         $router->get('/organization', 'AdminController.organization');
         $router->post('/organization', 'FunctionController.register');
     });
 
+
+
+    // Organization
+    $router->group('/organization')->use('access.org')->register(function (Router $router) {
+        $router->get('/', 'AdminController.index');
+
+        $router->get('/organization', 'AdminController.organization');
+        $router->post('/organization', 'FunctionController.register');
+    });
+
+
+
+
+    // Employee
+    $router->group('/employee')->use('access.emp')->register(function (Router $router) {
+        $router->get('/', 'AdminController.index');
+
+        $router->get('/organization', 'AdminController.organization');
+        $router->post('/organization', 'FunctionController.register');
+    });
+
+
+
+
+
+    // investor
+    $router->group('/investor')->use('access.inv')->register(function (Router $router) {
+        $router->get('/', 'AdminController.index');
+
+        $router->get('/organization', 'AdminController.organization');
+        $router->post('/organization', 'FunctionController.register');
+    });
 });

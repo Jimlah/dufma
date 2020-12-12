@@ -19,4 +19,9 @@ class CubeController extends Controller
     {
         return $response->view('home');
     }
+
+    public function _404(Request $request, Response $response)
+    {
+        return $response->view('404');
+    }
 }
