@@ -37,17 +37,17 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
         $router->get('/', 'AdminController.index');
 
         $router->get('/organization', 'AdminController.organization');
-        $router->post('/organization', 'FunctionController.register');
+        $router->post('/organization', 'FunctionController.registerOrg');
     });
 
 
 
     // Organization
     $router->group('/organization')->use('access.org')->register(function (Router $router) {
-        $router->get('/', 'AdminController.index');
+        $router->get('/', 'OrganizationController.index');
 
-        $router->get('/organization', 'AdminController.organization');
-        $router->post('/organization', 'FunctionController.register');
+        $router->get('/employee', 'OrganizationController.employee');
+        $router->post('/employee', 'FunctionController.registerEmp');
     });
 
 
@@ -57,7 +57,7 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
     $router->group('/employee')->use('access.emp')->register(function (Router $router) {
         $router->get('/', 'AdminController.index');
 
-        $router->get('/organization', 'AdminController.organization');
+        $router->get('/organization', 'OrganizationController.organization');
         $router->post('/organization', 'FunctionController.register');
     });
 

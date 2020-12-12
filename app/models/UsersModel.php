@@ -14,6 +14,7 @@ class UsersModel extends Model
 
     protected static $fields = array(
         'id',
+        'userid',
         'firstname',
         'lastname',
         'email',

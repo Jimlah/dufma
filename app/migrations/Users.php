@@ -20,6 +20,7 @@ class Users implements MigrationInterface
         DB::table(self::NAME)
             ->create(function (DBTableBuilder $table) {
                 $table->field("id")->int()->increment();
+                $table->field("userid")->int();
                 $table->field("username")->varchar();
                 $table->field("firstname")->varchar();
                 $table->field("lastname")->varchar();
