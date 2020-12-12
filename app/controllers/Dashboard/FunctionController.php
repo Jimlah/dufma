@@ -155,4 +155,82 @@ class FunctionController extends Controller
         return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
 
     }
+
+
+    public function edit(Request $request, Response $response)
+    {  
+        $user = $request->user();
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $id = $request->input('id');
+        InputValidator::init([
+            "uniqueField" => function (InputValidator $validator, string $field, string $message){
+                if($validator->getValue() == ''){
+                    return null;
+                    }
+                if (UsersModel::findBy($field, $validator->getValue())) {
+                    
+                    $validator->attachError($message);
+                }
+                
+            }
+            
+        ]);
+        
+        $lastname->validate('required');
+        $firstname->validate('required');
+
+        if(!InputValidator::isValid()){
+            $errors = InputValidator::getErrors();
+            $msg='';
+            foreach ($errors as $key) {
+                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                ' .   $key[0] .'
+            </div>';
+            }
+            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        }
+
+        UsersModel::findByPrimaryKeyAndUpdate( $id, [
+            'userid' => $user->id(),
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+        ]);
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                You have successfully updated '. $firstname .' Data
+            </div>';
+
+        return $response->withSession('msg', $msg)->redirect($url);
+
+    }
+
+    public function delete(Request $request, Response $response)
+    {   
+        $id = $request->input('id');
+        UsersModel::findByPrimaryKeyAndRemove($id);
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                You have successfully Deleted the user
+            </div>';
+
+        return $response->withSession('msg', $msg)->redirect($url);
+    }
 }

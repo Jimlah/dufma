@@ -48,6 +48,8 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
         $router->get('/employee', 'OrganizationController.employee');
         $router->post('/employee', 'FunctionController.registerEmp');
+        $router->post('/employee/edit', 'FunctionController.edit');
+        $router->post('/employee/delete', 'FunctionController.delete');
     });
 
 

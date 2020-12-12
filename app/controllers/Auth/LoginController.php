@@ -44,25 +44,31 @@ class LoginController extends Controller
         }
 
         // Access Status
+        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        You have Successfully login
+    </div>';
 
         if($access == UsersProvider::ACCESS_ADMIN){
-            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/admin/');
+            return $response->withSession('msg', $msg)->redirect('/dashboard/admin/');
         }
 
         if($access == UsersProvider::ACCESS_ORGANIZATION){
-            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/organization');
+            return $response->withSession('msg', $msg)->redirect('/dashboard/organization');
         }
 
         if($access == UsersProvider::ACCESS_EMPLOYEE){
-            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/empolyee');
+            return $response->withSession('msg', $msg)->redirect('/dashboard/empolyee');
         }
 
         if($access == UsersProvider::ACCESS_INVESTOR){
-            return $response->withSession('msg', 'You have Successfully Registered')->redirect('/dashboard/investor');
+            return $response->withSession('msg', $msg)->redirect('/dashboard/investor');
         }
 
 
-        return $response->withSession('msg', 'Unable to Login')->redirect($request->url()->getPath());
+        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
         
     }
 
