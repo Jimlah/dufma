@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Controllers\Dashboard;
+namespace App\Controllers\Dashboard\Employee;
 
 use App\Core\Http\Response;
 use App\Core\Http\Request;
 use App\Core\Http\Controller;
 
-class EmployeeController extends Controller
+class IndexController extends Controller
 {
-    public function index(Request $request, Response $response)
+    public function display(Request $request, Response $response)
     {
-
         $response->view('/dashboard/employee/index', []);
     }
 }

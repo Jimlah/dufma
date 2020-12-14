@@ -3,18 +3,21 @@
 namespace App\Models;
 
 use App\Core\Http\Model;
+use App\Providers\FixedAssetProvider;
 
 class FixedAssetModel extends Model
 {
-    protected static $schema = '{schema_name}';
+    protected static $schema = 'fixedasset';
     
-    protected static $primary_key = '{primary_key_field}';
+    protected static $primary_key = 'id';
 
-    protected static $provider = null;
+    protected static $provider = FixedAssetProvider::class;
 
     protected static $fields = array(
         'id',
         'userid',
+        'orgid',
+        'name',
         'category',
         'description',
         'amount',

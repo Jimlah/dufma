@@ -1,23 +1,17 @@
 <?php
 
-namespace App\Controllers\Dashboard;
+namespace App\Controllers\Dashboard\Admin;
 
-use App\Core\Http\Response;
-use App\Core\Http\Request;
-use App\Core\Http\Controller;
 use App\Core\Tools\Auth;
+use App\Core\Http\Request;
 use App\Models\UsersModel;
+use App\Core\Http\Response;
+use App\Core\Http\Controller;
 use App\Providers\UsersProvider;
 
-class AdminController extends Controller
+class OrganizationController extends Controller
 {
-    public function index(Request $request, Response $response)
-    {   
-
-        $response->view('/dashboard/admin/index',[]);
-    }
-
-    public function organization(Request $request, Response $response)
+    public function display(Request $request, Response $response)
     {   
         Auth::user();
         $org = UsersModel::select()

@@ -2,10 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\FixedAssetModel;
+
 class FixedAssetProvider
 {
-
-
     const BUILDING = 0;
     const MANCHINERY = 1;
     const VEHICLE = 2;
@@ -20,7 +20,7 @@ class FixedAssetProvider
      */
     public function __construct($id)
     {
-        $this->_model = $id;
+        $this->_model = FixedAssetModel::findByPrimaryKey($id);
     }
 
     /**
@@ -43,7 +43,12 @@ class FixedAssetProvider
      */
     public function __set($name, $value)
     {
+        
+    }
 
+    public function getUser(): UsersProvider
+    {
+        return new UsersProvider($this->userid());
     }
 
     /**

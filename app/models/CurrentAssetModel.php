@@ -6,15 +6,17 @@ use App\Core\Http\Model;
 
 class CurrentAssetModel extends Model
 {
-    protected static $schema = '{schema_name}';
+    protected static $schema = 'currentasset';
     
-    protected static $primary_key = '{primary_key_field}';
+    protected static $primary_key = 'id';
 
-    protected static $provider = null;
+    protected static $provider = CurrentAssetModel::class;
 
     protected static $fields = array(
         'id',
         'userid',
+        'orgid',
+        'name',
         'category',
         'description',
         'amount',

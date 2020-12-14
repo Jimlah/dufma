@@ -1,27 +1,23 @@
 <?php
 
-namespace App\Controllers\Dashboard;
+namespace App\Controllers\Dashboard\Organization;
 
-use App\Core\Http\Response;
-use App\Core\Http\Request;
-use App\Core\Http\Controller;
 use App\Core\Tools\Auth;
+use App\Core\Http\Request;
 use App\Models\UsersModel;
+use App\Core\Http\Response;
+use App\Core\Http\Controller;
 use App\Providers\UsersProvider;
 
-class OrganizationController extends Controller
+class IndexController extends Controller
 {
-    public function index(Request $request, Response $response)
+    public function dispaly(Request $request, Response $response)
     {
 
         $response->view('/dashboard/organization/index', []);
     }
 
-    public function building(Request $request, Response $response)
-    {
-
-        $response->view('/dashboard/organization/building', []);
-    }
+    
 
     public function employee(Request $request, Response $response)
     {
@@ -33,4 +29,5 @@ class OrganizationController extends Controller
             'emp' => $emp
         ]);
     }
+
 }

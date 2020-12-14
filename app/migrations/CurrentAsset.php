@@ -21,6 +21,7 @@ class CurrentAsset implements MigrationInterface
             ->create(function (DBTableBuilder $table) {
                 $table->field('id')->int()->increment();
                 $table->field('userid')->int();
+                $table->field('orgid')->int();
                 $table->field('category')->varchar();
                 $table->field('name')->varchar();
                 $table->field('description')->varchar();

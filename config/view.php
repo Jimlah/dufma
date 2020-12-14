@@ -20,7 +20,8 @@ return array(
     #Functions allowed in views
     'functions' => array(
         'var_dump',
-        'get_notification'
+        'get_notification',
+        'get_username'
     ),
 
     #Filters allowed in view

@@ -50,6 +50,11 @@ class UsersProvider
 
     }
 
+    public function getFullname(): string
+    {
+        return concat($this->firstname(), ' ', $this->lastname());
+    }
+
     /**
     * Model mapper
     *

@@ -7,10 +7,11 @@ use App\Core\Router\Router;
 $router = new Router();
 
 #Add routes
-$router->any('/', 'CubeController.home');
-$router->any('/404', 'CubeController._404');
+
+$router->any('/', 'CubeController.home')->use('checkAuth');
 
 $router->group()->namespace('Auth')->use('checkAuth')->register(function (Router $router) {
+    $router->any('/404', 'CubeController._404');
 
     $router->get('/case_studies', '@landing.case_studies');
 
@@ -30,54 +31,4 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
     $router->get('/logout', 'FunctionController.logout');
 
-
-
-    // Administrator
-    $router->group('/admin')->use('access.admin')->register(function (Router $router) {
-        $router->get('/', 'AdminController.index');
-
-        $router->get('/organization', 'AdminController.organization');
-        $router->post('/organization', 'FunctionController.registerOrg');
-    });
-
-
-
-    // Organization
-    $router->group('/organization')->use('access.org')->register(function (Router $router) {
-        $router->get('/', 'OrganizationController.index');
-
-
-        $router->get('/building', 'OrganizationController.building');
-        $router->post('/building', 'FunctionController.register');
-        $router->post('/building/edit', 'FunctionController.edit');
-        $router->post('/building/delete', 'FunctionController.delete');
-
-        $router->get('/employee', 'OrganizationController.employee');
-        $router->post('/employee', 'FunctionController.registerEmp');
-        $router->post('/employee/edit', 'FunctionController.edit');
-        $router->post('/employee/delete', 'FunctionController.delete');
-    });
-
-
-
-
-    // Employee
-    $router->group('/employee')->use('access.emp')->register(function (Router $router) {
-        $router->get('/', 'employeeController.index');
-
-        $router->get('/organization', 'OrganizationController.organization');
-        $router->post('/organization', 'FunctionController.register');
-    });
-
-
-
-
-
-    // investor
-    $router->group('/investor')->use('access.inv')->register(function (Router $router) {
-        $router->get('/', 'AdminController.index');
-
-        $router->get('/organization', 'AdminController.organization');
-        $router->post('/organization', 'FunctionController.register');
-    });
 });
