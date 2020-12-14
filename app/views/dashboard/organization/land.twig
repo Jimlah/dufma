@@ -19,14 +19,8 @@
 				<div class="col-12">
 					<div
 						class="page-title-box">
-						{# <div class="page-title-right">
-																																																																							                                        <ol class="breadcrumb m-0">
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-																																																																							                                            <li class="breadcrumb-item active">Products</li>
-																																																																							                                        </ol>
-																																																																							                                    </div> #}
-						<h4 class="page-title">Building</h4>
+																																																																							                                
+						<h4 class="page-title">Land</h4>
 					</div>
 				</div>
 			</div>
@@ -41,13 +35,13 @@
 								<div class="col-sm-4">
 									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
 										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Building</a>
+										Add Land</a>
 									<!-- Standard modal -->
 									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Building</h4>
+													<h4 class="modal-title" id="standard-modalLabel">Add Land</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												</div>
 												<div class="modal-body">
@@ -56,7 +50,7 @@
 															<label for="category">Category</label>
 															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
 															<datalist id="cat">
-																{% for key in buildings %}
+																{% for key in land %}
 																	<option value="{{key.category}}"></option>
 																{% endfor %}
 
@@ -131,7 +125,7 @@
 
 									<tbody>
 
-										{% for item in buildings %}
+										{% for item in land %}
 											<tr>
 												<td>{{item.name}}</td>
 												<td>{{item.description}}</td>
@@ -166,7 +160,7 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in buildings %}
+		{% for item in land %}
 			<!-- edit modal -->
 			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -176,12 +170,12 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/building/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/organization/land/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
 									<label for="category">Category</label>
 									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
 									<datalist id="cat">
-										{% for key in buildings %}
+										{% for key in land %}
 											<option value="{{key.category}}"></option>
 										{% endfor %}
 
@@ -235,7 +229,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization//building/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/land/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>

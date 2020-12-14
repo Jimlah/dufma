@@ -19,14 +19,7 @@
 				<div class="col-12">
 					<div
 						class="page-title-box">
-						{# <div class="page-title-right">
-																																																																							                                        <ol class="breadcrumb m-0">
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-																																																																							                                            <li class="breadcrumb-item active">Products</li>
-																																																																							                                        </ol>
-																																																																							                                    </div> #}
-						<h4 class="page-title">Building</h4>
+						<h4 class="page-title">Vehicle</h4>
 					</div>
 				</div>
 			</div>
@@ -41,13 +34,13 @@
 								<div class="col-sm-4">
 									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
 										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Building</a>
+										Add Vehicle</a>
 									<!-- Standard modal -->
 									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Building</h4>
+													<h4 class="modal-title" id="standard-modalLabel">Add Vehicle</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												</div>
 												<div class="modal-body">
@@ -56,7 +49,7 @@
 															<label for="category">Category</label>
 															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
 															<datalist id="cat">
-																{% for key in buildings %}
+																{% for key in vehicle %}
 																	<option value="{{key.category}}"></option>
 																{% endfor %}
 
@@ -72,8 +65,8 @@
 														</div>
 
 														<div class="form-group">
-															<label for="size">Size</label>
-															<input type="text" id="size" class="form-control" name="size">
+															<label for="manufacturer">Manufacturer</label>
+															<input type="text" id="manufacturer" class="form-control" name="manufacturer">
 														</div>
 
 														<div class="form-group">
@@ -82,8 +75,8 @@
 														</div>
 
 														<div class="form-group">
-															<label for="location">Location</label>
-															<input type="text" id="location" class="form-control" name="location">
+															<label for="serial_no">Serial No</label>
+															<input type="text" id="serial_no" class="form-control" name="serial_no">
 														</div>
 
 
@@ -119,9 +112,9 @@
 										<tr>
 											<th>Name</th>
 											<th>Description</th>
-											<th>Size</th>
+											<th>Manufacturer</th>
 											<th>Amount</th>
-											<th>Location</th>
+											<th>Serial No</th>
 											<th>Category</th>
 											<th>Date</th>
 											<th>Action</th>
@@ -131,13 +124,13 @@
 
 									<tbody>
 
-										{% for item in buildings %}
+										{% for item in vehicle %}
 											<tr>
 												<td>{{item.name}}</td>
 												<td>{{item.description}}</td>
-												<td>{{item.size}}</td>
+												<td>{{item.manufacturer}}</td>
 												<td>{{item.description}}</td>
-												<td>{{item.location}}</td>
+												<td>{{item.serial_no}}</td>
 												<td>{{item.category }}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
@@ -166,7 +159,7 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in buildings %}
+		{% for item in vehicle %}
 			<!-- edit modal -->
 			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -176,12 +169,12 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/building/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/organization/vehicle/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
 									<label for="category">Category</label>
 									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
 									<datalist id="cat">
-										{% for key in buildings %}
+										{% for key in vehicle %}
 											<option value="{{key.category}}"></option>
 										{% endfor %}
 
@@ -197,8 +190,8 @@
 								</div>
 
 								<div class="form-group">
-									<label for="size">Size</label>
-									<input type="text" id="size" class="form-control" name="size" value="{{item.size}}">
+									<label for="manufacturer">Manufacturer</label>
+									<input type="text" id="manufacturer" class="form-control" name="Manufacturer" value="{{item.manufacturer}}">
 								</div>
 
 								<div class="form-group">
@@ -207,8 +200,8 @@
 								</div>
 
 								<div class="form-group">
-									<label for="location">Location</label>
-									<input type="text" id="location" class="form-control" name="location" value="{{item.location}}">
+									<label for="serial_no">Serial No</label>
+									<input type="text" id="serial_no" class="form-control" name="serial_no" value="{{item.serial_no}}">
 								</div>
 
 
@@ -235,7 +228,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization//building/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/vehicle/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
@@ -273,18 +266,6 @@
 				</div>
 			</div>
 		</footer>
-		<script>
-			$("#default-suggestions").typeahead({
-minLength: 0,
-highlight: !0
-}, {
-name: "nfl-teams",
-display: "team",
-source: function (e, a) {
-"" === e ? a(n.get("Detroit Lions", "Green Bay Packers", "Chicago Bears")) : n.search(e, a)
-}
-}),
-		</script>
 
 
 		<!-- end Footer -->

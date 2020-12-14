@@ -181,15 +181,15 @@ class FixedAssetController extends Controller
     {
         Auth::user();
         $user = $request->user();
-        $buildings = FixedAssetModel::select()
-            ->where('del', FixedAssetProvider::BUILDING)
+        $machinery = FixedAssetModel::select()
+            ->where('del', FixedAssetProvider::MACHINERY)
             ->andWhere('orgid', $user->id())
             ->map()
             ->fetchAll();
 
 
-        $response->view('/dashboard/organization/building', [
-            'buildings' => $buildings
+        $response->view('/dashboard/organization/machinery', [
+            'machinery' => $machinery
         ]);
     }
 
@@ -198,12 +198,12 @@ class FixedAssetController extends Controller
 
         $userid = $request->user()->id();
         $orgid = $request->user()->id();
-        $del = FixedAssetProvider::BUILDING;
+        $del = FixedAssetProvider::MACHINERY;
         $name = $request->input('name');
         $description = $request->input('description');
-        $size = $request->input('size');
+        $manufacturer = $request->input('manufacturer');
         $amount = $request->input('amount');
-        $location = $request->input('location');
+        $serial_no = $request->input('serial_no');
         $category = $request->input('category');
 
 
@@ -211,9 +211,9 @@ class FixedAssetController extends Controller
 
         $name->validate('required');
         $description->validate('required');
-        $size->validate('required');
+        $manufacturer->validate('required');
         $amount->validate('required');
-        $location->validate('required');
+        $serial_no->validate('required');
         $category->validate('required');
 
         if (!InputValidator::isValid()) {
@@ -236,9 +236,9 @@ class FixedAssetController extends Controller
             'del' => $del,
             'name' => $name,
             'description' => $description,
-            'size' => $size,
+            'Manufacturer' => $manufacturer,
             'amount' => $amount,
-            'location' => $location,
+            'serial_no' => $serial_no,
             'category' => $category,
         ]);
 
@@ -257,9 +257,9 @@ class FixedAssetController extends Controller
         $id = $request->url()->getQuery('id');
         $name = $request->input('name');
         $description = $request->input('description');
-        $size = $request->input('size');
+        $manufacturer = $request->input('manufacturer');
         $amount = $request->input('amount');
-        $location = $request->input('location');
+        $serial_no = $request->input('serial_no');
         $category = $request->input('category');
 
 
@@ -267,9 +267,9 @@ class FixedAssetController extends Controller
 
         $name->validate('required');
         $description->validate('required');
-        $size->validate('required');
+        $manufacturer->validate('required');
         $amount->validate('required');
-        $location->validate('required');
+        $serial_no->validate('required');
         $category->validate('required');
 
         if (!InputValidator::isValid()) {
@@ -291,9 +291,9 @@ class FixedAssetController extends Controller
             [
                 'name' => $name,
                 'description' => $description,
-                'size' => $size,
+                'manufacturer' => $manufacturer,
                 'amount' => $amount,
-                'location' => $location,
+                'serial_no' => $serial_no,
                 'category' => $category,
             ]
         );
@@ -327,15 +327,15 @@ class FixedAssetController extends Controller
     {
         Auth::user();
         $user = $request->user();
-        $buildings = FixedAssetModel::select()
-            ->where('del', FixedAssetProvider::BUILDING)
+        $vehicle = FixedAssetModel::select()
+            ->where('del', FixedAssetProvider::VEHICLE)
             ->andWhere('orgid', $user->id())
             ->map()
             ->fetchAll();
 
 
-        $response->view('/dashboard/organization/building', [
-            'buildings' => $buildings
+        $response->view('/dashboard/organization/vehicle', [
+            'vehicle' => $vehicle
         ]);
     }
 
@@ -344,12 +344,12 @@ class FixedAssetController extends Controller
 
         $userid = $request->user()->id();
         $orgid = $request->user()->id();
-        $del = FixedAssetProvider::BUILDING;
+        $del = FixedAssetProvider::VEHICLE;
         $name = $request->input('name');
         $description = $request->input('description');
-        $size = $request->input('size');
+        $manufacturer = $request->input('manufacturer');
         $amount = $request->input('amount');
-        $location = $request->input('location');
+        $serial_no = $request->input('serial_no');
         $category = $request->input('category');
 
 
@@ -357,9 +357,9 @@ class FixedAssetController extends Controller
 
         $name->validate('required');
         $description->validate('required');
-        $size->validate('required');
+        $manufacturer->validate('required');
         $amount->validate('required');
-        $location->validate('required');
+        $serial_no->validate('required');
         $category->validate('required');
 
         if (!InputValidator::isValid()) {
@@ -382,9 +382,9 @@ class FixedAssetController extends Controller
             'del' => $del,
             'name' => $name,
             'description' => $description,
-            'size' => $size,
+            'Manufacturer' => $manufacturer,
             'amount' => $amount,
-            'location' => $location,
+            'serial_no' => $serial_no,
             'category' => $category,
         ]);
 
@@ -403,9 +403,9 @@ class FixedAssetController extends Controller
         $id = $request->url()->getQuery('id');
         $name = $request->input('name');
         $description = $request->input('description');
-        $size = $request->input('size');
+        $manufacturer = $request->input('manufacturer');
         $amount = $request->input('amount');
-        $location = $request->input('location');
+        $serial_no = $request->input('serial_no');
         $category = $request->input('category');
 
 
@@ -413,9 +413,9 @@ class FixedAssetController extends Controller
 
         $name->validate('required');
         $description->validate('required');
-        $size->validate('required');
+        $manufacturer->validate('required');
         $amount->validate('required');
-        $location->validate('required');
+        $serial_no->validate('required');
         $category->validate('required');
 
         if (!InputValidator::isValid()) {
@@ -437,9 +437,9 @@ class FixedAssetController extends Controller
             [
                 'name' => $name,
                 'description' => $description,
-                'size' => $size,
+                'manufacturer' => $manufacturer,
                 'amount' => $amount,
-                'location' => $location,
+                'serial_no' => $serial_no,
                 'category' => $category,
             ]
         );
@@ -474,15 +474,15 @@ class FixedAssetController extends Controller
     {
         Auth::user();
         $user = $request->user();
-        $buildings = FixedAssetModel::select()
-            ->where('del', FixedAssetProvider::BUILDING)
+        $land = FixedAssetModel::select()
+            ->where('del', FixedAssetProvider::LAND)
             ->andWhere('orgid', $user->id())
             ->map()
             ->fetchAll();
 
 
-        $response->view('/dashboard/organization/building', [
-            'buildings' => $buildings
+        $response->view('/dashboard/organization/land', [
+            'land' => $land
         ]);
     }
 
@@ -491,7 +491,7 @@ class FixedAssetController extends Controller
 
         $userid = $request->user()->id();
         $orgid = $request->user()->id();
-        $del = FixedAssetProvider::BUILDING;
+        $del = FixedAssetProvider::LAND;
         $name = $request->input('name');
         $description = $request->input('description');
         $size = $request->input('size');

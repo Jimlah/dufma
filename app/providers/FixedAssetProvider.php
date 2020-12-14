@@ -7,7 +7,7 @@ use App\Models\FixedAssetModel;
 class FixedAssetProvider
 {
     const BUILDING = 0;
-    const MANCHINERY = 1;
+    const MACHINERY = 1;
     const VEHICLE = 2;
     const LAND = 3;
 
