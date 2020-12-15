@@ -11,8 +11,12 @@ class GalleryController extends Controller
 {
     public function display(Request $request, Response $response)
     {   
+        $gallery = GalleryModel::select()
+                    ->fetchAll();
 
-        $response->view('/dashboard/admin/gallery',[]);
+        $response->view('/dashboard/admin/gallery',[
+            'gallery' => $gallery
+        ]);
     }
 
     public function addGallery(Request $request, Response $response)
@@ -37,14 +41,24 @@ class GalleryController extends Controller
             'esp',
         );
 
-        var_dump($request); die();
-
         try {
             if(!$image->hasExtensionIn($allowable_types)){
-                return $response->withSession('msg', 'Invalid document type')->redirect($request->url()->getPath());
+                $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Invalid document type
+            </div>';
+                return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
             }
         } catch (\Throwable $th) {
-            return $response->withSession('msg', 'No document uploaded')->redirect($request->url()->getPath());
+            $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Invalid document type 
+            </div>';
+            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
         }
 
         $token = generate_token(20);
@@ -54,7 +68,13 @@ class GalleryController extends Controller
 
 
         if (!$image->moveTo(concat('/uploads/', $filename))) {
-            return $response->withSession('msg', 'Unable to upload document')->redirect($request->url()->getPath());
+            $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                Unable to upload document
+            </div>';
+            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
         }
 
         GalleryModel::createEntry([
@@ -64,6 +84,35 @@ class GalleryController extends Controller
             'description' => $description
         ]);
 
-        return $response->withSession('msg', 'File uploded Successfully')->redirect($request->url()->getPath());
+        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                File uploded Successfully
+            </div>';
+
+        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+    }
+
+    public function delete(Request $request, Response $response)
+    {
+
+        $id = $request->input('id');
+
+
+        GalleryModel::findByPrimaryKeyAndRemove($id);
+
+        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                You have successfully Deleted
+            </div>';
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        return $response->withSession('msg', $msg)->redirect($url);
     }
 }

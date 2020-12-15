@@ -6,15 +6,16 @@ use App\Core\Http\Model;
 
 class GalleryModel extends Model
 {
-    protected static $schema = '{schema_name}';
+    protected static $schema = 'gallery';
     
-    protected static $primary_key = '{primary_key_field}';
+    protected static $primary_key = 'id';
 
     protected static $provider = null;
 
     protected static $fields = array(
         'id',
         'user_id',
+        'description',
         'image',
         'token',
         'created_at',

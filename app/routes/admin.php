@@ -19,7 +19,7 @@ $router->group('/dashboard/admin')->namespace('Dashboard\Admin')->use(['auth', '
 
     // Gallery
     $router->get('/gallery', 'GalleryController.display');
-    $router->get('/gallery', 'GalleryController.addGallery');
+    $router->post('/gallery', 'GalleryController.addGallery');
 
    
 });

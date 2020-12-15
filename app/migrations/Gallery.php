@@ -23,6 +23,7 @@ class Gallery implements MigrationInterface
                 $table->field("user_id")->int();
                 $table->field("image")->varchar();
                 $table->field("token")->varchar();
+                $table->field("description")->varchar();
                 
             });
     }

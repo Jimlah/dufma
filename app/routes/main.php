@@ -16,14 +16,18 @@ $router->group()->namespace('Auth')->use('checkAuth')->register(function (Router
     $router->get('/case_studies', '@landing.case_studies');
 
 
-    $router->get('/media', '@landing.media');
-
-
     $router->get('/sign_in', '@landing.sign_in');
     $router->post('/sign_in', 'LoginController.login');
 
 
     $router->get('/solutions', '@landing.solutions');
+});
+
+$router->group()->namespace('Landing')->use('checkAuth')->register(function (Router $router) {
+
+
+    $router->get('/media', 'MediaController.display');
+
 });
 
 
