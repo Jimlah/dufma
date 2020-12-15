@@ -145,7 +145,7 @@
 												<td>{{item.lastname}}</td>
 												<td>{{item.email}}</td>
 												<td>{{item.username}}</td>
-												<td>{{item.status == 0 ? 'INACTIVE' : 'ACTIVE' }}</td>
+												<td>{{item.status == 0 ? '<span class="badge badge-light">INACTIVE</span>' : '<span class="badge badge-success">ACTIVE</span>' }}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 											</tr>
 										{% endfor %}

@@ -71,6 +71,10 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/product/delete', 'CurrentAssetController.delete');
 
 
+    // Warehouse
+
+    $router->get('/warehouse', 'WarehouseController.dispalyWarehouse');
+
 
 
     // Employee => Users Table

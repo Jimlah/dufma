@@ -2,20 +2,20 @@
 
 namespace App\Providers;
 
-use App\Models\UsersModel;
+use App\Models\GalleryModel;
 
-class WarehouseProvider
+class GalleryProvider
 {
     private $_model;
 
     /**
-     * WarehouseProvider constructor
+     * GalleryProvider constructor
      *
      * @param mixed $id
      */
     public function __construct($id)
     {
-        $this->_model = UsersModel::findByPrimaryKey($id);
+        $this->_model = GalleryModel::findByPrimaryKey($id);
     }
 
     /**

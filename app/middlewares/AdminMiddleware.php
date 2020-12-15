@@ -22,6 +22,7 @@ class AdminMiddleware implements MiddlewareInterface
         if(!( $access == UsersProvider::ACCESS_ADMIN)){
             return redirect('/404');
         }  
+        
         return $request;
     }
 }

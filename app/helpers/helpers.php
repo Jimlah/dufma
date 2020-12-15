@@ -8,7 +8,15 @@ function get_notification() {
     return $data;
 }
 
-function get_username($id){
-    $data = UsersModel::findByPrimaryKey($id);
+function get_user($id){
+    $data = UsersModel::select()
+                        ->where('id', $id)
+                        ->fetchOne();
     return $data;
+}
+
+function dnd ($data){
+    echo '<pre>';
+    var_dump($data);
+    echo '</pre>';
 }

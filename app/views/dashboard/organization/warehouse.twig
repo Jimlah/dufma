@@ -19,14 +19,7 @@
 				<div class="col-12">
 					<div
 						class="page-title-box">
-						{# <div class="page-title-right">
-																																																																							                                        <ol class="breadcrumb m-0">
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-																																																																							                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-																																																																							                                            <li class="breadcrumb-item active">Products</li>
-																																																																							                                        </ol>
-																																																																							                                    </div> #}
-						<h4 class="page-title">Gallery</h4>
+						<h4 class="page-title">Vehicle</h4>
 					</div>
 				</div>
 			</div>
@@ -41,27 +34,51 @@
 								<div class="col-sm-4">
 									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
 										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Gallery</a>
+										Add Vehicle</a>
 									<!-- Standard modal -->
 									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Gallery</h4>
+													<h4 class="modal-title" id="standard-modalLabel">Add Vehicle</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												</div>
 												<div class="modal-body">
 													<form action="" method="post">
-
 														<div class="form-group">
-															<label for="img">Upload Your Image</label>
-															<input type="file" id="image" class="form-control-file">
-														</div>
+															<label for="category">Category</label>
+															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
+															<datalist id="cat">
+																{% for key in vehicle %}
+																	<option value="{{key.category}}"></option>
+																{% endfor %}
 
+															</datalist>
+														</div>
+														<div class="form-group">
+															<label for="name">Name</label>
+															<input type="text" id="name" class="form-control" name="name">
+														</div>
 														<div class="form-group">
 															<label for="description">Description</label>
-															<textarea class="form-control" id="description" rows="5"></textarea>
+															<input type="text" id="description" class="form-control" name="description">
 														</div>
+
+														<div class="form-group">
+															<label for="manufacturer">Manufacturer</label>
+															<input type="text" id="manufacturer" class="form-control" name="manufacturer">
+														</div>
+
+														<div class="form-group">
+															<label for="amount">Amount</label>
+															<input type="text" id="amount" class="form-control" name="amount">
+														</div>
+
+														<div class="form-group">
+															<label for="serial_no">Serial No</label>
+															<input type="text" id="serial_no" class="form-control" name="serial_no">
+														</div>
+
 
 														<button type="submit" class="btn btn-primary btn-block">Submit</button>
 													</form>
@@ -93,8 +110,12 @@
 								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
 									<thead>
 										<tr>
-											<th>Image</th>
+											<th>Name</th>
 											<th>Description</th>
+											<th>Manufacturer</th>
+											<th>Amount</th>
+											<th>Serial No</th>
+											<th>Category</th>
 											<th>Date</th>
 											<th>Action</th>
 										</tr>
@@ -103,10 +124,14 @@
 
 									<tbody>
 
-										{% for item in gallery %}
+										{% for item in vehicle %}
 											<tr>
-												<td>{{item.image}}</td>
-												<td>{{item.Description}}</td>
+												<td>{{item.name}}</td>
+												<td>{{item.description}}</td>
+												<td>{{item.manufacturer}}</td>
+												<td>{{item.description}}</td>
+												<td>{{item.serial_no}}</td>
+												<td>{{item.category }}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
 													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
@@ -134,22 +159,53 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in emp %}
+		{% for item in vehicle %}
 			<!-- edit modal -->
 			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Employee</h4>
+							<h4 class="modal-title" id="standard-modalLabel">Edit Building</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/gallery/edit')}}" method="post">
+							<form action="{{url('/dashboard/organization/vehicle/edit', {'id': item.id})}}" method="post">
+								<div class="form-group">
+									<label for="category">Category</label>
+									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
+									<datalist id="cat">
+										{% for key in vehicle %}
+											<option value="{{key.category}}"></option>
+										{% endfor %}
+
+									</datalist>
+								</div>
+								<div class="form-group">
+									<label for="name">Name</label>
+									<input type="text" id="name" class="form-control" name="name" value="{{item.name}}">
+								</div>
 								<div class="form-group">
 									<label for="description">Description</label>
-									<textarea class="form-control" id="description" rows="5"></textarea>
+									<input type="text" id="description" class="form-control" name="description" value="{{item.description}}">
 								</div>
-								<button type="submit" class="btn btn-primary btn-block" name="id" value="{{item.id}}">Submit</button>
+
+								<div class="form-group">
+									<label for="manufacturer">Manufacturer</label>
+									<input type="text" id="manufacturer" class="form-control" name="Manufacturer" value="{{item.manufacturer}}">
+								</div>
+
+								<div class="form-group">
+									<label for="amount">Amount</label>
+									<input type="text" id="amount" class="form-control" name="amount" value="{{item.amount}}">
+								</div>
+
+								<div class="form-group">
+									<label for="serial_no">Serial No</label>
+									<input type="text" id="serial_no" class="form-control" name="serial_no" value="{{item.serial_no}}">
+								</div>
+
+
+								<button type="submit" class="btn btn-primary btn-block">Submit</button>
 							</form>
 						</div>
 						<div class="modal-footer">
@@ -172,7 +228,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/employee/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/vehicle/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
@@ -210,10 +266,11 @@
 				</div>
 			</div>
 		</footer>
+
+
 		<!-- end Footer -->
 	</div>
 	<!-- content-page -->
-
 {% endblock %}
 {% block js %}
 	<!-- third party js -->
@@ -230,7 +287,4 @@
 	{{jscript('vendor/dataTables.select.min')}}
 	<!-- third party js ends -->
 	<!-- demo app -->
-{{jscript('pages/demo.datatable-init')}}
-	<!-- init js -->
-	<!-- end demo js-->
-{% endblock %}
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}

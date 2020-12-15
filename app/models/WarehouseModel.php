@@ -3,16 +3,23 @@
 namespace App\Models;
 
 use App\Core\Http\Model;
+use App\Providers\WarehouseProvider;
 
 class WarehouseModel extends Model
 {
-    protected static $schema = '{schema_name}';
+    protected static $schema = 'warehouse';
     
-    protected static $primary_key = '{primary_key_field}';
+    protected static $primary_key = 'id';
 
-    protected static $provider = null;
+    protected static $provider = WarehouseProvider::class;
 
     protected static $fields = array(
+        'id',
+        'userid',
+        'orgid',
+        'warehouseid',
+        'productid',
+        'number',
         'created_at',
         'updated_at'
     );

@@ -21,7 +21,8 @@ return array(
     'functions' => array(
         'var_dump',
         'get_notification',
-        'get_username'
+        'get_username',
+        'dnd'
     ),
 
     #Filters allowed in view
