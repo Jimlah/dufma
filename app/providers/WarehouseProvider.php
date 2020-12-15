@@ -2,27 +2,18 @@
 
 namespace App\Providers;
 
-use App\Models\CurrentAssetModel;
-
-class CurrentAssetProvider
+class WarehouseProvider
 {
-
-
-    const PRODUCT = 0;
-    const OTASSET = 1;
-    const EQUIPMENT = 2;
-    const GOODS = 3;
-
     private $_model;
 
     /**
-     * CurrentAssetProvider constructor
+     * WarehouseProvider constructor
      *
      * @param mixed $id
      */
     public function __construct($id)
     {
-        $this->_model = CurrentAssetModel::findByPrimaryKey($id);
+        $this->_model = $id;
     }
 
     /**

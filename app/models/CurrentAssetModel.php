@@ -26,7 +26,6 @@ class CurrentAssetModel extends Model
         'location',
         'latitude',
         'longitude',
-        'status',
         'quantity',
         'del',
         'created_at',

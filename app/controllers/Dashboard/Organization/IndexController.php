@@ -17,17 +17,6 @@ class IndexController extends Controller
         $response->view('/dashboard/organization/index', []);
     }
 
-    
 
-    public function employee(Request $request, Response $response)
-    {
-        Auth::user();
-        $emp = UsersModel::select()
-            ->where('access', UsersProvider::ACCESS_EMPLOYEE)
-            ->fetchAll();
-        return $response->view('/dashboard/organization/employee', [
-            'emp' => $emp
-        ]);
-    }
 
 }
