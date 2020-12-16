@@ -53,9 +53,6 @@ class WarehouseController extends Controller
             ->fetchOne()
             ->total;
 
-
-            // echo '<pre>'; var_dump($sum); echo '<pre>'; die();
-
         $current = AssetModel::select()
             ->where('orgid', $user->id())
             ->andWhere('asset', AssetProvider::CURRENT_ASSET)
@@ -77,6 +74,7 @@ class WarehouseController extends Controller
         Auth::user();
         $userid = $request->user()->id();
         $orgid = $request->user()->id();
+        $remove = $request->input('removeid');
         $warehouseid = $request->input('id');
         $productid = $request->input('productid');
         $number = $request->input('number');
@@ -92,13 +90,16 @@ class WarehouseController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
+        if(strlen($remove) != 0){
+            $number = '-' . $number;
+        }
+
         WarehouseModel::createEntry([
             'userid' => $userid,
             'orgid' => $orgid,
             'warehouseid' => $warehouseid,
             'productid' => $productid,
             'number' => $number
-
         ]);
 
 
@@ -106,5 +107,10 @@ class WarehouseController extends Controller
         $msg = 'You have updated successfully';
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function model()
+    {
+        # code...
     }
 }
