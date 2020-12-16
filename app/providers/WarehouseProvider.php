@@ -2,11 +2,13 @@
 
 namespace App\Providers;
 
-use App\Models\UsersModel;
+use App\Models\WarehouseModel;
 
 class WarehouseProvider
 {
     private $_model;
+
+    private $product;
 
     /**
      * WarehouseProvider constructor
@@ -15,7 +17,7 @@ class WarehouseProvider
      */
     public function __construct($id)
     {
-        $this->_model = UsersModel::findByPrimaryKey($id);
+        $this->_model = WarehouseModel::findByPrimaryKey($id);
     }
 
     /**
@@ -39,6 +41,27 @@ class WarehouseProvider
     public function __set($name, $value)
     {
 
+    }
+
+    public function getProduct(): CurrentAssetProvider
+    {
+        $this->product ??= new CurrentAssetProvider($this->productid());
+        /* if($this->product) {
+            return $this->product;
+        }
+
+        $this->product = new CurrentAssetProvider($this->productid()); */
+        return $this->product;
+    }
+
+    /**
+     * Get user that created warehouse
+     * 
+     * @return UsersProvider
+     */
+    public function getUser(): UsersProvider
+    {
+        return new UsersProvider($this->userid());
     }
 
     /**

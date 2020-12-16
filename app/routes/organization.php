@@ -74,6 +74,9 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // Warehouse
 
     $router->get('/warehouse', 'WarehouseController.dispalyWarehouse');
+    $router->get('/warehouse/{id}', 'WarehouseController.dispalyWarepro');
+    $router->post('/warehouse/{id}', 'WarehouseController.addWarepro');
+    
 
 
 

@@ -17,22 +17,14 @@
 			<!-- start page title -->
 			<div class="row">
 				<div class="col-12">
-					<div
-						class="page-title-box">
-						{# <div class="page-title-right">
-																																			                                        <ol class="breadcrumb m-0">
-																																			                                            <li class="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-																																			                                            <li class="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-																																			                                            <li class="breadcrumb-item active">Products</li>
-																																			                                        </ol>
-																																			                                    </div> #}
+					<div class="page-title-box">
 						<h4 class="page-title">Employee</h4>
 					</div>
 				</div>
 			</div>
 			<!-- end page title -->
 
-			{{get_notification()}}
+			{{get_alert()}}
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
@@ -249,5 +241,7 @@
 				</div>
 			</div>
 		</footer><!-- end Footer --></div><!-- content-page -->{% endblock %}
-{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}<!-- third party js ends --><!-- demo app -->
+{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
 {{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}

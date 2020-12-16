@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Http\Model;
+use App\Providers\CurrentAssetProvider;
 
 class CurrentAssetModel extends Model
 {
@@ -10,7 +11,7 @@ class CurrentAssetModel extends Model
     
     protected static $primary_key = 'id';
 
-    protected static $provider = CurrentAssetModel::class;
+    protected static $provider = CurrentAssetProvider::class;
 
     protected static $fields = array(
         'id',

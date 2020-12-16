@@ -21,7 +21,10 @@ return array(
     'functions' => array(
         'var_dump',
         'get_notification',
-        'get_username',
+        'get_user',
+        'get_fixedasset',
+        'get_currentasset',
+        'get_alert',
         'dnd'
     ),
 

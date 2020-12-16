@@ -17,83 +17,20 @@
 			<!-- start page title -->
 			<div class="row">
 				<div class="col-12">
-					<div
-						class="page-title-box">
-						<h4 class="page-title">Vehicle</h4>
+					<div class="page-title-box">
+						<h4 class="page-title">warehouse</h4>
 					</div>
 				</div>
 			</div>
 			<!-- end page title -->
 
-			{{get_notification()}}
+			{{get_alert()}}
 			<div class="row">
 				<div class="col-12">
 					<div class="card">
 						<div class="card-body">
 							<div class="row mb-2">
-								<div class="col-sm-4">
-									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
-										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Vehicle</a>
-									<!-- Standard modal -->
-									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-										<div class="modal-dialog">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Vehicle</h4>
-													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-												</div>
-												<div class="modal-body">
-													<form action="" method="post">
-														<div class="form-group">
-															<label for="category">Category</label>
-															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
-															<datalist id="cat">
-																{% for key in vehicle %}
-																	<option value="{{key.category}}"></option>
-																{% endfor %}
-
-															</datalist>
-														</div>
-														<div class="form-group">
-															<label for="name">Name</label>
-															<input type="text" id="name" class="form-control" name="name">
-														</div>
-														<div class="form-group">
-															<label for="description">Description</label>
-															<input type="text" id="description" class="form-control" name="description">
-														</div>
-
-														<div class="form-group">
-															<label for="manufacturer">Manufacturer</label>
-															<input type="text" id="manufacturer" class="form-control" name="manufacturer">
-														</div>
-
-														<div class="form-group">
-															<label for="amount">Amount</label>
-															<input type="text" id="amount" class="form-control" name="amount">
-														</div>
-
-														<div class="form-group">
-															<label for="serial_no">Serial No</label>
-															<input type="text" id="serial_no" class="form-control" name="serial_no">
-														</div>
-
-
-														<button type="submit" class="btn btn-primary btn-block">Submit</button>
-													</form>
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-													<button type="button" class="btn btn-primary">Save changes</button>
-												</div>
-											</div>
-											<!-- /.modal-content -->
-										</div>
-										<!-- /.modal-dialog -->
-									</div>
-									<!-- /.modal -->
-								</div>
+								<div class="col-sm-4"></div>
 								<div class="col-sm-8">
 									<div class="text-sm-right">
 										<button type="button" class="btn btn-success mb-2 mr-1">
@@ -112,10 +49,8 @@
 										<tr>
 											<th>Name</th>
 											<th>Description</th>
-											<th>Manufacturer</th>
-											<th>Amount</th>
-											<th>Serial No</th>
-											<th>Category</th>
+											<th>Size</th>
+											<th>Location</th>
 											<th>Date</th>
 											<th>Action</th>
 										</tr>
@@ -124,25 +59,21 @@
 
 									<tbody>
 
-										{% for item in vehicle %}
+										{% for item in building %}
 											<tr>
 												<td>{{item.name}}</td>
 												<td>{{item.description}}</td>
-												<td>{{item.manufacturer}}</td>
-												<td>{{item.description}}</td>
-												<td>{{item.serial_no}}</td>
-												<td>{{item.category }}</td>
+												<td>{{item.size}}</td>
+												<td>{{item.location}}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
-													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
-														<i class="mdi mdi-square-edit-outline"></i>
+													<a href="{{url(['dashboard/organization/warehouse', item.id])}}" class="action-icon">
+														<i class="mdi mdi-eye"></i>
 													</a>
 
-													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#delete{{item.id}}">
-														<i class="mdi mdi-delete"></i>
-													</a>
 												</td>
 											</tr>
+
 										{% endfor %}
 									</tbody>
 								</table>
@@ -155,100 +86,24 @@
 				<!-- end col -->
 			</div>
 			<!-- end row -->
+			<div class="accordion" id="accordionExample">
+				{% for item in building %}
 
+
+					<div id="view{{item.id}}" class="collapse show" aria-labelledby="view{{item.id}}e" data-parent="#accordionExample">
+						<div class="card-body">
+							hello view{{item.id}}
+						</div>
+					</div>
+
+
+				{% endfor %}
+			</div>
+			{# Accordion #}
 		</div>
 		<!-- End Content -->
 
-		{% for item in vehicle %}
-			<!-- edit modal -->
-			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Building</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						</div>
-						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/vehicle/edit', {'id': item.id})}}" method="post">
-								<div class="form-group">
-									<label for="category">Category</label>
-									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
-									<datalist id="cat">
-										{% for key in vehicle %}
-											<option value="{{key.category}}"></option>
-										{% endfor %}
 
-									</datalist>
-								</div>
-								<div class="form-group">
-									<label for="name">Name</label>
-									<input type="text" id="name" class="form-control" name="name" value="{{item.name}}">
-								</div>
-								<div class="form-group">
-									<label for="description">Description</label>
-									<input type="text" id="description" class="form-control" name="description" value="{{item.description}}">
-								</div>
-
-								<div class="form-group">
-									<label for="manufacturer">Manufacturer</label>
-									<input type="text" id="manufacturer" class="form-control" name="Manufacturer" value="{{item.manufacturer}}">
-								</div>
-
-								<div class="form-group">
-									<label for="amount">Amount</label>
-									<input type="text" id="amount" class="form-control" name="amount" value="{{item.amount}}">
-								</div>
-
-								<div class="form-group">
-									<label for="serial_no">Serial No</label>
-									<input type="text" id="serial_no" class="form-control" name="serial_no" value="{{item.serial_no}}">
-								</div>
-
-
-								<button type="submit" class="btn btn-primary btn-block">Submit</button>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-
-			<!-- Delete Modal -->
-			<div id="delete{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Employee</h4>
-							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						</div>
-						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/vehicle/delete')}}" method="post">
-
-								<div class="form-group">
-									<p>Are you sure you want to delete?</p>
-								</div>
-								<button type="submit" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
-								<button type="submit" class="btn btn-danger btn-block" name="id" value="{{item.id}}">yes</button>
-							</form>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
-							<button type="button" class="btn btn-primary">Save changes</button>
-						</div>
-					</div>
-					<!-- /.modal-content -->
-				</div>
-				<!-- /.modal-dialog -->
-			</div>
-			<!-- /.modal -->
-
-		{% endfor %}
 		<!-- Footer Start -->
 		<footer class="footer">
 			<div class="container-fluid">
@@ -287,4 +142,6 @@
 	{{jscript('vendor/dataTables.select.min')}}
 	<!-- third party js ends -->
 	<!-- demo app -->
-{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}
+{{jscript('pages/demo.datatable-init')}}
+	<!-- end demo js-->
+{% endblock %}

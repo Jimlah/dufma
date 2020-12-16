@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Core\Http\Model;
+use App\Providers\UsersProvider;
 
 class UsersModel extends Model
 {
@@ -10,7 +11,7 @@ class UsersModel extends Model
     
     protected static $primary_key = 'id';
 
-    protected static $provider = null;
+    protected static $provider = UsersProvider::class;
 
     protected static $fields = array(
         'id',

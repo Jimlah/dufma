@@ -22,18 +22,14 @@ class FixedAssetController extends Controller
 
         FixedAssetModel::findByPrimaryKeyAndRemove($id);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Deleted
-            </div>';
+        $msg = 'You have deleted successfully';
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
     // Building
@@ -78,16 +74,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::createEntry([
@@ -102,14 +90,9 @@ class FixedAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have updated successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
     public function updateBuilding(Request $request, Response $response)
@@ -134,16 +117,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::findByPrimaryKeyAndUpdate(
@@ -158,19 +133,14 @@ class FixedAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
-
+        
+        $msg = 'You have updated successfully';
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -218,16 +188,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::createEntry([
@@ -242,14 +204,9 @@ class FixedAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have updated successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
     public function updateMachinery(Request $request, Response $response)
@@ -274,16 +231,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::findByPrimaryKeyAndUpdate(
@@ -298,19 +247,16 @@ class FixedAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+        
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -364,16 +310,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::createEntry([
@@ -388,14 +326,9 @@ class FixedAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have updated successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
     public function updateVehicle(Request $request, Response $response)
@@ -420,16 +353,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::findByPrimaryKeyAndUpdate(
@@ -444,19 +369,15 @@ class FixedAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+        
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -511,16 +432,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::createEntry([
@@ -535,14 +448,9 @@ class FixedAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have updated successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
     public function updateLand(Request $request, Response $response)
@@ -567,16 +475,8 @@ class FixedAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         FixedAssetModel::findByPrimaryKeyAndUpdate(
@@ -591,18 +491,13 @@ class FixedAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+        
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
-
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 }

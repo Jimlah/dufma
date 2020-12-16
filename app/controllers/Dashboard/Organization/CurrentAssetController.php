@@ -9,6 +9,7 @@ use App\Core\Http\Controller;
 use App\Core\Misc\InputValidator;
 use App\Migrations\CurrentAsset;
 use App\Models\CurrentAssetModel;
+use App\Models\UsersModel;
 use App\Providers\CurrentAssetProvider;
 
 class CurrentAssetController extends Controller
@@ -21,19 +22,17 @@ class CurrentAssetController extends Controller
 
         CurrentAssetModel::findByPrimaryKeyAndRemove($id);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Deleted
-            </div>';
+
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have deleted successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
+
+
 
     // OtherAsset
     public function displayOtherAsset(Request $request, Response $response)
@@ -43,13 +42,16 @@ class CurrentAssetController extends Controller
         $otasset = CurrentAssetModel::select()
             ->where('del', CurrentAssetProvider::OTASSET)
             ->andWhere('orgid', $user->id())
+            ->map()
             ->fetchAll();
-
 
         $response->view('/dashboard/organization/otherAsset', [
             'otasset' => $otasset
         ]);
     }
+
+
+
 
     public function addOtherAsset(Request $request, Response $response)
     {
@@ -74,17 +76,10 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
+
 
         CurrentAssetModel::createEntry([
             'userid' => $userid,
@@ -97,15 +92,14 @@ class CurrentAssetController extends Controller
             'location' => $location,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have successfully added a new information';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
+
+
+
+
 
     public function updateOtherAsset(Request $request, Response $response)
     {
@@ -127,16 +121,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::findByPrimaryKeyAndUpdate(
@@ -150,19 +136,16 @@ class CurrentAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -209,16 +192,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::createEntry([
@@ -233,15 +208,12 @@ class CurrentAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have added successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
+
+
 
     public function updateEquipment(Request $request, Response $response)
     {
@@ -265,42 +237,32 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
-        CurrentAssetModel::findByPrimaryKeyAndUpdate($id,
+        CurrentAssetModel::findByPrimaryKeyAndUpdate(
+            $id,
             [
                 'name' => $name,
-            'description' => $description,
-            'Manufacturer' => $manufacturer,
-            'amount' => $amount,
-            'location' => $location,
-            'category' => $category,
+                'description' => $description,
+                'Manufacturer' => $manufacturer,
+                'amount' => $amount,
+                'location' => $location,
+                'category' => $category,
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -328,6 +290,9 @@ class CurrentAssetController extends Controller
         ]);
     }
 
+
+
+
     public function addGoods(Request $request, Response $response)
     {
 
@@ -351,16 +316,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::createEntry([
@@ -374,15 +331,12 @@ class CurrentAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have added successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
+
+
 
     public function updateGoods(Request $request, Response $response)
     {
@@ -404,16 +358,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::findByPrimaryKeyAndUpdate(
@@ -427,19 +373,16 @@ class CurrentAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
 
@@ -493,16 +436,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::createEntry([
@@ -517,14 +452,9 @@ class CurrentAssetController extends Controller
             'category' => $category,
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have added successfully';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
     public function updateProduct(Request $request, Response $response)
@@ -549,16 +479,8 @@ class CurrentAssetController extends Controller
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            $msg = '';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] . '
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         CurrentAssetModel::findByPrimaryKeyAndUpdate(
@@ -573,18 +495,14 @@ class CurrentAssetController extends Controller
             ]
         );
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated the database
-            </div>';
+
 
 
         $url = explode('/', $request->url()->getPath());
         array_pop($url);
         $url = implode('/', $url);
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        $msg = 'You have updated successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 }
