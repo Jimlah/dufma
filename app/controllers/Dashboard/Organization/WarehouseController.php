@@ -47,7 +47,14 @@ class WarehouseController extends Controller
             ->map()
             ->fetchAll();
 
+        $sum = WarehouseModel::select('sum(number) total')
+            ->Where('orgid', $user->id())
+            ->andWhere('warehouseid', $id)
+            ->fetchOne()
+            ->total;
 
+
+            // echo '<pre>'; var_dump($sum); echo '<pre>'; die();
 
         $current = AssetModel::select()
             ->where('orgid', $user->id())
