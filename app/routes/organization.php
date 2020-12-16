@@ -11,31 +11,31 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->get('/', 'IndexController.dispaly');
 
     // Building
-    $router->get('/building', 'FixedAssetController.displayBuilding');
-    $router->post('/building', 'FixedAssetController.addBuilding');
-    $router->post('/building/edit', 'FixedAssetController.updateBuilding');
-    $router->post('/building/delete', 'FixedAssetController.delete');
+    $router->get('/building', 'AssetController.displayBuilding');
+    $router->post('/building', 'AssetController.addBuilding');
+    $router->post('/building/edit', 'AssetController.updateBuilding');
+    $router->post('/building/delete', 'AssetController.delete');
 
 
     // Machinery
-    $router->get('/machinery', 'FixedAssetController.displayMachinery');
-    $router->post('/machinery', 'FixedAssetController.addMachinery');
-    $router->post('/machinery/edit', 'FixedAssetController.updateMachinery');
-    $router->post('/machinery/delete', 'FixedAssetController.delete');
+    $router->get('/machinery', 'AssetController.displayMachinery');
+    $router->post('/machinery', 'AssetController.addMachinery');
+    $router->post('/machinery/edit', 'AssetController.updateMachinery');
+    $router->post('/machinery/delete', 'AssetController.delete');
 
 
     // Land
-    $router->get('/land', 'FixedAssetController.displayLand');
-    $router->post('/land', 'FixedAssetController.addLand');
-    $router->post('/land/edit', 'FixedAssetController.updateLand');
-    $router->post('/land/delete', 'FixedAssetController.delete');
+    $router->get('/land', 'AssetController.displayLand');
+    $router->post('/land', 'AssetController.addLand');
+    $router->post('/land/edit', 'AssetController.updateLand');
+    $router->post('/land/delete', 'AssetController.delete');
 
 
     // Vehicle
-    $router->get('/vehicle', 'FixedAssetController.displayVehicle');
-    $router->post('/vehicle', 'FixedAssetController.addVehicle');
-    $router->post('/vehicle/edit', 'FixedAssetController.updateVehicle');
-    $router->post('/vehicle/delete', 'FixedAssetController.delete');
+    $router->get('/vehicle', 'AssetController.displayVehicle');
+    $router->post('/vehicle', 'AssetController.addVehicle');
+    $router->post('/vehicle/edit', 'AssetController.updateVehicle');
+    $router->post('/vehicle/delete', 'AssetController.delete');
 
     
 
@@ -43,32 +43,32 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
 
     // otherasset
-    $router->get('/otherAsset', 'CurrentAssetController.displayOtherAsset');
-    $router->post('/otherAsset', 'CurrentAssetController.addOtherAsset');
-    $router->post('/otherAsset/edit', 'CurrentAssetController.updateOtherAsset');
-    $router->post('/otherAsset/delete', 'CurrentAssetController.delete');
+    $router->get('/otherAsset', 'AssetController.displayOtherAsset');
+    $router->post('/otherAsset', 'AssetController.addOtherAsset');
+    $router->post('/otherAsset/edit', 'AssetController.updateOtherAsset');
+    $router->post('/otherAsset/delete', 'AssetController.delete');
 
 
     // Goods
-    $router->get('/goods', 'CurrentAssetController.displayGoods');
-    $router->post('/goods', 'CurrentAssetController.addGoods');
-    $router->post('/goods/edit', 'CurrentAssetController.updateGoods');
-    $router->post('/goods/delete', 'CurrentAssetController.delete');
+    $router->get('/goods', 'AssetController.displayGoods');
+    $router->post('/goods', 'AssetController.addGoods');
+    $router->post('/goods/edit', 'AssetController.updateGoods');
+    $router->post('/goods/delete', 'AssetController.delete');
 
 
 
      // Land
-     $router->get('/equipment', 'CurrentAssetController.displayEquipment');
-     $router->post('/equipment', 'CurrentAssetController.addEquipment');
-     $router->post('/equipment/edit', 'CurrentAssetController.updateEquipment');
-     $router->post('/equipment/delete', 'CurrentAssetController.delete');
+     $router->get('/equipment', 'AssetController.displayEquipment');
+     $router->post('/equipment', 'AssetController.addEquipment');
+     $router->post('/equipment/edit', 'AssetController.updateEquipment');
+     $router->post('/equipment/delete', 'AssetController.delete');
 
 
     // Product
-    $router->get('/product', 'CurrentAssetController.displayProduct');
-    $router->post('/product', 'CurrentAssetController.addProduct');
-    $router->post('/product/edit', 'CurrentAssetController.updateProduct');
-    $router->post('/product/delete', 'CurrentAssetController.delete');
+    $router->get('/product', 'AssetController.displayProduct');
+    $router->post('/product', 'AssetController.addProduct');
+    $router->post('/product/edit', 'AssetController.updateProduct');
+    $router->post('/product/delete', 'AssetController.delete');
 
 
     // Warehouse
