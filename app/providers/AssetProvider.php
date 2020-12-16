@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\AssetModel;
+use App\Providers\UsersProvider;
 
 class AssetProvider
 {
@@ -19,6 +20,7 @@ class AssetProvider
     const CURRENT_ASSET = 0;
     const FIXED_ASSET = 1;
     
+    private $user;
 
     /**
      * AssetProvider constructor
@@ -61,5 +63,18 @@ class AssetProvider
     public static function map($id): self
     {
         return new self($id);
+    }
+
+    /**
+     * Get User that created asset
+     * 
+     * @return UsersProvider
+     */
+
+    public function getUser(): UsersProvider
+    {
+        $this->user ??= new UsersProvider($this->userid());
+
+        return $this->product;
     }
 }

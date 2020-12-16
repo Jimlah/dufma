@@ -7,10 +7,9 @@ use App\Core\Http\Request;
 use App\Core\Http\Response;
 use App\Core\Http\Controller;
 use App\Core\Misc\InputValidator;
-use App\Models\CurrentAssetModel;
-use App\Models\FixedAssetModel;
+use App\Models\AssetModel;
 use App\Models\WarehouseModel;
-use App\Providers\FixedAssetProvider;
+use App\Providers\AssetProvider;
 
 class WarehouseController extends Controller
 {
@@ -23,20 +22,17 @@ class WarehouseController extends Controller
             ->Where('orgid', $user->id())
             ->fetchAll();
 
-        $building = FixedAssetModel::select()
+        $building = AssetModel::select()
             ->where('orgid', $user->id())
-            ->andWhere('del', FixedAssetProvider::BUILDING)
+            ->andWhere('table_type', AssetProvider::BUILDING)
             ->andWhere('category', 'Warehouse')
             ->fetchAll();
 
 
-        $response->view(
-            '/dashboard/organization/warehouse',
-            [
-                'warehouse' => $warehouse,
-                'building' => $building
-            ]
-        );
+        $response->view('/dashboard/organization/warehouse', [
+            'warehouse' => $warehouse,
+            'building' => $building
+        ]);
     }
 
     public function dispalyWarepro(Request $request, Response $response)
@@ -45,15 +41,21 @@ class WarehouseController extends Controller
         $id = $request->id;
 
         $user = $request->user();
-        $warehouse = WarehouseModel::select('id')
+        $warehouse = WarehouseModel::select()
             ->Where('orgid', $user->id())
             ->andWhere('warehouseid', $id)
             ->map()
             ->fetchAll();
 
 
-        $current = CurrentAssetModel::findAllBy('orgid', $user->id());
-        $building = FixedAssetModel::findByPrimaryKey($id);
+
+        $current = AssetModel::select()
+            ->where('orgid', $user->id())
+            ->andWhere('asset', AssetProvider::CURRENT_ASSET)
+            ->fetchAll();
+
+        $building = AssetModel::findByPrimaryKey($id);
+
         $response->view('/dashboard/organization/warepro', [
             'building' => $building,
             'warehouse' => $warehouse,

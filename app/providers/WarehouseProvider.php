@@ -43,9 +43,9 @@ class WarehouseProvider
 
     }
 
-    public function getProduct(): CurrentAssetProvider
+    public function getProduct(): AssetProvider
     {
-        $this->product ??= new CurrentAssetProvider($this->productid());
+        $this->product ??= new AssetProvider($this->productid());
         /* if($this->product) {
             return $this->product;
         }
