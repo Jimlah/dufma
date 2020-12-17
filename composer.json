@@ -17,6 +17,7 @@
         }
     },
     "require": {
-        "twig/twig": "^2.5"
+        "twig/twig": "^2.5",
+        "swiftmailer/swiftmailer": "^6.0"
     }
 }
