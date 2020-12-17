@@ -48,8 +48,8 @@
 															<label for="category">Category</label>
 															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
 															<datalist id="cat">
-																{% for key in buildings %}
-																	<option value="{{key.category}}"></option>
+																{% for key in category %}
+																	<option value="{{key.category}}">{{key.category}}</option>
 																{% endfor %}
 
 															</datalist>
@@ -173,8 +173,8 @@
 									<label for="category">Category</label>
 									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
 									<datalist id="cat">
-										{% for key in buildings %}
-											<option value="{{key.category}}"></option>
+										{% for key in category %}
+											<option value="{{key.category == item.category ? 'SELECTED' : ''}}"></option>
 										{% endfor %}
 
 									</datalist>

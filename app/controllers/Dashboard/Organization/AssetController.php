@@ -32,482 +32,523 @@ class AssetController extends Controller
 
 
 
-     // Building
-     public function displayBuilding(Request $request, Response $response)
-     {
-         Auth::user();
-         $user = $request->user();
-         $buildings = AssetModel::select()
-             ->where('table_type', AssetProvider::BUILDING)
-             ->andWhere('orgid', $user->id())
-             ->map()
-             ->fetchAll();
- 
- 
-         $response->view('/dashboard/organization/building', [
-             'buildings' => $buildings
-         ]);
-     }
- 
-     public function addBuilding(Request $request, Response $response)
-     {
- 
-         $userid = $request->user()->id();
-         $orgid = $request->user()->id();
-         $table_type = AssetProvider::BUILDING;
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $size = $request->input('size');
-         $amount = $request->input('amount');
-         $location = $request->input('location');
-         $category = $request->input('category');
-         $asset = AssetProvider::FIXED_ASSET;
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $size->validate('required');
-         $amount->validate('required');
-         $location->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::createEntry([
-             'userid' => $userid,
-             'orgid' => $orgid,
-             'table_type' => $table_type,
-             'name' => $name,
-             'description' => $description,
-             'size' => $size,
-             'amount' => $amount,
-             'location' => $location,
-             'category' => $category,
-             'asset' => $asset
-         ]);
- 
-         $msg = 'You have updated successfully';
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
-     }
- 
-     public function updateBuilding(Request $request, Response $response)
-     {
-         $id = $request->url()->getQuery('id');
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $size = $request->input('size');
-         $amount = $request->input('amount');
-         $location = $request->input('location');
-         $category = $request->input('category');
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $size->validate('required');
-         $amount->validate('required');
-         $location->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::findByPrimaryKeyAndUpdate(
-             $id,
-             [
-                 'name' => $name,
-                 'description' => $description,
-                 'size' => $size,
-                 'amount' => $amount,
-                 'location' => $location,
-                 'category' => $category,
-             ]
-         );
- 
-         
-         $msg = 'You have updated successfully';
- 
-         $url = explode('/', $request->url()->getPath());
-         array_pop($url);
-         $url = implode('/', $url);
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
-     }
- 
- 
- 
-     // Machinery
- 
-     public function displayMachinery(Request $request, Response $response)
-     {
-         Auth::user();
-         $user = $request->user();
-         $machinery = AssetModel::select()
-             ->where('table_type', AssetProvider::MACHINERY)
-             ->andWhere('orgid', $user->id())
-             ->map()
-             ->fetchAll();
- 
- 
-         $response->view('/dashboard/organization/machinery', [
-             'machinery' => $machinery
-         ]);
-     }
- 
-     public function addMachinery(Request $request, Response $response)
-     {
- 
-         $userid = $request->user()->id();
-         $orgid = $request->user()->id();
-         $table_type = AssetProvider::MACHINERY;
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $manufacturer = $request->input('manufacturer');
-         $amount = $request->input('amount');
-         $serial_no = $request->input('serial_no');
-         $category = $request->input('category');
-         $asset = AssetProvider::FIXED_ASSET;
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $manufacturer->validate('required');
-         $amount->validate('required');
-         $serial_no->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::createEntry([
-             'userid' => $userid,
-             'orgid' => $orgid,
-             'table_type' => $table_type,
-             'name' => $name,
-             'description' => $description,
-             'Manufacturer' => $manufacturer,
-             'amount' => $amount,
-             'serial_no' => $serial_no,
-             'category' => $category,
-             'asset' => $asset
-         ]);
- 
-         $msg = 'You have updated successfully';
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
-     }
- 
-     public function updateMachinery(Request $request, Response $response)
-     {
-         $id = $request->url()->getQuery('id');
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $manufacturer = $request->input('manufacturer');
-         $amount = $request->input('amount');
-         $serial_no = $request->input('serial_no');
-         $category = $request->input('category');
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $manufacturer->validate('required');
-         $amount->validate('required');
-         $serial_no->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::findByPrimaryKeyAndUpdate(
-             $id,
-             [
-                 'name' => $name,
-                 'description' => $description,
-                 'manufacturer' => $manufacturer,
-                 'amount' => $amount,
-                 'serial_no' => $serial_no,
-                 'category' => $category,
-             ]
-         );
- 
-         
- 
- 
-         $url = explode('/', $request->url()->getPath());
-         array_pop($url);
-         $url = implode('/', $url);
- 
-         $msg = 'You have updated successfully';
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
-     }
- 
- 
- 
- 
- 
- 
- 
- 
-     // Vehicle
- 
- 
-     public function displayVehicle(Request $request, Response $response)
-     {
-         Auth::user();
-         $user = $request->user();
-         $vehicle = AssetModel::select()
-             ->where('table_type', AssetProvider::VEHICLE)
-             ->andWhere('orgid', $user->id())
-             ->map()
-             ->fetchAll();
- 
- 
-         $response->view('/dashboard/organization/vehicle', [
-             'vehicle' => $vehicle
-         ]);
-     }
- 
-     public function addVehicle(Request $request, Response $response)
-     {
- 
-         $userid = $request->user()->id();
-         $orgid = $request->user()->id();
-         $table_type = AssetProvider::VEHICLE;
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $manufacturer = $request->input('manufacturer');
-         $amount = $request->input('amount');
-         $serial_no = $request->input('serial_no');
-         $category = $request->input('category');
-         $asset = AssetProvider::FIXED_ASSET;
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $manufacturer->validate('required');
-         $amount->validate('required');
-         $serial_no->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::createEntry([
-             'userid' => $userid,
-             'orgid' => $orgid,
-             'table_type' => $table_type,
-             'name' => $name,
-             'description' => $description,
-             'Manufacturer' => $manufacturer,
-             'amount' => $amount,
-             'serial_no' => $serial_no,
-             'category' => $category,
-             'asset' => $asset
-         ]);
- 
-         $msg = 'You have updated successfully';
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
-     }
- 
-     public function updateVehicle(Request $request, Response $response)
-     {
-         $id = $request->url()->getQuery('id');
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $manufacturer = $request->input('manufacturer');
-         $amount = $request->input('amount');
-         $serial_no = $request->input('serial_no');
-         $category = $request->input('category');
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $manufacturer->validate('required');
-         $amount->validate('required');
-         $serial_no->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::findByPrimaryKeyAndUpdate(
-             $id,
-             [
-                 'name' => $name,
-                 'description' => $description,
-                 'manufacturer' => $manufacturer,
-                 'amount' => $amount,
-                 'serial_no' => $serial_no,
-                 'category' => $category,
-             ]
-         );
- 
-         
- 
- 
-         $url = explode('/', $request->url()->getPath());
-         array_pop($url);
-         $url = implode('/', $url);
- 
-         $msg = 'You have updated successfully';
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
-     }
- 
- 
- 
- 
- 
- 
- 
- 
- 
-     // Land
- 
- 
-     public function displayLand(Request $request, Response $response)
-     {
-         Auth::user();
-         $user = $request->user();
-         $land = AssetModel::select()
-             ->where('table_type', AssetProvider::LAND)
-             ->andWhere('orgid', $user->id())
-             ->map()
-             ->fetchAll();
- 
- 
-         $response->view('/dashboard/organization/land', [
-             'land' => $land
-         ]);
-     }
- 
-     public function addLand(Request $request, Response $response)
-     {
- 
-         $userid = $request->user()->id();
-         $orgid = $request->user()->id();
-         $table_type = AssetProvider::LAND;
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $size = $request->input('size');
-         $amount = $request->input('amount');
-         $location = $request->input('location');
-         $category = $request->input('category');
-         $asset = AssetProvider::FIXED_ASSET;
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $size->validate('required');
-         $amount->validate('required');
-         $location->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::createEntry([
-             'userid' => $userid,
-             'orgid' => $orgid,
-             'table_type' => $table_type,
-             'name' => $name,
-             'description' => $description,
-             'size' => $size,
-             'amount' => $amount,
-             'location' => $location,
-             'category' => $category,
-             'asset' => $asset
-         ]);
- 
-         $msg = 'You have updated successfully';
- 
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
-     }
- 
-     public function updateLand(Request $request, Response $response)
-     {
-         $id = $request->url()->getQuery('id');
-         $name = $request->input('name');
-         $description = $request->input('description');
-         $size = $request->input('size');
-         $amount = $request->input('amount');
-         $location = $request->input('location');
-         $category = $request->input('category');
- 
- 
-         InputValidator::init();
- 
-         $name->validate('required');
-         $description->validate('required');
-         $size->validate('required');
-         $amount->validate('required');
-         $location->validate('required');
-         $category->validate('required');
- 
-         if (!InputValidator::isValid()) {
-             $errors = InputValidator::getErrors();
-             
-             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
-         }
- 
-         AssetModel::findByPrimaryKeyAndUpdate(
-             $id,
-             [
-                 'name' => $name,
-                 'description' => $description,
-                 'size' => $size,
-                 'amount' => $amount,
-                 'location' => $location,
-                 'category' => $category,
-             ]
-         );
- 
-         
- 
- 
-         $url = explode('/', $request->url()->getPath());
-         array_pop($url);
-         $url = implode('/', $url);
-         $msg = 'You have updated successfully';
-         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
-     }
+
+    
+
+
+
+    // Building
+    public function displayBuilding(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $buildings = AssetModel::select()
+            ->where('table_type', AssetProvider::BUILDING)
+            ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('DISTINCT(category)')
+            ->where('table_type', AssetProvider::BUILDING)
+            ->andWhere('orgid', $user->id())
+            //  ->map()
+            ->fetchAll();
+
+
+        $response->view('/dashboard/organization/building', [
+            'buildings' => $buildings,
+            'category' => $category
+        ]);
+    }
+
+    public function addBuilding(Request $request, Response $response)
+    {
+
+        $userid = $request->user()->id();
+        $orgid = $request->user()->id();
+        $table_type = AssetProvider::BUILDING;
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $size = $request->input('size');
+        $amount = $request->input('amount');
+        $location = $request->input('location');
+        $category = $request->input('category');
+        $asset = AssetProvider::FIXED_ASSET;
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $size->validate('required');
+        $amount->validate('required');
+        $location->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'table_type' => $table_type,
+            'name' => $name,
+            'description' => $description,
+            'size' => $size,
+            'amount' => $amount,
+            'location' => $location,
+            'category' => $category,
+            'asset' => $asset
+        ]);
+
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function updateBuilding(Request $request, Response $response)
+    {
+        $id = $request->url()->getQuery('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $size = $request->input('size');
+        $amount = $request->input('amount');
+        $location = $request->input('location');
+        $category = $request->input('category');
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $size->validate('required');
+        $amount->validate('required');
+        $location->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::findByPrimaryKeyAndUpdate(
+            $id,
+            [
+                'name' => $name,
+                'description' => $description,
+                'size' => $size,
+                'amount' => $amount,
+                'location' => $location,
+                'category' => $category,
+            ]
+        );
+
+
+        $msg = 'You have updated successfully';
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    }
+
+
+
+
+
+
+
+    // Machinery
+
+    public function displayMachinery(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $machinery = AssetModel::select()
+            ->where('table_type', AssetProvider::MACHINERY)
+            ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::MACHINERY)
+            ->andWhere('orgid', $user->id())
+            //  ->map()
+            ->fetchAll();
+
+
+        $response->view('/dashboard/organization/machinery', [
+            'machinery' => $machinery,
+            'category' => $category
+        ]);
+    }
+
+    public function addMachinery(Request $request, Response $response)
+    {
+
+        $userid = $request->user()->id();
+        $orgid = $request->user()->id();
+        $table_type = AssetProvider::MACHINERY;
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $manufacturer = $request->input('manufacturer');
+        $amount = $request->input('amount');
+        $serial_no = $request->input('serial_no');
+        $category = $request->input('category');
+        $asset = AssetProvider::FIXED_ASSET;
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $manufacturer->validate('required');
+        $amount->validate('required');
+        $serial_no->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'table_type' => $table_type,
+            'name' => $name,
+            'description' => $description,
+            'Manufacturer' => $manufacturer,
+            'amount' => $amount,
+            'serial_no' => $serial_no,
+            'category' => $category,
+            'asset' => $asset
+        ]);
+
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function updateMachinery(Request $request, Response $response)
+    {
+        $id = $request->url()->getQuery('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $manufacturer = $request->input('manufacturer');
+        $amount = $request->input('amount');
+        $serial_no = $request->input('serial_no');
+        $category = $request->input('category');
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $manufacturer->validate('required');
+        $amount->validate('required');
+        $serial_no->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::findByPrimaryKeyAndUpdate(
+            $id,
+            [
+                'name' => $name,
+                'description' => $description,
+                'manufacturer' => $manufacturer,
+                'amount' => $amount,
+                'serial_no' => $serial_no,
+                'category' => $category,
+            ]
+        );
+
+
+
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    }
+
+
+
+
+
+
+
+
+    // Vehicle
+
+
+    public function displayVehicle(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $vehicle = AssetModel::select()
+            ->where('table_type', AssetProvider::VEHICLE)
+            ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::VEHICLE)
+            ->andWhere('orgid', $user->id())
+            // ->map()
+            ->fetchAll();
+
+        $response->view('/dashboard/organization/vehicle', [
+            'vehicle' => $vehicle,
+            'category' => $category
+        ]);
+    }
+
+    public function addVehicle(Request $request, Response $response)
+    {
+
+        $userid = $request->user()->id();
+        $orgid = $request->user()->id();
+        $table_type = AssetProvider::VEHICLE;
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $manufacturer = $request->input('manufacturer');
+        $amount = $request->input('amount');
+        $serial_no = $request->input('serial_no');
+        $category = $request->input('category');
+        $asset = AssetProvider::FIXED_ASSET;
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $manufacturer->validate('required');
+        $amount->validate('required');
+        $serial_no->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'table_type' => $table_type,
+            'name' => $name,
+            'description' => $description,
+            'Manufacturer' => $manufacturer,
+            'amount' => $amount,
+            'serial_no' => $serial_no,
+            'category' => $category,
+            'asset' => $asset
+        ]);
+
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function updateVehicle(Request $request, Response $response)
+    {
+        $id = $request->url()->getQuery('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $manufacturer = $request->input('manufacturer');
+        $amount = $request->input('amount');
+        $serial_no = $request->input('serial_no');
+        $category = $request->input('category');
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $manufacturer->validate('required');
+        $amount->validate('required');
+        $serial_no->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::findByPrimaryKeyAndUpdate(
+            $id,
+            [
+                'name' => $name,
+                'description' => $description,
+                'manufacturer' => $manufacturer,
+                'amount' => $amount,
+                'serial_no' => $serial_no,
+                'category' => $category,
+            ]
+        );
+
+
+
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+
+        $msg = 'You have updated successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    }
+
+
+
+
+
+
+
+
+
+    // Land
+
+
+    public function displayLand(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $land = AssetModel::select()
+            ->where('table_type', AssetProvider::LAND)
+            ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::LAND)
+            ->andWhere('orgid', $user->id())
+            // ->map()
+            ->fetchAll();
+
+
+        $response->view('/dashboard/organization/land', [
+            'land' => $land,
+            'category' => $category
+        ]);
+    }
+
+    public function addLand(Request $request, Response $response)
+    {
+
+        $userid = $request->user()->id();
+        $orgid = $request->user()->id();
+        $table_type = AssetProvider::LAND;
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $size = $request->input('size');
+        $amount = $request->input('amount');
+        $location = $request->input('location');
+        $category = $request->input('category');
+        $asset = AssetProvider::FIXED_ASSET;
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $size->validate('required');
+        $amount->validate('required');
+        $location->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'table_type' => $table_type,
+            'name' => $name,
+            'description' => $description,
+            'size' => $size,
+            'amount' => $amount,
+            'location' => $location,
+            'category' => $category,
+            'asset' => $asset
+        ]);
+
+        $msg = 'You have updated successfully';
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function updateLand(Request $request, Response $response)
+    {
+        $id = $request->url()->getQuery('id');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $size = $request->input('size');
+        $amount = $request->input('amount');
+        $location = $request->input('location');
+        $category = $request->input('category');
+
+
+        InputValidator::init();
+
+        $name->validate('required');
+        $description->validate('required');
+        $size->validate('required');
+        $amount->validate('required');
+        $location->validate('required');
+        $category->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        AssetModel::findByPrimaryKeyAndUpdate(
+            $id,
+            [
+                'name' => $name,
+                'description' => $description,
+                'size' => $size,
+                'amount' => $amount,
+                'location' => $location,
+                'category' => $category,
+            ]
+        );
+
+
+
+
+        $url = explode('/', $request->url()->getPath());
+        array_pop($url);
+        $url = implode('/', $url);
+        $msg = 'You have updated successfully';
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    }
+
+
+
+
+
 
 
 
@@ -526,8 +567,6 @@ class AssetController extends Controller
             'other_asset' => $other_asset
         ]);
     }
-
-
 
 
     public function addOtherAsset(Request $request, Response $response)
@@ -575,9 +614,6 @@ class AssetController extends Controller
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
-
-
-
 
 
     public function updateOtherAsset(Request $request, Response $response)
@@ -629,6 +665,11 @@ class AssetController extends Controller
 
 
 
+    
+
+
+
+
     // Equipment
 
     public function displayEquipment(Request $request, Response $response)
@@ -638,11 +679,18 @@ class AssetController extends Controller
         $equipment = AssetModel::select()
             ->where('table_type', AssetProvider::EQUIPMENT)
             ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::EQUIPMENT)
+            ->andWhere('orgid', $user->id())
             ->fetchAll();
 
 
         $response->view('/dashboard/organization/equipment', [
-            'equipment' => $equipment
+            'equipment' => $equipment,
+            'category' => $category
         ]);
     }
 
@@ -763,11 +811,18 @@ class AssetController extends Controller
         $goods = AssetModel::select()
             ->where('table_type', AssetProvider::GOODS)
             ->andWhere('orgid', $user->id())
+            ->map()
+            ->fetchAll();
+
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::GOODS)
+            ->andWhere('orgid', $user->id())
             ->fetchAll();
 
 
         $response->view('/dashboard/organization/goods', [
-            'goods' => $goods
+            'goods' => $goods,
+            'category' => $category
         ]);
     }
 
@@ -888,9 +943,14 @@ class AssetController extends Controller
             ->andWhere('orgid', $user->id())
             ->fetchAll();
 
+        $category = AssetModel::select('distinct(category)')
+            ->where('table_type', AssetProvider::PRODUCT)
+            ->andWhere('orgid', $user->id())
+            ->fetchAll();
 
         $response->view('/dashboard/organization/product', [
-            'product' => $product
+            'product' => $product,
+            'category' => $category
         ]);
     }
 
