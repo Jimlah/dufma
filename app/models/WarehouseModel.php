@@ -20,7 +20,8 @@ class WarehouseModel extends Model
         'warehouseid',
         'productid',
         'number',
+        'type',
         'created_at',
-        'updated_at'
+        'updated_at',
     );
 }

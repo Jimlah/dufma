@@ -6,6 +6,10 @@ use App\Models\WarehouseModel;
 
 class WarehouseProvider
 {
+
+    const REMOVED = 0;
+    const ADDED = 1;
+
     private $_model;
 
     private $product;

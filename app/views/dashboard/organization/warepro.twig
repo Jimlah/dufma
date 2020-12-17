@@ -128,6 +128,7 @@
 											<th>Product</th>
 											<th>Description</th>
 											<th>Quantity</th>
+											<th>Type</th>
 											<th>Date</th>
 											<th>Action</th>
 										</tr>
@@ -142,6 +143,7 @@
 												<td>{{ item.getProduct().name() }}</td>
 												<td>{{ item.getProduct().description() }}</td>
 												<td>{{ item.number() }}</td>
+												<td>{{ item.type() == 0 ? 'Removed' : 'Added' }}</td>
 												<td>{{ item.created_at() | date('d M Y') }}</td>
 												<td>
 													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">

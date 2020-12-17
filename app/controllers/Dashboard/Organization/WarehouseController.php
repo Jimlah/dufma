@@ -10,6 +10,7 @@ use App\Core\Misc\InputValidator;
 use App\Models\AssetModel;
 use App\Models\WarehouseModel;
 use App\Providers\AssetProvider;
+use App\Providers\WarehouseProvider;
 
 class WarehouseController extends Controller
 {
@@ -47,11 +48,13 @@ class WarehouseController extends Controller
             ->map()
             ->fetchAll();
 
-        $sum = WarehouseModel::select('sum(number) total')
+        $items = WarehouseModel::select(' productid, sum(number) total')
             ->Where('orgid', $user->id())
             ->andWhere('warehouseid', $id)
-            ->fetchOne()
-            ->total;
+            ->groupBy('productid')
+            ->fetchAll();
+
+
 
         $current = AssetModel::select()
             ->where('orgid', $user->id())
@@ -64,6 +67,7 @@ class WarehouseController extends Controller
             'building' => $building,
             'warehouse' => $warehouse,
             'current' => $current,
+            'num' => $items
         ]);
     }
 
@@ -78,6 +82,7 @@ class WarehouseController extends Controller
         $warehouseid = $request->input('id');
         $productid = $request->input('productid');
         $number = $request->input('number');
+        $type = WarehouseProvider::ADDED;
 
 
         InputValidator::init();
@@ -90,16 +95,24 @@ class WarehouseController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
-        if(strlen($remove) != 0){
+
+
+        if (strlen($remove) != 0) {
+            $warehouseid = $remove;
             $number = '-' . $number;
+            $type = WarehouseProvider::REMOVED;
         }
+
+        // var_dump($warehouseid); die();
+
 
         WarehouseModel::createEntry([
             'userid' => $userid,
             'orgid' => $orgid,
             'warehouseid' => $warehouseid,
             'productid' => $productid,
-            'number' => $number
+            'number' => $number,
+            'type' => $type
         ]);
 
 

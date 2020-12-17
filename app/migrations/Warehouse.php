@@ -25,6 +25,7 @@ class Warehouse implements MigrationInterface
                 $table->field('warehouseid')->int();
                 $table->field('productid')->int();
                 $table->field('number')->int();
+                $table->field('type')->int();
             });
     }
 
