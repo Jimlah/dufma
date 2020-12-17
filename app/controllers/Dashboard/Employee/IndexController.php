@@ -10,6 +10,6 @@ class IndexController extends Controller
 {
     public function display(Request $request, Response $response)
     {
-        $response->view('/dashboard/employee/index', []);
+        $response->view('dashboard/employee/index');
     }
 }

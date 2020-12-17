@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
 
         if($access == UsersProvider::ACCESS_EMPLOYEE){
-            return $response->withSession('msg', [$msg, 'alert'])->redirect('/dashboard/empolyee');
+            return $response->withSession('msg', [$msg, 'alert'])->redirect('/dashboard/employee');
         }
 
         if($access == UsersProvider::ACCESS_INVESTOR){

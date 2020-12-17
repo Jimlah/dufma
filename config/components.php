@@ -12,5 +12,5 @@
 return array(
     'hello_world' => function () {
         return 'Hello world from component "Hello world"';
-    }
+    },   
 );

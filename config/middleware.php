@@ -4,6 +4,7 @@ use App\Middlewares\AccessMiddleware;
 use App\Middlewares\AdminMiddleware;
 use App\Middlewares\Authentication;
 use App\Middlewares\CheckAuthMiddleware;
+use App\Middlewares\CheckuserMiddleware;
 use App\Middlewares\CsrfMiddleware;
 use App\Middlewares\EmployeeMiddleware;
 use App\Middlewares\InvestorMiddleware;
@@ -17,4 +18,5 @@ return array(
     'access.org' => OrganizationMiddleware::class,
     'access.emp' => EmployeeMiddleware::class,
     'access.inv' => InvestorMiddleware::class,
+    'check.user' => CheckuserMiddleware::class,
 );

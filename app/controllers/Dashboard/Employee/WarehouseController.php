@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Dashboard\Organization;
+namespace App\Controllers\Dashboard\Employee;
 
 use App\Core\Tools\Auth;
 use App\Core\Http\Request;
@@ -20,11 +20,11 @@ class WarehouseController extends Controller
         Auth::user();
         $user = $request->user();
         $warehouse = WarehouseModel::select()
-            ->Where('orgid', $user->id())
+            ->Where('orgid', $user->userid())
             ->fetchAll();
 
         $building = AssetModel::select()
-            ->where('orgid', $user->id())
+            ->where('orgid', $user->userid())
             ->andWhere('table_type', AssetProvider::BUILDING)
             ->andWhere('category', 'Warehouse')
             ->fetchAll();
@@ -43,21 +43,21 @@ class WarehouseController extends Controller
 
         $user = $request->user();
         $warehouse = WarehouseModel::select()
-            ->Where('orgid', $user->id())
+            ->Where('orgid', $user->userid())
             ->andWhere('warehouseid', $id)
             ->map()
             ->fetchAll();
 
-        $items = WarehouseModel::select(['id', 'productid', 'sum(number) total'])
-            ->where('orgid', $user->id())
-            ->and('warehouseid', $id)
+        $items = WarehouseModel::select(' productid, sum(number) total')
+            ->Where('orgid', $user->userid())
+            ->andWhere('warehouseid', $id)
             ->groupBy('productid')
-            //->map()
             ->fetchAll();
 
 
+
         $current = AssetModel::select()
-            ->where('orgid', $user->id())
+            ->where('orgid', $user->userid())
             ->andWhere('asset', AssetProvider::CURRENT_ASSET)
             ->fetchAll();
 
@@ -77,7 +77,7 @@ class WarehouseController extends Controller
 
         Auth::user();
         $userid = $request->user()->id();
-        $orgid = $request->user()->id();
+        $orgid = $request->user()->userid();
         $remove = $request->input('removeid');
         $warehouseid = $request->input('id');
         $productid = $request->input('productid');

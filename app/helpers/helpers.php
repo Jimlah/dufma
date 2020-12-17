@@ -1,10 +1,7 @@
 <?php
 
 use App\Core\Http\Session;
-use App\Models\CurrentAssetModel;
-use App\Models\FixedAssetModel;
 use App\Models\UsersModel;
-use App\Providers\UsersProvider;
 
 function get_notification()
 {
@@ -15,41 +12,12 @@ function get_notification()
 
 
 
-function get_user($id)
-{
-    $data = UsersModel::select()
-        ->where('id', $id)
-        ->fetchOne();
-    return $data;
-}
-
-
-
-function get_fixedasset($id)
-{
-    $data = FixedAssetModel::select()
-        ->where('id', $id)
-        ->fetchOne();
-    return $data;
-}
-
-
-function get_currentasset($id)
-{
-    $data = CurrentAssetModel::select()
-        ->where('id', $id)
-        ->fetchOne();
-    return $data;
-}
-
-
-
-
-function dnd($data)
+function dnd($data, $d = true)
 {
     echo '<pre>';
     var_dump($data);
     echo '</pre>';
+    if($d) die();
 }
 
 
