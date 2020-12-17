@@ -1,7 +1,7 @@
 <?php
 
+use App\Core\Http\Request;
 use App\Core\Http\Session;
-use App\Models\UsersModel;
 
 function get_notification()
 {

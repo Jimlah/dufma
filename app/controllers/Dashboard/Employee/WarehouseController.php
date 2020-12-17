@@ -30,7 +30,7 @@ class WarehouseController extends Controller
             ->fetchAll();
 
 
-        $response->view('/dashboard/organization/warehouse', [
+        $response->view('/dashboard/employee/warehouse', [
             'warehouse' => $warehouse,
             'building' => $building
         ]);
@@ -63,7 +63,7 @@ class WarehouseController extends Controller
 
         $building = AssetModel::findByPrimaryKey($id);
 
-        $response->view('/dashboard/organization/warepro', [
+        $response->view('/dashboard/employee/warepro', [
             'building' => $building,
             'warehouse' => $warehouse,
             'current' => $current,
@@ -103,7 +103,6 @@ class WarehouseController extends Controller
             $type = WarehouseProvider::REMOVED;
         }
 
-        // var_dump($warehouseid); die();
 
 
         WarehouseModel::createEntry([
