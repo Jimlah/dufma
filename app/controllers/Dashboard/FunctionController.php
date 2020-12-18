@@ -9,6 +9,9 @@ use App\Core\Misc\InputValidator;
 use App\Core\Tools\Auth;
 use App\Models\UsersModel;
 use App\Providers\UsersProvider;
+use Swift_Mailer;
+use Swift_Message;
+use Swift_SmtpTransport;
 
 class FunctionController extends Controller
 {
@@ -30,6 +33,11 @@ class FunctionController extends Controller
         $password1 = $request->input('password1');
         $access = UsersProvider::ACCESS_ORGANIZATION;
         $status = UsersProvider::STATUS_ACTIVE;
+
+
+        $mail = $this->sendMail($request, $response);
+
+        dnd($mail);
 
         InputValidator::init([
             "uniqueField" => function (InputValidator $validator, string $field, string $message){
@@ -54,16 +62,8 @@ class FunctionController extends Controller
 
         if(!InputValidator::isValid()){
             $errors = InputValidator::getErrors();
-            $msg='';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] .'
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         UsersModel::createEntry([
@@ -77,14 +77,9 @@ class FunctionController extends Controller
             'status' => $status
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have successfully logrd in';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
 
     }
 
@@ -122,16 +117,8 @@ class FunctionController extends Controller
 
         if(!InputValidator::isValid()){
             $errors = InputValidator::getErrors();
-            $msg='';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] .'
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         UsersModel::createEntry([
@@ -145,14 +132,9 @@ class FunctionController extends Controller
             'status' => $status
         ]);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Registered
-            </div>';
+        $msg = 'You have successfully logrd in';
 
-        return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
 
     }
 
@@ -182,16 +164,8 @@ class FunctionController extends Controller
 
         if(!InputValidator::isValid()){
             $errors = InputValidator::getErrors();
-            $msg='';
-            foreach ($errors as $key) {
-                $msg .= '<div class="alert alert-danger alert-dismissible bg-danger text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                ' .   $key[0] .'
-            </div>';
-            }
-            return $response->withSession('msg', $msg)->redirect($request->url()->getPath());
+            
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
         UsersModel::findByPrimaryKeyAndUpdate( $id, [
@@ -204,14 +178,9 @@ class FunctionController extends Controller
         array_pop($url);
         $url = implode('/', $url);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully updated '. $firstname .' Data
-            </div>';
+        $msg = "You have success fully updated your details";
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
 
     }
 
@@ -224,13 +193,26 @@ class FunctionController extends Controller
         array_pop($url);
         $url = implode('/', $url);
 
-        $msg = '<div class="alert alert-success alert-dismissible bg-success text-white border-0 fade show" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                You have successfully Deleted the user
-            </div>';
+        $msg = "You have successfully deleted";
 
-        return $response->withSession('msg', $msg)->redirect($url);
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    }
+
+    public function sendMail(Request $request, Response $response)
+    {
+        $transport = (new Swift_SmtpTransport('mail.dufma.ng', 25))
+                    ->setUsername('admin@fmc.dufma.ng')
+                    ->setPassword('Ademola789@');
+        
+        $mailer = new Swift_Mailer($transport);
+
+
+        $message = (new Swift_Message('WonderFul Subject'))
+                    ->setFrom(['admin@fmc.dufma.ng' => 'Dufma'])
+                    ->setTo(['abdullahij951@gmail.com' => 'Abdullahi'])
+                    ->setBody('Here is the message itself');
+
+
+        $result = $mailer->send($message);
     }
 }

@@ -17,6 +17,11 @@ class IndexController extends Controller
         $response->view('/dashboard/organization/index', []);
     }
 
+    public function displayProfile(Request $request, Response $response)
+    {
+        $response->view('/dashboard/organization/profile', []);
+    }
+
 
 
 }

@@ -10,6 +10,10 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // Dashboard
     $router->get('/', 'IndexController.dispaly');
 
+    // Profile
+
+   $router->get('/profile', 'IndexController.displayProfile');
+
     // Building
     $router->get('/building', 'AssetController.displayBuilding');
     $router->post('/building', 'AssetController.addBuilding');
@@ -76,7 +80,7 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->get('/warehouse', 'WarehouseController.dispalyWarehouse');
     $router->get('/warehouse/{id}', 'WarehouseController.dispalyWarepro');
     $router->post('/warehouse/{id}', 'WarehouseController.addWarepro');
-    
+
 
 
 
