@@ -2,6 +2,7 @@
 
 namespace App\Controllers\Dashboard\Admin;
 
+use App\Controllers\Dashboard\SendMailController;
 use App\Core\Tools\Auth;
 use App\Core\Http\Request;
 use App\Models\UsersModel;
@@ -39,9 +40,7 @@ class OrganizationController extends Controller
         $status = UsersProvider::STATUS_ACTIVE;
 
 
-        $mail = $this->sendMail($request, $response);
-
-        dnd($mail);
+        
 
         InputValidator::init([
             "uniqueField" => function (InputValidator $validator, string $field, string $message){
@@ -70,6 +69,21 @@ class OrganizationController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
+        $name = $firstname;
+        $message = "Thank you for applying to for this Application.<br>
+                    Username: $username <br>
+                    Email: $email <br> 
+                    Password: $password <br> 
+                    goto http://fmcdufma.demisho.com.ng/sign_in to login
+                    and make sure you change your password immediately";
+
+
+        SendMailController::send(
+            $email, 
+            $name, 
+            $message
+        );
+
         UsersModel::createEntry([
             'userid' => $user->id(),
             'username' => $username,
@@ -87,21 +101,5 @@ class OrganizationController extends Controller
 
     }
 
-    public function sendMail(Request $request, Response $response)
-    {
-        $transport = (new Swift_SmtpTransport('mail.dufma.ng', 25))
-                    ->setUsername('admin@fmc.dufma.ng')
-                    ->setPassword('Ademola789@');
-        
-        $mailer = new Swift_Mailer($transport);
-
-
-        $message = (new Swift_Message('WonderFul Subject'))
-                    ->setFrom(['admin@fmc.dufma.ng' => 'Dufma'])
-                    ->setTo(['abdullahij951@gmail.com' => 'Abdullahi'])
-                    ->setBody('Here is the message itself');
-
-
-        $result = $mailer->send($message);
-    }
+    
 }
