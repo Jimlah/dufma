@@ -681,6 +681,7 @@ class AssetController extends Controller
             ->andWhere('orgid', $user->id())
             ->map()
             ->fetchAll();
+        
 
         $category = AssetModel::select('distinct(category)')
             ->where('table_type', AssetProvider::EQUIPMENT)

@@ -110,6 +110,7 @@
 								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
 									<thead>
 										<tr>
+										<th>User</th>
 											<th>Name</th>
 											<th>Description</th>
 											<th>Manufacturer</th>
@@ -126,6 +127,7 @@
 
 										{% for item in equipment %}
 											<tr>
+											<td>{{item.getUser().username()}}</td>
 												<td>{{item.name}}</td>
 												<td>{{item.description}}</td>
 												<td>{{item.manufacturer}}</td>

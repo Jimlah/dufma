@@ -12,7 +12,13 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
     // Profile
 
-   $router->get('/profile', 'IndexController.displayProfile');
+    $router->get('/profile', 'IndexController.displayProfile');
+
+
+
+    //    inventory Dashboard
+
+    $router->get('/inventory-dash', 'IndexController.displayInventory');
 
     // Building
     $router->get('/building', 'AssetController.displayBuilding');
@@ -41,7 +47,7 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/vehicle/edit', 'AssetController.updateVehicle');
     $router->post('/vehicle/delete', 'AssetController.delete');
 
-    
+
 
 
 
@@ -61,11 +67,11 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
 
 
-     // Land
-     $router->get('/equipment', 'AssetController.displayEquipment');
-     $router->post('/equipment', 'AssetController.addEquipment');
-     $router->post('/equipment/edit', 'AssetController.updateEquipment');
-     $router->post('/equipment/delete', 'AssetController.delete');
+    // Land
+    $router->get('/equipment', 'AssetController.displayEquipment');
+    $router->post('/equipment', 'AssetController.addEquipment');
+    $router->post('/equipment/edit', 'AssetController.updateEquipment');
+    $router->post('/equipment/delete', 'AssetController.delete');
 
 
     // Product

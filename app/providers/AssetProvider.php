@@ -19,8 +19,10 @@ class AssetProvider
     const GOODS = 7;
     const CURRENT_ASSET = 0;
     const FIXED_ASSET = 1;
-    
+
     private $user;
+
+    private $table;
 
     /**
      * AssetProvider constructor
@@ -52,14 +54,13 @@ class AssetProvider
      */
     public function __set($name, $value)
     {
-
     }
 
     /**
-    * Model mapper
-    *
-    * @return self
-    */
+     * Model mapper
+     *
+     * @return self
+     */
     public static function map($id): self
     {
         return new self($id);
@@ -73,8 +74,40 @@ class AssetProvider
 
     public function getUser(): UsersProvider
     {
-        $this->user ??= new UsersProvider($this->userid());
+        return new UsersProvider($this->userid());
+    }
 
-        return $this->product;
+    public function getAsset()
+    {
+        switch ($this->table_type()) {
+            case self::BUILDING:
+                $table = 'BUILDING';
+                break;
+            case self::MACHINERY:
+                $table = 'MACHINERY';
+                break;
+            case self::VEHICLE:
+                $table = 'VEHICLE';
+                break;
+            case self::PRODUCT:
+                $table = 'PRODUCT';
+                break;
+            case self::LAND:
+                $table = 'LAND';
+                break;
+            case self::OTHER_ASSET:
+                $table = 'OTHER ASSET';
+                break;
+            case self::GOODS:
+                $table = 'GOODS';
+                break;
+            case self::EQUIPMENT:
+                $table = 'EQUIPMENT';
+                break;
+            default:
+                $table = 'UNNAMMED';
+                break;
+        }
+        return $table;
     }
 }
