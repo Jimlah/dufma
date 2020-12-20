@@ -122,8 +122,55 @@ class WarehouseController extends Controller
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }
 
-    public function model()
+    public function displayInputAnalysis(Request $request, Response $response)
     {
-        # code...
+        $user = $request->user();
+
+        $input = WarehouseModel::select('sum(number) total, created_at')
+                    ->where('orgid', $user->id())
+                    ->andWhere('type', '1')
+                    ->groupBy('date(created_at)')
+                    ->fetchAll();
+        
+        $datas = [];
+        $dates = [];
+
+        foreach ($input as $value) {
+            $datas[] = $value->total ;
+            $dates[] = date('Y-m-d', strtotime($value->created_at));
+        }
+
+        
+
+        $response->view('/dashboard/organization/input-analysis', [
+            'datas' => json_encode($datas),
+            'dates' => json_encode($dates)
+        ]);
+    }
+
+    public function displayOutputAnalysis(Request $request, Response $response)
+    {
+        $user = $request->user();
+
+        $output = WarehouseModel::select('sum(cast(number as int)) total, created_at')
+                    ->where('orgid', $user->id())
+                    ->andWhere('type', '0 ')
+                    ->groupBy('date(created_at)')
+                    ->fetchAll();
+
+        
+        $datas = [];
+        $dates = [];
+        foreach ($output as $value) {
+            $datas[] = $value->total * -1 ;
+            $dates[] = date('Y-m-d', strtotime($value->created_at));
+        }
+
+        
+
+        $response->view('/dashboard/organization/input-analysis', [
+            'datas' => json_encode($datas),
+            'dates' => json_encode($dates)
+        ]);
     }
 }

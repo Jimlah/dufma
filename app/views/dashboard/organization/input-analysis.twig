@@ -1,0 +1,87 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+
+						<h4 class="page-title">Input Analysis</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+
+
+			<div class="row">
+				<div class="col-xl-6">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="header-title mb-4">Simple line chart</h4>
+							<div id="line-chart" class="apex-charts" data-colors="#10c469"></div>
+						</div> <p id="value" hidden>{{datas}}</p>
+						<p id="created" hidden>{{dates}}</p>
+						<!-- end card body-->
+					</div>
+					<!-- end card -->
+				</div>
+				<!-- end col-->
+			</div>
+		</div>
+		<!-- End Content -->
+			<script>
+			var data = {{datas}}
+			var date = {{dates}}
+			</script>
+		
+	
+			
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+
+{% endblock %}
+
+
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+	{{jscript('pages/demo.datatable-init')}}
+	<!-- end demo js-->
+
+	{{jscript('vendor/apexcharts.min')}}
+
+	{{jscript('data/stock-prices')}}
+
+	{{jscript('data/irregular-data-series')}}
+{{jscript('pages/demo.apex-line')}}
+	<!-- third party:js -->
+{% endblock %}

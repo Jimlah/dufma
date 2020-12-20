@@ -89,6 +89,8 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
 
 
+    $router->get('/input-analysis', 'WarehouseController.displayInputAnalysis');
+    $router->get('/output-analysis', 'WarehouseController.displayOutputAnalysis');
 
     // Employee => Users Table
     $router->get('/employee', 'EmployeeController.employee');
