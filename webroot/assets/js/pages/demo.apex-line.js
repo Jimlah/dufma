@@ -8,8 +8,8 @@ var options = {
     dataLabels: { enabled: !1 },
     colors: colors,
     stroke: { width: [4], curve: "straight" },
-    series: [{ name: "Desktops", data: value }],
-    title: { text: "Product Trends by Month", align: "center" },
+    series: [{ name: "Items", data: value }],
+    title: { text: "Warehousing Trends by Month", align: "center" },
     grid: {
       row: { colors: ["transparent", "transparent"], opacity: 0.2 },
       borderColor: "#f1f3fa",
