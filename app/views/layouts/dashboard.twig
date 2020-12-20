@@ -11,7 +11,8 @@
 		<meta
 		content="Coderthemes" name="author"/>
 		<!-- App favicon -->
-		<link rel="shortcut icon" href="{{asset('images/favicon.png')}}">
+		<link
+		rel="shortcut icon" href="{{asset('images/favicon.png')}}">
 
 		<!-- third party css -->
 		{{ block("style") }}
@@ -119,15 +120,7 @@
 							</div>
 
 							<!-- item-->
-							<a href="{% if req.user.access == 0 %}
-										/dashboard/admin/profile
-									{% elseif req.user.access == 1 %}
-										/dashboard/organization/profile
-									{% elseif req.user.access == 2 %}
-										/dashboard/employee/profile
-									{% else %}
-										/dashboard/investor/profile
-									{% endif %} " class="dropdown-item notify-item">
+							<a href="{% if req.user.access == 0 %} /dashboard/admin/profile {% elseif req.user.access == 1 %} /dashboard/organization/profile {% elseif req.user.access == 2 %} /dashboard/employee/profile {% else %} /dashboard/investor/profile {% endif %} " class="dropdown-item notify-item">
 								<i class="mdi mdi-account-circle mr-1"></i>
 								<span>My Account</span>
 							</a>
@@ -175,7 +168,7 @@
 
 					{% if req.user.access == 0 %}
 
-                    <ul class="metismenu side-nav">
+						<ul class="metismenu side-nav">
 
 							<li class="side-nav-title side-nav-item">Navigation</li>
 
@@ -215,7 +208,7 @@
 
 
 						</ul>
-						
+
 					{% elseif req.user.access == 1 %}
 						<ul class="metismenu side-nav">
 
@@ -496,7 +489,22 @@
 								</ul>
 							</li>
 
-
+							<li class="side-nav-item">
+								<a href="/dashboard/admin/chat" class="side-nav-link">
+									<i class="uil-home-alt"></i>
+									<span>
+										Chat
+									</span>
+								</a>
+							</li>
+							<li class="side-nav-item">
+								<a href="/dashboard/admin/faq" class="side-nav-link">
+									<i class="uil-home-alt"></i>
+									<span>
+										FAQ
+									</span>
+								</a>
+							</li>
 
 
 						</ul>
@@ -782,8 +790,6 @@
 							</li>
 
 
-
-
 						</ul>
 					{% else %}
 						Investor
@@ -856,7 +862,7 @@
 					<a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" class="btn btn-danger btn-block mt-3" target="_blank">
 						<i class="mdi mdi-basket mr-1"></i>
 						Purchase
-																														                        Now</a>
+																																				                        Now</a>
 				</div>
 				<!-- end padding-->
 

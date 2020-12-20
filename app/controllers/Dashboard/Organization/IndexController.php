@@ -4,12 +4,14 @@ namespace App\Controllers\Dashboard\Organization;
 
 use App\Core\Tools\Auth;
 use App\Core\Http\Request;
+use App\Models\AssetModel;
 use App\Models\UsersModel;
 use App\Core\Http\Response;
 use App\Core\Http\Controller;
-use App\Models\AssetModel;
 use App\Providers\AssetProvider;
 use App\Providers\UsersProvider;
+use App\Core\Misc\InputValidator;
+use App\Controllers\Dashboard\SendMailController;
 
 class IndexController extends Controller
 {
@@ -33,7 +35,6 @@ class IndexController extends Controller
         $items = AssetModel::select('count(*) sum, table_type')
             ->where('orgid', $orgid)
             ->groupBy('table_type')
-            // ->map()
             ->fetchAll();
 
         $total = AssetModel::select('count(*) sum')
@@ -46,5 +47,65 @@ class IndexController extends Controller
             'items' => $items,
             'total' => $total
         ]);
+    }
+
+    public function updateUser(Request $request, Response $response)
+    {
+        $referer_uri = $request->getServer()->get('http_referer');
+        
+        $user = $request->user();
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $email = $request->input('email');
+        $password = $request->input('password');
+        $password1 = $request->input('password1');
+
+
+
+
+        InputValidator::init();
+
+        $lastname->validate('required');
+        $firstname->validate('required');
+        $password->validate('required')->equals($password1, "Password does not match");
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($referer_uri, [], true);
+        }
+
+        $message = "You have successfully Updated your profile. If it was not done by you pls contact the admin immediately.
+                    goto http://fmcdufma.demisho.com.ng/sign_in to login
+                    and make sure you change your password immediately";
+
+
+        $msgerror = $mail = SendMailController::send(
+            $email,
+            $message
+        );
+
+
+
+        UsersModel::findByPrimaryKey($user->id(), [
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
+
+        $msg = 'You have successfully changed your password';
+
+        if ($msgerror) {
+
+            $msg = $msgerror;
+        }
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
+        
+    }
+
+    public function updateProfile(Request $request, Response $response)
+    {
+        # code...
     }
 }

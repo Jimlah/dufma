@@ -13,7 +13,8 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // Profile
 
     $router->get('/profile', 'IndexController.displayProfile');
-
+    $router->post('/profile/updateUser', 'IndexController.updateUser');
+    $router->post('/profile/updateProfile', 'IndexController.updateProfile');
 
 
     //    inventory Dashboard
