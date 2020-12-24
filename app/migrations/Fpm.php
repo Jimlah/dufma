@@ -19,7 +19,25 @@ class Fpm implements MigrationInterface
     {
         DB::table(self::NAME)
             ->create(function (DBTableBuilder $table) {
-                
+                $table->field('id')->int()->increment();
+                $table->field('userid')->int();
+                $table->field('orgid')->int();
+                $table->field('assetid')->int();
+                $table->field('soil_type')->varchar();
+                $table->field('ph')->varchar();
+                $table->field('active')->varchar();
+                $table->field('cur_util')->varchar();
+                $table->field('start_season')->varchar();
+                $table->field('end_season')->varchar();
+                $table->field('ownership')->varchar();
+                $table->field('fallow_period')->varchar();
+                $table->field('manager')->varchar();
+                $table->field('capacity')->varchar();
+                $table->field('type')->varchar();
+                $table->field('purpose')->varchar();
+                $table->field('status')->varchar();
+                $table->field('fpm')->varchar();
+
             });
     }
 

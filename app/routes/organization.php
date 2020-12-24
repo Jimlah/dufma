@@ -93,6 +93,22 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->get('/input-analysis', 'WarehouseController.displayInputAnalysis');
     $router->get('/output-analysis', 'WarehouseController.displayOutputAnalysis');
 
+    
+
+
+
+    // Monitory and Evaluation
+
+    // Field Management
+    $router->get('/field', 'FpmController.displayField');
+    $router->post('/field', 'FpmController.addFpm');
+    $router->post('/field/edit', 'FpmController.updateFpm');
+    $router->post('/field/delete', 'FpmController.deleteFpm');
+
+
+
+
+
     // Employee => Users Table
     $router->get('/employee', 'EmployeeController.employee');
     $router->post('/employee', 'FunctionController.registerEmp');
