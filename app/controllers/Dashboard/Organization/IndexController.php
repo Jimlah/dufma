@@ -12,6 +12,7 @@ use App\Providers\AssetProvider;
 use App\Providers\UsersProvider;
 use App\Core\Misc\InputValidator;
 use App\Controllers\Dashboard\SendMailController;
+use App\Models\ProfileModel;
 
 class IndexController extends Controller
 {
@@ -23,29 +24,15 @@ class IndexController extends Controller
 
     public function displayProfile(Request $request, Response $response)
     {
-        $response->view('/dashboard/organization/profile', []);
-    }
 
-
-    public function displayInventory(Request $request, Response $response)
-    {
+        Auth::user();
         $user = $request->user();
-        $orgid = $user->id();
 
-        $items = AssetModel::select('count(*) sum, table_type')
-            ->where('orgid', $orgid)
-            ->groupBy('table_type')
-            ->fetchAll();
+        $profile = ProfileModel::findBy('userid', $user->id());
 
-        $total = AssetModel::select('count(*) sum')
-            ->where('orgid', $orgid)
-            ->fetchOne();
 
-        
-        
-        $response->view('/dashboard/organization/inventory-dash', [
-            'items' => $items,
-            'total' => $total
+        $response->view('/dashboard/organization/profile', [
+            'profile' => $profile
         ]);
     }
 
@@ -87,7 +74,7 @@ class IndexController extends Controller
 
 
 
-        UsersModel::findByPrimaryKey($user->id(), [
+        UsersModel::findByPrimaryKeyAndUpdate($user->id(), [
             'firstname' => $firstname,
             'lastname' => $lastname,
             'password' => password_hash($password, PASSWORD_DEFAULT)
@@ -106,6 +93,85 @@ class IndexController extends Controller
 
     public function updateProfile(Request $request, Response $response)
     {
-        # code...
+        Auth::user();
+
+        $referer_uri = $request->getServer()->get('http_referer');
+        $user = $request->user();
+
+        $companyname = $request->input('companyname');
+        $address = $request->input('address');
+        $phone_no = $request->input('phone');
+        $bkname = $request->input('bkname');
+        $bkacct = $request->input('bkacct');
+
+        InputValidator::init();
+
+        $companyname->validate('required');
+        $address->validate('required');
+        $phone_no->validate('required');
+        $bkname->validate('required');
+        $bkacct->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($referer_uri, [], true);
+        }
+
+        $check = ProfileModel::findBy('userid', $user->id());
+
+        if(!$check){
+            ProfileModel::createEntry([
+                'userid' => $user->id(),
+                'companyname' => $companyname,
+                'address' => $address,
+                'phone_no' => $phone_no,
+                'bkname' => $bkname,
+                'bkacct' => $bkacct
+            ]);
+
+            $msg = 'You have successfully updated your profile'; 
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
+        }
+
+        $id = $check->id;
+
+        ProfileModel::findByPrimaryKeyAndUpdate($id, [
+            'userid' => $user->id(),
+                'companyname' => $companyname,
+                'address' => $address,
+                'phone_no' => $phone_no,
+                'bkname' => $bkname,
+                'bkacct' => $bkacct
+        ]);
+
+        $msg = 'You have successfully updated your profile'; 
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
     }
+
+
+    public function displayInventory(Request $request, Response $response)
+    {
+        $user = $request->user();
+        $orgid = $user->id();
+
+        $items = AssetModel::select('count(*) sum, table_type')
+            ->where('orgid', $orgid)
+            ->groupBy('table_type')
+            ->fetchAll();
+
+        $total = AssetModel::select('count(*) sum')
+            ->where('orgid', $orgid)
+            ->fetchOne();
+
+        
+        
+        $response->view('/dashboard/organization/inventory-dash', [
+            'items' => $items,
+            'total' => $total
+        ]);
+    }
+
 }

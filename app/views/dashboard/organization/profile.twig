@@ -121,15 +121,15 @@
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="userpassword">Password</label>
+													<label for="password">Password</label>
 													<input type="password" class="form-control" id="password" name="password" placeholder="Enter password">
 												</div>
 											</div>
 
 											<div class="col-md-6">
 												<div class="form-group">
-													<label for="userpassword">Confirm Password</label>
-													<input type="password" class="form-control" id="password1" name="password" placeholder="Confirm password">
+													<label for="password">Confirm Password</label>
+													<input type="password" class="form-control" id="password1" name="password1" placeholder="Confirm password">
 												</div>
 												<!-- end col -->
 											</div>
@@ -149,13 +149,13 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="companyname">Company Name</label>
-													<input type="text" class="form-control" id="companyname" placeholder="Enter company name">
+													<input type="text" class="form-control" id="companyname" name="companyname" placeholder="Enter company name" value="{{profile.companyname}}">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="caddress">Address</label>
-													<input type="text" class="form-control" id="caddress" placeholder="Address">
+													<input type="text" class="form-control" id="caddress" name="address" placeholder="Address" value="{{profile.address}}">
 												</div>
 											</div>
 											<!-- end col -->
@@ -169,19 +169,19 @@
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="phone">Phone No</label>
-													<input type="tel" class="form-control" id="phone" placeholder="Enter Phone Number" value="">
+													<input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter Phone Number" value="{{profile.phone_no}}">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="bk">Bank Name</label>
-													<input type="text" class="form-control" id="bkname" placeholder="Enter Your Bank Name" value="">
+													<input type="text" class="form-control" id="bkname" name="bkname" placeholder="Enter Your Bank Name" value="{{profile.bkname}}">
 												</div>
 											</div>
 											<div class="col-md-6">
 												<div class="form-group">
 													<label for="bkacct">Bank Acct No</label>
-													<input type="number" class="form-control" id="bkacct" placeholder="Enter Bank Account Number">
+													<input type="number" class="form-control" id="bkacct" name="bkacct" placeholder="Enter Bank Account Number" value="{{profile.bkacct}}">
 												</div>
 											</div>
 											<!-- end row -->

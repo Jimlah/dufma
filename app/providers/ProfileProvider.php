@@ -2,7 +2,7 @@
 
 namespace App\Providers;
 
-use App\Models\UsersModel;
+use App\Models\ProfileModel;
 
 class ProfileProvider
 {
@@ -15,7 +15,7 @@ class ProfileProvider
      */
     public function __construct($id)
     {
-        $this->_model = UsersModel::findByPrimaryKey($id);
+        $this->_model = ProfileModel::findByPrimaryKey($id);
     }
 
     /**

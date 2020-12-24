@@ -24,6 +24,7 @@ class Profile implements MigrationInterface
                 $table->field('orgid')->int();
                 $table->field('firstname')->varchar();
                 $table->field('lastname')->varchar();
+                $table->field('companyname')->varchar();
                 $table->field('email')->varchar();
                 $table->field('image')->varchar();
                 $table->field('address')->varchar();
