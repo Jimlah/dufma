@@ -8,6 +8,11 @@ class FpmProvider
 {
     private $_model;
 
+    const FPM_FIELD = 0;
+    const FPM_PEN = 1;
+    const FPM_FACULTY = 2;
+
+
     /**
      * FpmProvider constructor
      *
@@ -39,6 +44,11 @@ class FpmProvider
     public function __set($name, $value)
     {
 
+    }
+
+    public function getAsset(): AssetProvider
+    {
+        return new AssetProvider($this->assetid());
     }
 
     /**

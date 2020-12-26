@@ -26,6 +26,7 @@ class Fpm implements MigrationInterface
                 $table->field('soil_type')->varchar();
                 $table->field('ph')->varchar();
                 $table->field('active')->varchar();
+                $table->field('chemical')->varchar();
                 $table->field('cur_util')->varchar();
                 $table->field('start_season')->varchar();
                 $table->field('end_season')->varchar();

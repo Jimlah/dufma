@@ -17,8 +17,7 @@
 			<!-- start page title -->
 			<div class="row">
 				<div class="col-12">
-					<div
-						class="page-title-box">
+					<div class="page-title-box">
 						<h4 class="page-title">Fields</h4>
 					</div>
 				</div>
@@ -46,30 +45,60 @@
 												<div class="modal-body">
 													<form action="" method="post">
 														<div class="form-group">
-															<label for="category">Fields</label>
-															<select id="cat" class="form-control">
+															<label for="assetid">Fields</label>
+															<select id="cat" class="form-control" name="assetid">
 																{% for key in field %}
 																	<option value="{{key.id}}">{{key.name}}</option>
 																{% endfor %}
 															</select>
 														</div>
 														<div class="form-group">
-															<label for="name">Name</label>
-															<input type="text" id="name" class="form-control" name="name">
+															<label for="soil_type">Soil Type</label>
+															<input type="text" id="soil_type" class="form-control" name="soil_type">
 														</div>
 														<div class="form-group">
-															<label for="description">Description</label>
-															<input type="text" id="description" class="form-control" name="description">
-														</div>
-
-														<div class="form-group">
-															<label for="manufacturer">Manufacturer</label>
-															<input type="text" id="manufacturer" class="form-control" name="manufacturer">
+															<label for="ph">PH</label>
+															<input type="text" id="ph" class="form-control" name="ph">
 														</div>
 
 														<div class="form-group">
-															<label for="amount">Amount</label>
-															<input type="text" id="amount" class="form-control" name="amount">
+															<label for="chemical">Chemical/additives</label>
+															<input type="text" id="chemical" class="form-control" name="chemical">
+														</div>
+
+														<div class="form-group">
+															<label for="active">Active</label>
+															<input type="text" id="active" class="form-control" name="active">
+														</div>
+
+														<div class="form-group">
+															<label for="cur_util">Current Utilization</label>
+															<input type="text" id="cur_util" class="form-control" name="cur_util">
+														</div>
+
+														<div class="form-group">
+															<label for="start_season">Start Season</label>
+															<input type="month" id="start_season" class="form-control" name="start_season">
+														</div>
+
+														<div class="form-group">
+															<label for="end_season">End Season</label>
+															<input type="month" id="end_season" class="form-control" name="end_season">
+														</div>
+
+														<div class="form-group">
+															<label for="ownership">Ownership</label>
+															<input type="text" id="ownership" class="form-control" name="ownership">
+														</div>
+
+														<div class="form-group">
+															<label for="fallow_period">Fallow Period</label>
+															<input type="text" id="fallow_period" class="form-control" name="fallow_period">
+														</div>
+
+														<div class="form-group">
+															<label for="manager">Manager</label>
+															<input type="text" id="manager" class="form-control" name="manager">
 														</div>
 
 
@@ -117,19 +146,28 @@
 											<th>Fallow Period</th>
 											<th>Manager</th>
 											<th>Date</th>
+											<td>Action</td>
 										</tr>
 									</thead>
 
 
 									<tbody>
 
-										{% for item in goods %}
+										{% for item in fpm %}
 											<tr>
-												<td>{{item.name}}</td>
-												<td>{{item.description}}</td>
-												<td>{{item.manufacturer}}</td>
-												<td>{{item.amount}}</td>
-												<td>{{item.category }}</td>
+												<td>{{item.getAsset().name}}</td>
+												<td>{{item.getAsset().size}}</td>
+												<td>{{item.getAsset().location}}</td>
+												<td>{{item.soil_type}}</td>
+												<td>{{item.ph}}</td>
+												<td>{{item.chemical}}</td>
+												<td>{{item.active}}</td>
+												<td>{{item.cur_util}}</td>
+												<td>{{item.start_season}}</td>
+												<td>{{item.end_season}}</td>
+												<td>{{item.ownership}}</td>
+												<td>{{item.fallow_period}}</td>
+												<td>{{item.manager}}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
 													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
@@ -157,45 +195,75 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in goods %}
+		{% for item in fpm %}
 			<!-- edit modal -->
 			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Building</h4>
+							<h4 class="modal-title" id="standard-modalLabel">Edit Field</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/goods/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/organization/field/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
-									<label for="category">Category</label>
-									<input type="text" id="category" class="form-control" name="category" list="cat" value="{{item.category}}">
-									<datalist id="cat">
-										{% for key in category %}
-											<option value="{{key.category == item.category ? 'SELECTED' : ''}}"></option>
+									<label for="assetid">Fields</label>
+									<select id="cat" class="form-control" name="assetid">
+										{% for key in field %}
+											<option value="{{key.id}}" {{ item.id == key.id ? "SELECTED" : "" }} >{{key.name}}</option>
 										{% endfor %}
-
-									</datalist>
+									</select>
 								</div>
 								<div class="form-group">
-									<label for="name">Name</label>
-									<input type="text" id="name" class="form-control" name="name" value="{{item.name}}">
+									<label for="soil_type">Soil Type</label>
+									<input type="text" id="soil_type" class="form-control" name="soil_type" value="{{item.soil_type}}">
 								</div>
 								<div class="form-group">
-									<label for="description">Description</label>
-									<input type="text" id="description" class="form-control" name="description" value="{{item.description}}">
-								</div>
-
-								<div class="form-group">
-									<label for="manufacturer">Manufacturer</label>
-									<input type="text" id="manufacturer" class="form-control" name="Manufacturer" value="{{item.manufacturer}}">
+									<label for="ph">PH</label>
+									<input type="text" id="ph" class="form-control" name="ph" value="{{item.ph}}">
 								</div>
 
 								<div class="form-group">
-									<label for="amount">Amount</label>
-									<input type="text" id="amount" class="form-control" name="amount" value="{{item.amount}}">
+									<label for="chemical">Chemical/additives</label>
+									<input type="text" id="chemical" class="form-control" name="chemical" value="{{item.chemical}}">
 								</div>
+
+								<div class="form-group">
+									<label for="active">Active</label>
+									<input type="text" id="active" class="form-control" name="active" value="{{item.active}}">
+								</div>
+
+								<div class="form-group">
+									<label for="cur_util">Current Utilization</label>
+									<input type="text" id="cur_util" class="form-control" name="cur_util" value="{{item.cur_util}}">
+								</div>
+
+								<div class="form-group">
+									<label for="start_season">Start Season</label>
+									<input type="month" id="start_season" class="form-control" name="start_season" value="{{item.start_season}}">
+								</div>
+
+								<div class="form-group">
+									<label for="end_season">End Season</label>
+									<input type="month" id="end_season" class="form-control" name="end_season" value="{{item.end_season}}">
+								</div>
+
+								<div class="form-group">
+									<label for="ownership">Ownership</label>
+									<input type="text" id="ownership" class="form-control" name="ownership" value="{{item.ownership}}">
+								</div>
+
+								<div class="form-group">
+									<label for="fallow_period">Fallow Period</label>
+									<input type="text" id="fallow_period" class="form-control" name="fallow_period" value="{{item.fallow_period}}">
+								</div>
+
+								<div class="form-group">
+									<label for="manager">Manager</label>
+									<input type="text" id="manager" class="form-control" name="manager" value="{{item.manager}}">
+								</div>
+
+
 								<button type="submit" class="btn btn-primary btn-block">Submit</button>
 							</form>
 						</div>
@@ -219,7 +287,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/goods/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/field/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
