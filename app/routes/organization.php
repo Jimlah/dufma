@@ -100,14 +100,24 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // Monitory and Evaluation
 
     // Field Management
+
+    // Field
     $router->get('/field', 'FpmController.displayField');
     $router->post('/field', 'FpmController.addFpm');
     $router->post('/field/edit', 'FpmController.updateFpm');
     $router->post('/field/delete', 'FpmController.deleteFpm');
 
+    // Pen
+    $router->get('/pen', 'FpmController.displayPen');
+    $router->post('/pen', 'FpmController.addFpm');
+    $router->post('/pen/edit', 'FpmController.updateFpm');
+    $router->post('/pen/delete', 'FpmController.deleteFpm');
 
-
-
+    // Facility
+    $router->get('/facility', 'FpmController.displayFacility');
+    $router->post('/facility', 'FpmController.addFpm');
+    $router->post('/facility/edit', 'FpmController.updateFpm');
+    $router->post('/facility/delete', 'FpmController.deleteFpm');
 
     // Employee => Users Table
     $router->get('/employee', 'EmployeeController.employee');

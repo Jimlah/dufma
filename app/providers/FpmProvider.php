@@ -10,7 +10,7 @@ class FpmProvider
 
     const FPM_FIELD = 0;
     const FPM_PEN = 1;
-    const FPM_FACULTY = 2;
+    const FPM_FACILITY = 2;
 
 
     /**

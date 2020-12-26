@@ -35,6 +35,50 @@ class FpmController extends Controller
         ]);
     }
 
+    public function displayPen(Request $request, Response $response)
+    {
+        Auth::user();
+
+        $user = $request->user();
+        $pen = AssetModel::select()
+            ->where('orgid', $user->id())
+            ->and('category', 'Pen')
+            ->fetchAll();
+
+        $fpm = FpmModel::select()
+            ->where('orgid', $user->id())
+            ->and('fpm', FpmProvider::FPM_PEN)
+            ->map()
+            ->fetchAll();
+
+        $response->view('/dashboard/organization/pen', [
+            'pen' => $pen,
+            'fpm' => $fpm
+        ]);
+    }
+
+    public function displayFacility(Request $request, Response $response)
+    {
+        Auth::user();
+
+        $user = $request->user();
+        $facility = AssetModel::select()
+            ->where('orgid', $user->id())
+            ->and('category', 'Facility')
+            ->fetchAll();
+
+        $fpm = FpmModel::select()
+            ->where('orgid', $user->id())
+            ->and('fpm', FpmProvider::FPM_FACILITY)
+            ->map()
+            ->fetchAll();
+
+        $response->view('/dashboard/organization/facility', [
+            'facility' => $facility,
+            'fpm' => $fpm
+        ]);
+    }
+
     public function addFpm(Request $request, Response $response)
     {
         Auth::user();
@@ -67,7 +111,7 @@ class FpmController extends Controller
         }
 
         if ($request->url()->getPath() == "/dashboard/organization/faculty") {
-            $fpm = FpmProvider::FPM_FACULTY;
+            $fpm = FpmProvider::FPM_FACILITY;
         }
 
         InputValidator::init();

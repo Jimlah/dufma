@@ -18,7 +18,7 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="page-title-box">
-						<h4 class="page-title">Fields</h4>
+						<h4 class="page-title">Pens</h4>
 					</div>
 				</div>
 			</div>
@@ -33,37 +33,37 @@
 								<div class="col-sm-4">
 									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
 										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Fields</a>
+										Add Pens</a>
 									<!-- Standard modal -->
 									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Field</h4>
+													<h4 class="modal-title" id="standard-modalLabel">Add Pen</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												</div>
 												<div class="modal-body">
 													<form action="" method="post">
 														<div class="form-group">
-															<label for="assetid">Fields</label>
+															<label for="assetid">Pens</label>
 															<select id="cat" class="form-control" name="assetid">
-																{% for key in field %}
+																{% for key in pen %}
 																	<option value="{{key.id}}">{{key.name}}</option>
 																{% endfor %}
 															</select>
 														</div>
 														<div class="form-group">
-															<label for="soil_type">Soil Type</label>
-															<input type="text" id="soil_type" class="form-control" name="soil_type">
+															<label for="capacity">Capacity</label>
+															<input type="text" id="capacity" class="form-control" name="capacity">
 														</div>
 														<div class="form-group">
-															<label for="ph">PH</label>
-															<input type="text" id="ph" class="form-control" name="ph">
+															<label for="type">Type</label>
+															<input type="text" id="type" class="form-control" name="type">
 														</div>
 
 														<div class="form-group">
-															<label for="chemical">Chemical/additives</label>
-															<input type="text" id="chemical" class="form-control" name="chemical">
+															<label for="purpose">Purpose</label>
+															<input type="text" id="purpose" class="form-control" name="purpose">
 														</div>
 
 														<div class="form-group">
@@ -139,10 +139,10 @@
 											<th>Name</th>
 											<th>Dimension</th>
 											<th>Location</th>
-											<th>Soil Type</th>
-											<th>ph</th>
-											<th>Chemical/Addictives</th>
-											<th>Active Crop</th>
+											<th>Capacity</th>
+											<th>Type</th>
+											<th>Purpose</th>
+											<th>Active Animal</th>
 											<th>Current Utilization</th>
 											<th>Start Season</th>
 											<th>End Season</th>
@@ -162,9 +162,9 @@
 												<td>{{item.getAsset().name}}</td>
 												<td>{{item.getAsset().size}}</td>
 												<td>{{item.getAsset().location}}</td>
-												<td>{{item.soil_type}}</td>
-												<td>{{item.ph}}</td>
-												<td>{{item.chemical}}</td>
+												<td>{{item.capacity}}</td>
+												<td>{{item.type}}</td>
+												<td>{{item.purpose}}</td>
 												<td>{{item.active}}</td>
 												<td>{{item.cur_util}}</td>
 												<td>{{item.start_season}}</td>
@@ -205,31 +205,31 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Field</h4>
+							<h4 class="modal-title" id="standard-modalLabel">Edit Pen</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/field/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/organization/pen/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
-									<label for="assetid">Fields</label>
+									<label for="assetid">Pens</label>
 									<select id="cat" class="form-control" name="assetid">
-										{% for key in field %}
+										{% for key in pen %}
 											<option value="{{key.id}}" {{ item.id == key.id ? "SELECTED" : "" }}>{{key.name}}</option>
 										{% endfor %}
 									</select>
 								</div>
 								<div class="form-group">
-									<label for="soil_type">Soil Type</label>
-									<input type="text" id="soil_type" class="form-control" name="soil_type" value="{{item.soil_type}}">
+									<label for="capacity">Capacity</label>
+									<input type="text" id="capacity" class="form-control" name="capacity" value="{{item.capacity}}">
 								</div>
 								<div class="form-group">
-									<label for="ph">PH</label>
-									<input type="text" id="ph" class="form-control" name="ph" value="{{item.ph}}">
+									<label for="type">Type</label>
+									<input type="text" id="type" class="form-control" name="type" value="{{item.type}}">
 								</div>
 
 								<div class="form-group">
-									<label for="chemical">Chemical/additives</label>
-									<input type="text" id="chemical" class="form-control" name="chemical" value="{{item.chemical}}">
+									<label for="purpose">Purpose</label>
+									<input type="text" id="purpose" class="form-control" name="purpose" value="{{item.purpose}}">
 								</div>
 
 								<div class="form-group">
@@ -295,7 +295,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/field/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/pen/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
