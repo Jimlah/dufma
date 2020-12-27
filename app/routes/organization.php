@@ -119,6 +119,30 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/facility/edit', 'FpmController.updateFpm');
     $router->post('/facility/delete', 'FpmController.deleteFpm');
 
+
+    // Activity Log
+    
+    
+    $router->post('/activity/edit', 'ReportController.updateReport');
+    $router->post('/activity/delete', 'ReportController.delete');
+    
+    // Field
+    $router->get('/fieldactivity', 'ReportController.displayFieldActivity');
+    $router->post('/fieldactivity', 'ReportController.addReport');
+
+    // Pen
+    $router->get('/penactivity', 'ReportController.displayPenActivity');
+    $router->post('/penactivity', 'ReportController.addReport');
+
+    // Facility
+    $router->get('/facilityactivity', 'ReportController.displayFacilityActivity');
+    $router->post('/facilityactivity', 'ReportController.addReport');
+
+
+
+
+
+
     // Employee => Users Table
     $router->get('/employee', 'EmployeeController.employee');
     $router->post('/employee', 'FunctionController.registerEmp');

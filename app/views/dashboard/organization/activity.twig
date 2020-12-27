@@ -18,7 +18,8 @@
 			<div class="row">
 				<div class="col-12">
 					<div class="page-title-box">
-						<h4 class="page-title">Pens</h4>
+						<h4 class="page-title">Daily
+							{{ name | capitalize }}s Activity Log</h4>
 					</div>
 				</div>
 			</div>
@@ -33,71 +34,57 @@
 								<div class="col-sm-4">
 									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
 										<i class="mdi mdi-plus-circle mr-2"></i>
-										Add Pens</a>
+										Add
+										{{ name | capitalize }}</a>
 									<!-- Standard modal -->
 									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 										<div class="modal-dialog">
 											<div class="modal-content">
 												<div class="modal-header">
-													<h4 class="modal-title" id="standard-modalLabel">Add Pen</h4>
+													<h4 class="modal-title" id="standard-modalLabel">Add Field</h4>
 													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 												</div>
 												<div class="modal-body">
 													<form action="" method="post">
 														<div class="form-group">
-															<label for="assetid">Pens</label>
-															<select id="cat" class="form-control" name="assetid">
-																{% for key in pen %}
+															<label for="time">Date</label>
+															<input type="date" id="time" class="form-control" name="time">
+														</div>
+														<div class="form-group">
+															<label for="assetid">{{ name | capitalize }}</label>
+															<select id="assetid" class="form-control" name="assetid">
+																{% for key in asset %}
 																	<option value="{{key.id}}">{{key.name}}</option>
 																{% endfor %}
 															</select>
 														</div>
 														<div class="form-group">
-															<label for="capacity">Capacity</label>
-															<input type="text" id="capacity" class="form-control" name="capacity">
+															<label for="usage_emp">Usage Employee</label>
+															<input type="text" id="usage_emp" class="form-control" name="usage_emp">
 														</div>
 														<div class="form-group">
-															<label for="type">Type</label>
-															<input type="text" id="type" class="form-control" name="type">
-														</div>
-
-														<div class="form-group">
-															<label for="purpose">Purpose</label>
-															<input type="text" id="purpose" class="form-control" name="purpose">
+															<label for="usage_hr">Usage Hours</label>
+															<input type="number" id="usage_hr" class="form-control" name="usage_hr" min="1">
 														</div>
 
 														<div class="form-group">
-															<label for="active">Active</label>
-															<input type="text" id="active" class="form-control" name="active">
+															<label for="activity">Activity</label>
+															<input type="text" id="activity" class="form-control" name="activity">
 														</div>
 
 														<div class="form-group">
-															<label for="cur_util">Current Utilization</label>
-															<input type="text" id="cur_util" class="form-control" name="cur_util">
-														</div>
-
-														<div class="form-group">
-															<label for="start_season">Start Season</label>
-															<input type="month" id="start_season" class="form-control" name="start_season">
-														</div>
-
-														<div class="form-group">
-															<label for="end_season">End Season</label>
-															<input type="month" id="end_season" class="form-control" name="end_season">
-														</div>
-
-														<div class="form-group">
-															<label for="ownership">Ownership</label>
-															<select id="ownership" class="form-control" name="ownership">
-																<option value="0">Full</option>
-																<option value="1">Lease</option>
-																<option value="2">Rent</option>
+															<label for="activity_status">Activity Status</label>
+															<select id="activity_status" class="form-control" name="activity_status">
+																{% for key, value in status %}
+																	<option value="{{key}}">{{value}}</option>
+																{% endfor %}
 															</select>
 														</div>
 
 														<div class="form-group">
-															<label for="fallow_period">Fallow Period</label>
-															<input type="text" id="fallow_period" class="form-control" name="fallow_period">
+															<label for="asset_status">{{ name | capitalize }}
+																Rating</label>
+															<input type="number" id="asset_status" class="form-control" name="asset_status" min="1" max="5">
 														</div>
 
 														<div class="form-group">
@@ -136,20 +123,16 @@
 								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
 									<thead>
 										<tr>
-											<th>Name</th>
-											<th>Dimension</th>
-											<th>Location</th>
-											<th>Capacity</th>
-											<th>Type</th>
-											<th>Purpose</th>
-											<th>Active Animal</th>
-											<th>Current Utilization</th>
-											<th>Start Season</th>
-											<th>End Season</th>
-											<th>Ownership</th>
-											<th>Fallow Period</th>
-											<th>Manager</th>
 											<th>Date</th>
+											<th>{{ name | capitalize }}</th>
+											<th>Usage Employee</th>
+											<th>Employee Department</th>
+											<th>Usage hours</th>
+											<th>Activity</th>
+											<th>Activity Status</th>
+											<th>{{ name | capitalize }}
+												Rating</th>
+											<th>Manager</th>
 											<td>Action</td>
 										</tr>
 									</thead>
@@ -157,22 +140,18 @@
 
 									<tbody>
 
-										{% for item in fpm %}
+										{% for item in report %}
 											<tr>
+												<td>{{item.date | date('d M Y')}}</td>
 												<td>{{item.getAsset().name}}</td>
-												<td>{{item.getAsset().size}}</td>
-												<td>{{item.getAsset().location}}</td>
-												<td>{{item.capacity}}</td>
-												<td>{{item.type}}</td>
-												<td>{{item.purpose}}</td>
-												<td>{{item.active}}</td>
-												<td>{{item.cur_util}}</td>
-												<td>{{item.start_season}}</td>
-												<td>{{item.end_season}}</td>
-												<td>{{item.ownership}}</td>
-												<td>{{item.fallow_period}}</td>
+												<td>{{item.getWorker().firstname}}
+													{{item.getWorker().lastname}}</td>
+												<td>{{item.getWorker().department}}</td>
+												<td>{{item.usage_hr}}</td>
+												<td>{{item.activity}}</td>
+												<td>{{item.activity_status}}</td>
+												<td>{{item.asset_status}}</td>
 												<td>{{item.manager}}</td>
-												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
 													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
 														<i class="mdi mdi-square-edit-outline"></i>
@@ -199,76 +178,57 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in fpm %}
+		{% for item in report %}
 			<!-- edit modal -->
 			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Pen</h4>
+							<h4 class="modal-title" id="standard-modalLabel">Edit Field</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/pen/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/organization/activity/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
-									<label for="assetid">Pens</label>
-									<select id="cat" class="form-control" name="assetid">
-										{% for key in pen %}
-											<option value="{{key.id}}" {{ item.id == key.id ? "SELECTED" : "" }}>{{key.name}}</option>
+									<label for="time">Date</label>
+									<input type="date" id="time" class="form-control" name="time" value="{{item.time}}">
+								</div>
+								<div class="form-group">
+									<label for="assetid">{{ name | capitalize }}</label>
+									<input type="text" id="assetid" class="form-control" name="assetid" value="{{item.assetid}}">
+								</div>
+								<div class="form-group">
+									<label for="usage_emp">Usage Employee</label>
+									<input type="text" id="usage_emp" class="form-control" name="usage_emp" value="{{item.usage_emp}}">
+								</div>
+								<div class="form-group">
+									<label for="usage_hr">Usage Hours</label>
+									<input type="number" id="usage_hr" class="form-control" name="usage_hr" min="1" value="{{item.usage_hr}}">
+								</div>
+
+								<div class="form-group">
+									<label for="activity">Activity</label>
+									<input type="text" id="activity" class="form-control" name="activity" value="{{item.activity}}">
+								</div>
+
+								<div class="form-group">
+									<label for="activity_status">Activity Status</label>
+									<select id="activity_status" class="form-control" name="activity_status" value="{{item.activty_status}}">
+										{% for key, value in status %}
+											<option value="{{key}}" {{ item.activity_status == key ? "SELECTED" : "" }}>{{value}}</option>
 										{% endfor %}
 									</select>
 								</div>
-								<div class="form-group">
-									<label for="capacity">Capacity</label>
-									<input type="text" id="capacity" class="form-control" name="capacity" value="{{item.capacity}}">
-								</div>
-								<div class="form-group">
-									<label for="type">Type</label>
-									<input type="text" id="type" class="form-control" name="type" value="{{item.type}}">
-								</div>
 
 								<div class="form-group">
-									<label for="purpose">Purpose</label>
-									<input type="text" id="purpose" class="form-control" name="purpose" value="{{item.purpose}}">
-								</div>
-
-								<div class="form-group">
-									<label for="active">Active</label>
-									<input type="text" id="active" class="form-control" name="active" value="{{item.active}}">
-								</div>
-
-								<div class="form-group">
-									<label for="cur_util">Current Utilization</label>
-									<input type="text" id="cur_util" class="form-control" name="cur_util" value="{{item.cur_util}}">
-								</div>
-
-								<div class="form-group">
-									<label for="start_season">Start Season</label>
-									<input type="month" id="start_season" class="form-control" name="start_season" value="{{item.start_season}}">
-								</div>
-
-								<div class="form-group">
-									<label for="end_season">End Season</label>
-									<input type="month" id="end_season" class="form-control" name="end_season" value="{{item.end_season}}">
-								</div>
-
-								<div class="form-group">
-									<label for="ownership">Ownership</label>
-									<select id="ownership" class="form-control" name="ownership">
-										<option value="0" {{item.ownership == 0 ? "SELECTED" : ""}}>Full</option>
-										<option value="1" {{item.ownership == 1 ? "SELECTED" : ""}}>Lease</option>
-										<option value="2" {{item.ownership == 2 ? "SELECTED" : ""}}>Rent</option>
-									</select>
-								</div>
-
-								<div class="form-group">
-									<label for="fallow_period">Fallow Period</label>
-									<input type="text" id="fallow_period" class="form-control" name="fallow_period" value="{{item.fallow_period}}">
+									<label for="asset_status">{{ name | capitalize }}
+										Rating</label>
+									<input type="number" id="asset_status" class="form-control" name="asset_status" min="1" max="5" value="{{item.asset_status}}">
 								</div>
 
 								<div class="form-group">
 									<label for="manager">Manager</label>
-									<input type="text" id="manager" class="form-control" name="manager" value="{{item.manager}}">
+									<input type="text" id="manager" class="form-control" name="manager">
 								</div>
 
 
@@ -291,11 +251,11 @@
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<h4 class="modal-title" id="standard-modalLabel">Edit Pen</h4>
+							<h4 class="modal-title" id="standard-modalLabel">Delete {{name}} Activty Log</h4>
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/pen/delete')}}" method="post">
+							<form action="{{url('/dashboard/organization/activity/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
