@@ -5,7 +5,7 @@
 	<!-- Mirrored from coderthemes.com/hyper/modern/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Fri, 13 Nov 2020 08:30:29 GMT -->
 	<head>
 		<meta charset="utf-8"/>
-		<title>Dufma</title>
+		<title>Dufma | {{ block("title") }}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description"/>
 		<meta
@@ -352,14 +352,44 @@
 											<span class="menu-arrow"></span>
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
-											<li>
-												<a href="/dashboard/organization/">Field</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Field Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/organization/fieldweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/organization/fieldmonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
-											<li>
-												<a href="/dashboard/organization/">Pen</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Pen Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/organization/penweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/organization/penmonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
-											<li>
-												<a href="/dashboard/organization/">Facility</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Facility Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/organization/facilityweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/organization/facilitymonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
 
 										</ul>

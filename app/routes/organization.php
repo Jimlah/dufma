@@ -93,7 +93,7 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->get('/input-analysis', 'WarehouseController.displayInputAnalysis');
     $router->get('/output-analysis', 'WarehouseController.displayOutputAnalysis');
 
-    
+
 
 
 
@@ -121,11 +121,11 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
 
     // Activity Log
-    
-    
+
+
     $router->post('/activity/edit', 'ReportController.updateReport');
     $router->post('/activity/delete', 'ReportController.delete');
-    
+
     // Field
     $router->get('/fieldactivity', 'ReportController.displayFieldActivity');
     $router->post('/fieldactivity', 'ReportController.addReport');
@@ -139,6 +139,38 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/facilityactivity', 'ReportController.addReport');
 
 
+
+    // Weekly Report
+
+
+    // Field
+    $router->get('/fieldweek', 'ReportController.displayFieldWeekReport');
+    $router->post('/fieldweek', 'ReportController.addReport');
+
+    // Pen
+    $router->get('/penweek', 'ReportController.displayPenWeekReport');
+    $router->post('/penweek', 'ReportController.addReport');
+
+    // Facility
+    $router->get('/facilityweek', 'ReportController.displayFacilityWeekReport');
+    $router->post('/facilityweek', 'ReportController.addReport');
+
+
+
+    // Monthly Report
+
+
+    // Field
+    $router->get('/fieldmonth', 'ReportController.displayFieldMonthReport');
+    $router->post('/fieldmonth', 'ReportController.addReport');
+
+    // Pen
+    $router->get('/penmonth', 'ReportController.displayPenMonthReport');
+    $router->post('/penmonth', 'ReportController.addReport');
+
+    // Facility
+    $router->get('/facilitymonth', 'ReportController.displayFacilityMonthReport');
+    $router->post('/facilitymonth', 'ReportController.addReport');
 
 
 
