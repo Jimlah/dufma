@@ -110,7 +110,7 @@ class FpmController extends Controller
             $fpm = FpmProvider::FPM_PEN;
         }
 
-        if ($request->url()->getPath() == "/dashboard/organization/faculty") {
+        if ($request->url()->getPath() == "/dashboard/organization/facilty") {
             $fpm = FpmProvider::FPM_FACILITY;
         }
 
