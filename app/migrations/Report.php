@@ -31,6 +31,7 @@ class Report implements MigrationInterface
                 $table->field('activity_status')->varchar();
                 $table->field('asset_status')->varchar();
                 $table->field('manager')->varchar();
+                $table->field('category')->varchar();
 
             });
     }

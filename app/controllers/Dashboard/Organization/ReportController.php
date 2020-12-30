@@ -28,6 +28,7 @@ class ReportController extends Controller
 
         $field = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_DAILY)
             ->and('type', ReportProvider::TYPE_FIELD)
             ->map()
             ->fetchAll();
@@ -66,6 +67,7 @@ class ReportController extends Controller
 
         $pen = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_DAILY)
             ->and('type', ReportProvider::TYPE_PEN)
             ->map()
             ->fetchAll();
@@ -104,6 +106,7 @@ class ReportController extends Controller
 
         $facility = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_DAILY)
             ->and('type', ReportProvider::TYPE_FACILITY)
             ->map()
             ->fetchAll();
@@ -143,6 +146,7 @@ class ReportController extends Controller
 
         $field = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_WEEKLY)
             ->and('type', ReportProvider::TYPE_FIELD)
             ->map()
             ->fetchAll();
@@ -182,6 +186,7 @@ class ReportController extends Controller
 
         $pen = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_WEEKLY)
             ->and('type', ReportProvider::TYPE_PEN)
             ->map()
             ->fetchAll();
@@ -221,6 +226,7 @@ class ReportController extends Controller
 
         $facility = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_WEEKLY)
             ->and('type', ReportProvider::TYPE_FACILITY)
             ->map()
             ->fetchAll();
@@ -260,6 +266,7 @@ class ReportController extends Controller
 
         $field = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_MONTHLY)
             ->and('type', ReportProvider::TYPE_FIELD)
             ->map()
             ->fetchAll();
@@ -299,6 +306,7 @@ class ReportController extends Controller
 
         $pen = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_MONTHLY)
             ->and('type', ReportProvider::TYPE_PEN)
             ->map()
             ->fetchAll();
@@ -338,6 +346,7 @@ class ReportController extends Controller
 
         $facility = ReportModel::select()
             ->where('orgid', $orgid)
+            ->andWhere('category', ReportProvider::CATEGORY_MONTHLY)
             ->and('type', ReportProvider::TYPE_FACILITY)
             ->map()
             ->fetchAll();
@@ -380,22 +389,50 @@ class ReportController extends Controller
         $activity_status = $request->input('activity_status');
         $asset_status = $request->input('asset_status');
         $manager = $request->input('manager');
-        
+
 
         $url = $request->url()->getPath();
-        if ($url == "/dashboard/organization/fieldactivity") {
-            $type = ReportProvider::TYPE_FIELD;
+
+        switch ($url) {
+            case '/dashboard/organization/fieldactivity':
+                $type = ReportProvider::TYPE_FIELD;
+                $category = ReportProvider::CATEGORY_DAILY;
+                break;
+            case '/dashboard/organization/facilityactivity':
+                $type = ReportProvider::TYPE_FACILITY;
+                $category = ReportProvider::CATEGORY_DAILY;
+                break;
+            case '/dashboard/organization/penactivity':
+                $type = ReportProvider::TYPE_PEN;
+                $category = ReportProvider::CATEGORY_DAILY;
+                break;
+            case '/dashboard/organization/fieldweek':
+                $type = ReportProvider::TYPE_FIELD;
+                $category = ReportProvider::CATEGORY_WEEKLY;
+                break;
+            case '/dashboard/organization/penweek':
+                $type = ReportProvider::TYPE_PEN;
+                $category = ReportProvider::CATEGORY_WEEKLY;
+                break;
+            case '/dashboard/organization/facilityweek':
+                $type = ReportProvider::TYPE_FACILITY;
+                $category = ReportProvider::CATEGORY_WEEKLY;
+                break;
+            case '/dashboard/organization/fieldmonth':
+                $type = ReportProvider::TYPE_FIELD;
+                $category = ReportProvider::CATEGORY_MONTHLY;
+                break;
+            case '/dashboard/organization/penmonth':
+                $type = ReportProvider::TYPE_PEN;
+                $category = ReportProvider::CATEGORY_MONTHLY;
+                break;
+            case '/dashboard/organization/facilitymonth':
+                $type = ReportProvider::TYPE_FACILITY;
+                $category = ReportProvider::CATEGORY_MONTHLY;
+                break;
         }
 
-        if ($url == "/dashboard/organization/facilityactivity") {
-            $type = ReportProvider::TYPE_FACILITY;
-        }
 
-        if ($url == "/dashboard/organization/penactivity") {
-            $type = ReportProvider::TYPE_PEN;
-        }
-
-    
 
         InputValidator::init();
 
@@ -419,7 +456,8 @@ class ReportController extends Controller
             'activity_status' => $activity_status,
             'asset_status' => $asset_status,
             'manager' => $manager,
-            'type' => $type
+            'type' => $type,
+            'category' => $category
         ]);
 
         $msg = "You have successfully added to the database";
@@ -432,7 +470,7 @@ class ReportController extends Controller
         Auth::user();
         $referer_uri = $request->getServer()->get('http_referer');
 
-       $id = $request->url()->getQuery('id');
+        $id = $request->url()->getQuery('id');
 
 
         $time = $request->input('time');

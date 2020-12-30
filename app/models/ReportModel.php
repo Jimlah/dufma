@@ -26,6 +26,7 @@ class ReportModel extends Model
         'activity_status', 
         'asset_status', 
         'manager',
+        'category',
         'created_at',
         'updated_at'
     );

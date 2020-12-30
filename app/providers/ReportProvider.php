@@ -15,6 +15,10 @@ class ReportProvider
     const TYPE_PEN = 1;
     const TYPE_FACILITY = 2;
 
+    const CATEGORY_DAILY = 0;
+    const CATEGORY_WEEKLY = 1;
+    const CATEGORY_MONTHLY = 2;
+
 
 
     /**
