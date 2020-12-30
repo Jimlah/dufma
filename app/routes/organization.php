@@ -180,4 +180,13 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/employee', 'FunctionController.registerEmp');
     $router->post('/employee/edit', 'FunctionController.edit');
     $router->post('/employee/delete', 'FunctionController.delete');
+
+
+
+
+    // Worker
+    $router->get('/worker', 'EmployeeController.displayWorker');
+    $router->post('/worker', 'EmployeeController.addWorker');
+    $router->post('/worker/edit', 'EmployeeController.editWorker');
+    $router->post('/worker/delete', 'EmployeeController.delete');
 });

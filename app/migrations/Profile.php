@@ -37,6 +37,7 @@ class Profile implements MigrationInterface
                 $table->field('bkname')->varchar();
                 $table->field('bkacct')->varchar();
                 $table->field('contract_type')->varchar();
+                $table->field('status')->varchar();
 
             });
     }

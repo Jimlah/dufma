@@ -8,6 +8,9 @@ class ProfileProvider
 {
     private $_model;
 
+    const STATUS_ACTIVE = 1;
+    const STATUS_INACTIVE = 0;
+
     /**
      * ProfileProvider constructor
      *
