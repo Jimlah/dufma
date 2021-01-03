@@ -189,4 +189,9 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/worker', 'EmployeeController.addWorker');
     $router->post('/worker/edit', 'EmployeeController.editWorker');
     $router->post('/worker/delete', 'EmployeeController.delete');
+
+
+
+    // Building Maintenance
+    $router->get('/main-build', 'ExpLogController.mainBuild');
 });
