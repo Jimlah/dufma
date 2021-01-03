@@ -55,6 +55,7 @@ class EmployeeController extends Controller
         $bkacct = $request->input('bkacct');
         $bkname = $request->input('bkname');
         $contract_type = $request->input('contract_type');
+        $phone_no = $request->input('phone_no');
 
         InputValidator::init();
 
@@ -80,12 +81,66 @@ class EmployeeController extends Controller
             'salary' => $salary,
             'bkacct' => $bkacct,
             'bkname' => $bkname,
-            'contract_type' => $contract_type
+            'contract_type' => $contract_type,
+            'phone_no' => $phone_no
         ]);
 
 
         $msg = "You have successfully add workers details";
 
         $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function editWorker(Request $request, Response $response)
+    {
+        Auth::user();
+
+        $id = $request->input('id');
+        $firstname = $request->input('firstname');
+        $lastname = $request->input('lastname');
+        $address = $request->input('address');
+        $gender = $request->input('gender');
+        $email = $request->input('email');
+        $department = $request->input('department');
+        $salary = $request->input('salary');
+        $bkacct = $request->input('bkacct');
+        $bkname = $request->input('bkname');
+        $contract_type = $request->input('contract_type');
+        $phone_no = $request->input('phone_no');
+
+        ProfileModel::findByPrimaryKeyAndUpdate($id,[
+            'firstname' => $firstname,
+            'lastname' => $lastname,
+            'address' => $address,
+            'gender' => $gender,
+            'email' => $email,
+            'department' => $department,
+            'salary' => $salary,
+            'bkacct' => $bkacct,
+            'bkname' => $bkname,
+            'contract_type' => $contract_type,
+            'phone_no' => $phone_no
+        ]);
+
+
+        $referer_uri = $request->getServer()->get('http_referer');
+
+        $msg = "You have successfully updated workers details";
+
+        $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
+    }
+
+    public function delete(Request $request, Response $response)
+    {
+        Auth::user();
+        
+        $id = $request->input('id');
+        ProfileModel::findByPrimaryKeyAndRemove($id);
+
+        $referer_uri = $request->getServer()->get('http_referer');
+
+        $msg = "You have successfully deleted workers details";
+
+        $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
     }
 }

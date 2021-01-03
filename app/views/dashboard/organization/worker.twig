@@ -1,6 +1,8 @@
 {% extends "layouts/dashboard.twig" %}
 
-{% block title %} Worker {% endblock %}
+{% block title %}
+	Worker
+{% endblock %}
 
 {% block style %}
 	{{css('vendor/dataTables.bootstrap4')}}
@@ -19,8 +21,8 @@
 			<!-- start page title -->
 			<div class="row">
 				<div class="col-12">
-					<div
-						class="page-title-box"><h4 class="page-title">Worker</h4>
+					<div class="page-title-box">
+						<h4 class="page-title">Worker</h4>
 					</div>
 				</div>
 			</div>
@@ -76,7 +78,7 @@
 
 														<div class="form-group">
 															<label for="phone">Phone</label>
-															<input type="tel" id="phone" name="email" class="form-control">
+															<input type="tel" id="phone" name="phone_no" class="form-control">
 														</div>
 
 														<div class="form-group">
@@ -156,7 +158,7 @@
 												<td>{{item.lastname}}</td>
 												<td>{{item.email}}</td>
 												<td>{{item.address}}</td>
-												<td>{{item.phone}}</td>
+												<td>{{item.phone_no}}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
 													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.username}}">
@@ -184,7 +186,7 @@
 		</div>
 		<!-- End Content -->
 
-		{% for item in emp %}
+		{% for item in worker %}
 			<!-- edit modal -->
 			<div id="edit{{item.username}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
 				<div class="modal-dialog">
@@ -204,6 +206,58 @@
 									<label for="lastname">Last Name</label>
 									<input type="text" id="lastname" class="form-control" name="lastname" value="{{item.lastname}}">
 								</div>
+
+								<div class="form-group">
+									<label for="address">Address</label>
+									<input type="text" id="address" class="form-control" name="address" value="{{item.address}}">
+								</div>
+
+								<div class="form-group">
+									<label for="email">Email</label>
+									<input type="email" id="email" name="email" class="form-control" placeholder="Email" value="{{item.email}}">
+								</div>
+
+								<div class="form-group">
+									<label for="gender">Gender</label>
+									<select name="gender" id="gender" class="form-control">
+										<option value="Male" value="{{ item.gender == 'Male' ? 'SELECTED' : ''}}">Male</option>
+										<option value="Female" value="{{ item.gender == 'Female' ? 'SELECTED' : ''}}">Female</option>
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="phone">Phone</label>
+									<input type="tel" id="phone" name="phone_no" class="form-control" value="{{item.phone_no}}">
+								</div>
+
+								<div class="form-group">
+									<label for="department">Department</label>
+									<input type="text" id="department" name="department" class="form-control" value="{{item.department}}">
+								</div>
+
+								<div class="form-group">
+									<label for="salary">Salary</label>
+									<input type="text" id="salary" name="salary" class="form-control" value="{{item.salary}}">
+								</div>
+
+								<div class="form-group">
+									<label for="bkname">Bank Name</label>
+									<input type="text" id="bkname" name="bkname" class="form-control" value="{{item.bkname}}">
+								</div>
+
+								<div class="form-group">
+									<label for="bkacct">Bank Account Number</label>
+									<input type="text" id="bkacct" name="bkacct" class="form-control" value="{{item.bkacct}}">
+								</div>
+
+								<div class="form-group">
+									<label for="contract_type">Contract Type</label>
+									<select id="contract_type" name="contract_type" class="form-control">
+										<option value="permanent" value="{{ item.contract_type == 'Male' ? 'SELECTED' : ''}}">Permanent</option>
+										<option value="part-time" value="{{ item.contract_type == 'Female' ? 'SELECTED' : ''}}">Part-time</option>
+									</select>
+								</div>
+
 								<button type="submit" class="btn btn-primary btn-block" name="id" value="{{item.id}}">Submit</button>
 							</form>
 						</div>
@@ -265,5 +319,7 @@
 				</div>
 			</div>
 		</footer><!-- end Footer --></div><!-- content-page -->{% endblock %}
-{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}<!-- third party js ends --><!-- demo app -->
+{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
 {{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}
