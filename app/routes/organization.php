@@ -194,7 +194,62 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     
     // Expenditure Log
     
+    $router->post('/explog/edit', 'ExpLogController.updateExpLog');
+    $router->post('/explog/delete', 'ExpLogController.deleteExpLog');
+
+    
     // Building Maintenance
     $router->get('/main-build', 'ExpLogController.mainBuild');
     $router->post('/main-build', 'ExpLogController.addExpLog');
+
+    // Vehicle Maintenance
+    $router->get('/main-vehi', 'ExpLogController.mainVehi');
+    $router->post('/main-vehi', 'ExpLogController.addExpLog');
+
+    // Machinery Maintenance
+    $router->get('/main-mach', 'ExpLogController.mainMach');
+    $router->post('/main-mach', 'ExpLogController.addExpLog');
+
+    // Utility
+    $router->get('/utility', 'ExpLogController.utility');
+    $router->post('/utility', 'ExpLogController.addExpLog');
+
+    // Advert
+    $router->get('/advert', 'ExpLogController.advert');
+    $router->post('/advert', 'ExpLogController.addExpLog');
+
+
+    // purchases
+    $router->get('/purchases', 'ExpLogController.purchases');
+    $router->post('/purchases', 'ExpLogController.addExpLog');
+
+
+    // rent
+    $router->get('/rent', 'ExpLogController.rent');
+    $router->post('/rent', 'ExpLogController.addExpLog');
+
+
+    // legal
+    $router->get('/legal', 'ExpLogController.legal');
+    $router->post('/legal', 'ExpLogController.addExpLog');
+
+
+    // power
+    $router->get('/power', 'ExpLogController.power');
+    $router->post('/power', 'ExpLogController.addExpLog');
+
+    // salary
+    $router->get('/salary', 'ExpLogController.salary');
+    $router->post('/salary', 'ExpLogController.addExpLog');
+
+
+    // insurance
+    $router->get('/insurance', 'ExpLogController.insurance');
+    $router->post('/insurance', 'ExpLogController.addExpLog');
+
+
+    // security
+    $router->get('/security', 'ExpLogController.security');
+    $router->post('/security', 'ExpLogController.addExpLog');
+
 });
