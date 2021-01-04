@@ -191,7 +191,10 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/worker/delete', 'EmployeeController.delete');
 
 
-
+    
+    // Expenditure Log
+    
     // Building Maintenance
     $router->get('/main-build', 'ExpLogController.mainBuild');
+    $router->post('/main-build', 'ExpLogController.addExpLog');
 });

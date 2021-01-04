@@ -19,8 +19,8 @@ class ExpLogProvider
     const POWER = 8;
     const SALARY = 9;
     const INSURANCE = 10;
-    const SECURITY = 10;
-    const RAW_MATERIALS = 10;
+    const SECURITY = 11;
+    const RAW_MATERIALS = 12;
 
 
     /**

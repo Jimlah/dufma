@@ -48,4 +48,49 @@ class ExpLogController extends Controller
             'asset' => $asset
         ]);
     }
+    
+    public function addExpLog(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $userid = $user->id();
+        $orgid = $user->id();
+        $assetid = $request->input('assetid');
+        $category = $request->input('category');
+        $name = $request->input('name');
+        $description = $request->input('description');
+        $amount = $request->input('amount');
+        $quantity = $request->input('quantity');
+        $status = $request->input('status');
+        $duration_start = $request->input('duration_start');
+        $duration_end = $request->input('duration_end');
+
+        $url = $request->url()->getPath();
+
+        $type = ExpLogProvider::BUILDING_MAINTENANCE;
+
+        $type_arr = [
+            "/dashboard/organization/main-build" => ExpLogProvider::BUILDING_MAINTENANCE,
+            "/dashboard/organization/vehi-build" => ExpLogProvider::VEHICLE_MAINTENANCE,
+            "/dashboard/organization/mach-build" => ExpLogProvider::MACHINERY_MAINTENANCE,
+            "/dashboard/organization/utility" => ExpLogProvider::UTILITIES,
+            "/dashboard/organization/advert" => ExpLogProvider::ADVERT,
+            "/dashboard/organization/purchaces" => ExpLogProvider::PURCHASES,
+            "/dashboard/organization/rent" => ExpLogProvider::RENT,
+            "/dashboard/organization/legal" => ExpLogProvider::LEGAL_FEES,
+            "/dashboard/organization/power" => ExpLogProvider::POWER,
+            "/dashboard/organization/salary" => ExpLogProvider::SALARY,
+            "/dashboard/organization/insurance" => ExpLogProvider::INSURANCE,
+            "/dashboard/organization/security" => ExpLogProvider::SECURITY,
+            "/dashboard/organization/raw_mat" => ExpLogProvider::RAW_MATERIALS,
+        ];
+
+        $type = in_array($url, $type_arr) ? $type_arr[$url] : null;
+
+        // if ($type == null ) {
+        //     $response->withSession('msg', ['Unable to submit', 'alert'])->redirect($request->url()->getPath);
+        // }
+
+        dnd($type);
+    }
 }
