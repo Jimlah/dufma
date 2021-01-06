@@ -21,18 +21,20 @@ $router->group()->namespace('Auth')->use('checkAuth')->register(function (Router
 
 
     $router->get('/solutions', '@landing.solutions');
+
+
+    $router->get('/smart-farming', '@landing.smartFarming');
 });
+
 
 $router->group()->namespace('Landing')->use('checkAuth')->register(function (Router $router) {
 
 
     $router->get('/media', 'MediaController.display');
-
 });
 
 
 $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function (Router $router) {
 
     $router->get('/logout', 'FunctionController.logout');
-
 });

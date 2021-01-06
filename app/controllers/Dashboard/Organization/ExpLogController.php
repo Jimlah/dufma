@@ -255,7 +255,7 @@ class ExpLogController extends Controller
             ->where('orgid', $user->id())
             ->and('table_type', AssetProvider::BUILDING)
             ->map()
-            ->fetchAll();;
+            ->fetchAll();
 
 
         $response->view('/dashboard/organization/explog', [
@@ -554,7 +554,8 @@ class ExpLogController extends Controller
             'name' => $name,
             'exp' => $exp,
             'table' => $table,
-            'asset' => $asset
+            'asset' => $asset,
+            'category' => $category
         ]);
     }
    

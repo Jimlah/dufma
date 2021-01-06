@@ -207,6 +207,5 @@ class FpmController extends Controller
         FpmModel::findByPrimaryKeyAndRemove($id);
         $msg = "You have successfully deleted your data";
         return $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri);
-        
     }
 }

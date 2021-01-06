@@ -68,22 +68,20 @@
 															</div>
 														{% endif %}
 														{% if table.description %}
-															<th>
 																<div class="form-group">
 																	<label for="description">Description</label>
 																	<input type="text" id="description" class="form-control" name="description">
 																</div>
-															</th>
 														{% endif %}
 														{% if table.category %}
-															<th>
+															<div class="form-group">
 																<label for="assetid">Name</label>
 																<select id="category" class="form-control" name="category">
 																	{% for key in category %}
 																		<option value="{{key}}">{{key}}</option>
 																	{% endfor %}
 																</select>
-															</th>
+															</div>
 														{% endif %}
 														{% if table.amount %}
 															<div class="form-group">
@@ -328,22 +326,20 @@
 									</div>
 								{% endif %}
 								{% if table.description %}
-									<th>
 										<div class="form-group">
 											<label for="description">Description</label>
 											<input type="text" id="description" class="form-control" name="description" value="{{item.description}}">
 										</div>
-									</th>
 								{% endif %}
 								{% if table.category %}
-									<th>
+									<div class="form-group">
 										<label for="assetid">Name</label>
 										<select id="category" class="form-control" name="category">
 											{% for key in category %}
 												<option value="{{key}}" {{key == item.category ? "SELECTED" : ""}}>{{key}}</option>
 											{% endfor %}
 										</select>
-									</th>
+									</div>
 								{% endif %}
 								{% if table.amount %}
 									<div class="form-group">

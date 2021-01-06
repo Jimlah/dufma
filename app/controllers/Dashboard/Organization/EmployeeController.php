@@ -16,8 +16,11 @@ class EmployeeController extends Controller
     public function employee(Request $request, Response $response)
     {
         Auth::user();
+        $user = $request->user();
+        $userid = $user->id();
         $emp = UsersModel::select()
             ->where('access', UsersProvider::ACCESS_EMPLOYEE)
+            ->and('userid', $userid)
             ->fetchAll();
         return $response->view('/dashboard/organization/employee', [
             'emp' => $emp
