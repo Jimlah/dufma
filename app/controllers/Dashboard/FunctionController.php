@@ -16,7 +16,7 @@ use Swift_SmtpTransport;
 class FunctionController extends Controller
 {
     public function logout(Request $request, Response $response)
-    {   
+    {
         Auth::logout();
         return $response->redirect('/');
     }
@@ -24,7 +24,7 @@ class FunctionController extends Controller
 
 
     public function registerEmp(Request $request, Response $response)
-    {   
+    {
         $user = $request->user();
         $username = $request->input('username');
         $firstname = $request->input('firstname');
@@ -35,29 +35,28 @@ class FunctionController extends Controller
         $access = UsersProvider::ACCESS_EMPLOYEE;
         $status = UsersProvider::STATUS_ACTIVE;
         InputValidator::init([
-            "uniqueField" => function (InputValidator $validator, string $field, string $message){
-                if($validator->getValue() == ''){
+            "uniqueField" => function (InputValidator $validator, string $field, string $message) {
+                if ($validator->getValue() == '') {
                     return null;
                     // die();
-                    }
+                }
                 if (UsersModel::findby($field, $validator->getValue())) {
-                    
+
                     $validator->attachError($message);
                 }
-                
             }
-            
+
         ]);
-        
-        $username->validate('required')->uniqueField('username','Username has already been registered');
+
+        $username->validate('required')->uniqueField('username', 'Username has already been registered');
         $lastname->validate('required');
         $firstname->validate('required');
-        $email->validate('required')->uniqueField('email','Email has already been registered');
+        $email->validate('required')->uniqueField('email', 'Email has already been registered');
         $password->validate('required')->equals($password1, "Password does not match");
 
-        if(!InputValidator::isValid()){
+        if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            
+
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
@@ -75,40 +74,38 @@ class FunctionController extends Controller
         $msg = 'You have successfully logrd in';
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
-
     }
 
 
     public function edit(Request $request, Response $response)
-    {  
+    {
         $user = $request->user();
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $id = $request->input('id');
         InputValidator::init([
-            "uniqueField" => function (InputValidator $validator, string $field, string $message){
-                if($validator->getValue() == ''){
+            "uniqueField" => function (InputValidator $validator, string $field, string $message) {
+                if ($validator->getValue() == '') {
                     return null;
-                    }
+                }
                 if (UsersModel::findBy($field, $validator->getValue())) {
-                    
+
                     $validator->attachError($message);
                 }
-                
             }
-            
+
         ]);
-        
+
         $lastname->validate('required');
         $firstname->validate('required');
 
-        if(!InputValidator::isValid()){
+        if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
-            
+
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
-        UsersModel::findByPrimaryKeyAndUpdate( $id, [
+        UsersModel::findByPrimaryKeyAndUpdate($id, [
             'userid' => $user->id(),
             'firstname' => $firstname,
             'lastname' => $lastname,
@@ -121,11 +118,10 @@ class FunctionController extends Controller
         $msg = "You have success fully updated your details";
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
-
     }
 
     public function delete(Request $request, Response $response)
-    {   
+    {
         $id = $request->input('id');
         UsersModel::findByPrimaryKeyAndRemove($id);
 
@@ -138,5 +134,34 @@ class FunctionController extends Controller
         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
-    
+    /**
+     * @param $num number of colors to generate
+     * 
+     * @return array
+     */
+    public function genColor($num)
+    {
+        $colors =[];
+        for ($i = 0; $i < $num; $i++) {
+            $hex = '#';
+
+            //Create a loop.
+            foreach (array('r', 'g', 'b') as $color) {
+                //Random number between 0 and 255.
+                $val = mt_rand(0, 255);
+                //Convert the random number into a Hex value.
+                $dechex = dechex($val);
+                //Pad with a 0 if length is less than 2.
+                if (strlen($dechex) < 2) {
+                    $dechex = "0" . $dechex;
+                }
+                //Concatenate
+                $hex .= $dechex;
+            }
+
+            $colors[] = $hex;
+        };
+
+        return $colors;
+    }
 }
