@@ -13,7 +13,11 @@ use App\Providers\AssetProvider;
 use App\Providers\UsersProvider;
 use App\Core\Misc\InputValidator;
 use App\Controllers\Dashboard\SendMailController;
+use App\Models\ExpLogModel;
+use App\Models\FpmModel;
 use App\Models\ProfileModel;
+use App\Providers\ExpLogProvider;
+use App\Providers\FpmProvider;
 
 class IndexController extends Controller
 {
@@ -224,9 +228,79 @@ class IndexController extends Controller
             ->where('orgid', $orgid)
             ->fetchOne();
 
-
-
         $response->view('/dashboard/organization/inventory-dash', [
+            'items' => $items,
+            'total' => $total
+        ]);
+    }
+
+    public function displayMonitory(Request $request, Response $response)
+    {
+        $user = $request->user();
+        $orgid = $user->id();
+
+        $items = FpmModel::select('count(*) sum, fpm')
+            ->where('orgid', $orgid)
+            ->groupBy('fpm')
+            ->fetchAll();
+
+        $total = FpmModel::select('count(*) sum')
+            ->where('orgid', $orgid)
+            ->fetchOne();
+
+        $arr = array(
+            FpmProvider::FPM_FIELD => 'FIELD',
+            FpmProvider::FPM_PEN => 'PEN',
+            FpmProvider::FPM_FACILITY => 'FACILITY'
+        );
+
+        foreach ($items as $key) {
+            $key->fpm = $arr[$key->fpm];
+        }
+
+
+        $response->view('/dashboard/organization/monitory-dash', [
+            'items' => $items,
+            'total' => $total
+        ]);
+    }
+
+    public function displayFinancial(Request $request, Response $response)
+    {
+        $user = $request->user();
+        $orgid = $user->id();
+
+        $items = ExpLogModel::select('count(*) sum, type')
+            ->where('orgid', $orgid)
+            ->groupBy('type')
+            ->fetchAll();
+
+        $total = ExpLogModel::select('count(*) sum')
+            ->where('orgid', $orgid)
+            ->fetchOne();
+
+
+        $arr = array(
+            ExpLogProvider::BUILDING_MAINTENANCE => 'BUILDNG MAINTENANCE',
+            ExpLogProvider::MACHINERY_MAINTENANCE => 'MACHINERY MAINTENANCE',
+            ExpLogProvider::VEHICLE_MAINTENANCE => 'VECHILE MAINTENANCE',
+            ExpLogProvider::UTILITIES => 'UTILITIES',
+            ExpLogProvider::ADVERT => 'ADVERT',
+            ExpLogProvider::PURCHASES => 'PURCHASES',
+            ExpLogProvider::RENT => 'RENT',
+            ExpLogProvider::LEGAL_FEES => 'LEGAL FEES',
+            ExpLogProvider::POWER => 'POWER',
+            ExpLogProvider::SALARY => 'SALARY',
+            ExpLogProvider::INSURANCE => 'INSURANCE',
+            ExpLogProvider::SECURITY => 'SECURITY',
+        );
+
+        foreach ($items as $key) {
+            $key->fpm = $arr[$key->type] ?? 'Empty';
+        }
+
+
+        $response->view('/dashboard/organization/financial-dash', [
             'items' => $items,
             'total' => $total
         ]);

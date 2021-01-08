@@ -50,6 +50,8 @@
 															<label for="category">Category</label>
 															<input type="text" id="category" class="form-control" name="category" list="cat" value="">
 															<datalist id="cat">
+															<option value="Warehouse">Warehouse</option>
+															<option value="Pen">Pen</option>
 																{% for key in category %}
 																	<option value="{{key.category}}">{{key.category}}</option>
 																{% endfor %}

@@ -1,0 +1,104 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Faq
+{% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<div class="page-title-right">
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">Main</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">Pages</a>
+								</li>
+								<li class="breadcrumb-item active">Coming Soon</li>
+							</ol>
+						</div>
+						<h4 class="page-title">Coming Soon</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			<div class="row justify-content-center">
+				<div class="col-lg-4">
+					<div class="text-center">
+						<img src="{{asset('images/file-searching.svg')}}" height="90" alt="File not found Image">
+
+						<h1 class="text-error mt-4 "><span class="mdi mdi-shield-alert-outline"></span></h1>
+						<h4 class="text-uppercase mt-3">Coming Soon</h4>
+						{# <p class="text-muted mt-3">It's looking like you may have taken a wrong turn. Don't worry... it
+							                                        happens to the best of us. Here's a
+							                                        little tip that might help you get back on track.</p> #}
+
+						<a class="btn btn-info mt-3" href="/">
+							<i class="mdi mdi-reply"></i>
+							Return Home</a>
+					</div>
+					<!-- end /.text-center-->
+				</div>
+				<!-- end col-->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}

@@ -21,6 +21,11 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
     $router->get('/inventory-dash', 'IndexController.displayInventory');
 
+
+    // Comming Soon
+
+    $router->get('/coming-soon', '@dashboard.organization.coming-soon');
+
     // Building
     $router->get('/building', 'AssetController.displayBuilding');
     $router->post('/building', 'AssetController.addBuilding');
@@ -99,6 +104,9 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
     // Monitory and Evaluation
 
+    //    Monitory Dashboard
+
+    $router->get('/monitory-dash', 'IndexController.displayMonitory');
     // Field Management
 
     // Field
@@ -191,13 +199,17 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/worker/delete', 'EmployeeController.delete');
 
 
-    
+
     // Expenditure Log
-    
+
+    // financial Dashboard
+
+    $router->get('/financial-dash', 'IndexController.displayFinancial');
+
     $router->post('/explog/edit', 'ExpLogController.updateExpLog');
     $router->post('/explog/delete', 'ExpLogController.deleteExpLog');
 
-    
+
     // Building Maintenance
     $router->get('/main-build', 'ExpLogController.mainBuild');
     $router->post('/main-build', 'ExpLogController.addExpLog');
@@ -251,5 +263,4 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // security
     $router->get('/security', 'ExpLogController.security');
     $router->post('/security', 'ExpLogController.addExpLog');
-
 });
