@@ -212,7 +212,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/facility/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/employee/facility/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
 									<label for="assetid">Facility</label>
 									<select id="cat" class="form-control" name="assetid">
@@ -298,7 +298,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/facility/delete')}}" method="post">
+							<form action="{{url('/dashboard/employee/facility/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>

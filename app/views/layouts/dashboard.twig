@@ -594,7 +594,7 @@
 								</a>
 								<ul class="side-nav-second-level" aria-expanded="false">
 									<li class="side-nav-item">
-										<a href="/dashboard/employee">Summary
+										<a href="/dashboard/employee/inventory-dash">Summary
 										</a>
 									</li>
 
@@ -604,34 +604,34 @@
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/machinery">Machinery</a>
+												<a href="{{url('/dashboard/employee/machinery')}}">Machinery</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/building">Buildings</a>
+												<a href="{{url('/dashboard/employee/building')}}">Buildings</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/land">Lands</a>
+												<a href="{{url('/dashboard/employee/land')}}">Lands</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/vehicle">Vehicle</a>
+												<a href="{{url('/dashboard/employee/vehicle')}}">Vehicle</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/otherAsset">Other Asset</a>
+												<a href="{{url('/dashboard/employee/otherAsset')}}">Other Asset</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/goods">Goods</a>
+												<a href="{{url('/dashboard/employee/goods')}}">Goods</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/equipment">Equipments</a>
+												<a href="{{url('/dashboard/employee/equipment')}}">Equipments</a>
 											</li>
 										</ul>
 									</li>
 									<li class="side-nav-item">
-										<a href="/dashboard/employee/product">Product Management
+										<a href="{{url('/dashboard/employee/product')}}">Product Management
 										</a>
 									</li>
 									<li class="side-nav-item">
-										<a href="/dashboard/employee/warehouse">WareHousing
+										<a href="{{url('/dashboard/employee/warehouse')}}">WareHousing
 										</a>
 									</li>
 									<li class="side-nav-item">
@@ -643,7 +643,7 @@
 												<a href="/dashboard/employee/input-analysis">Input</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Output</a>
+												<a href="/dashboard/employee/output-analysis">Output</a>
 											</li>
 										</ul>
 									</li>
@@ -665,7 +665,7 @@
 								</a>
 								<ul class="side-nav-second-level" aria-expanded="false">
 									<li class="side-nav-item">
-										<a href="javascript: void(0);">Summary
+										<a href="/dashboard/employee/monitory-dash">Summary
 										</a>
 									</li>
 
@@ -675,22 +675,35 @@
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/">Field</a>
+												<a href="/dashboard/employee/field">Field</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Pen</a>
+												<a href="/dashboard/employee/pen">Pen</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Facilities</a>
+												<a href="/dashboard/employee/facility">Facilities</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Mapping/Tagging</a>
+												<a href="/dashboard/employee/coming-soon">Mapping/Tagging</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Scheduling</a>
+												<a href="/dashboard/employee/coming-soon">Scheduling</a>
 											</li>
-											<li>
-												<a href="/dashboard/employee/">Activity Log</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Activity Log
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/fieldactivity">Field</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/penactivity">Pen</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/facilityactivity">Facilities</a>
+													</li>
+												</ul>
 											</li>
 										</ul>
 									</li>
@@ -699,14 +712,44 @@
 											<span class="menu-arrow"></span>
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
-											<li>
-												<a href="/dashboard/employee/">Field</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Field Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/fieldweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/fieldmonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
-											<li>
-												<a href="/dashboard/employee/">Pen</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Pen Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/penweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/penmonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
-											<li>
-												<a href="/dashboard/employee/">Facility</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Facility Report
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/facilityweek">Weekly</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/facilitymonth">Monthly</a>
+													</li>
+												</ul>
 											</li>
 
 										</ul>
@@ -717,7 +760,7 @@
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/">Employee List</a>
+												<a href="/dashboard/employee/employee">Employee List</a>
 											</li>
 											<li>
 												<a href="/dashboard/employee/">Employee Appraisal</a>
@@ -734,7 +777,7 @@
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/">Worker List</a>
+												<a href="/dashboard/employee/worker">Worker List</a>
 											</li>
 											<li>
 												<a href="/dashboard/employee/">Worker Appraisal</a>
@@ -747,16 +790,16 @@
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/">Weather</a>
+												<a href="/dashboard/employee/coming-soon">Weather</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Smart Weather</a>
+												<a href="/dashboard/employee/coming-soon">Smart Weather</a>
 											</li>
 
 										</ul>
 									</li>
 									<li class="side-nav-item">
-										<a href="/dashboard/employee/" aria-expanded="false">Record Management
+										<a href="/dashboard/employee/coming-soon" aria-expanded="false">Record Management
 										</a>
 
 									</li>
@@ -775,78 +818,111 @@
 								</a>
 								<ul class="side-nav-second-level" aria-expanded="false">
 									<li class="side-nav-item">
-										<a href="/dashboard/employee/">Summary
+										<a href="/dashboard/employee/financial-dash">Summary
 										</a>
 									</li>
 									<li class="side-nav-item">
-										<a href="javascript: void(0);" aria-expanded="false">Field/Pen
+										<a href="javascript: void(0);" aria-expanded="false">Expenditure Log
 											<span class="menu-arrow"></span>
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
-											<li>
-												<a href="/dashboard/employee/">Field</a>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Maintenance
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/main-build">Buildings</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/main-vehi">Vehicle</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/main-mach">Machinery</a>
+													</li>
+												</ul>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Pen</a>
+												<a href="/dashboard/employee/utility">Utilities</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Facilities</a>
+												<a href="/dashboard/employee/advert">Advert</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Mapping/Tagging</a>
+												<a href="/dashboard/employee/purchases">Purchases</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Scheduling</a>
+												<a href="/dashboard/employee/rent">Rent</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Activity Log</a>
-											</li>
-										</ul>
-									</li>
-									<li class="side-nav-item">
-										<a href="javascript: void(0);" aria-expanded="false">Field Report
-											<span class="menu-arrow"></span>
-										</a>
-										<ul class="side-nav-third-level" aria-expanded="false">
-											<li>
-												<a href="/dashboard/employee/">Field</a>
+												<a href="/dashboard/employee/legal">Legal Fees</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Pen</a>
+												<a href="/dashboard/employee/power">power</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Facility</a>
+												<a href="/dashboard/employee/salary">Salary</a>
+											</li>
+											<li class="side-nav-item">
+												<a href="javascript: void(0);" aria-expanded="false">Insurance and Security
+													<span class="menu-arrow"></span>
+												</a>
+												<ul class="side-nav-forth-level" aria-expanded="false">
+													<li>
+														<a href="/dashboard/employee/insurance">Insurance</a>
+													</li>
+													<li>
+														<a href="/dashboard/employee/security">Security</a>
+													</li>
+												</ul>
 											</li>
 
 										</ul>
 									</li>
-									<li class="side-nav-item">
-										<a href="/dashboard/employee/">Product Management
-										</a>
+									<li>
+										<a href="/dashboard/employee/raw-mat">Raw Materials</a>
+									</li>
+									<li>
+										<a href="/dashboard/employee/depreciate">Depreciation</a>
+									</li>
+									<li>
+										<a href="/dashboard/employee/project-expenses">Project Expense</a>
 									</li>
 									<li class="side-nav-item">
-										<a href="/dashboard/employee/">WareHousing
-										</a>
-									</li>
-									<li class="side-nav-item">
-										<a href="javascript: void(0);" aria-expanded="false">Analysis
+										<a href="javascript: void(0);" aria-expanded="false">Income Log
 											<span class="menu-arrow"></span>
 										</a>
 										<ul class="side-nav-third-level" aria-expanded="false">
 											<li>
-												<a href="/dashboard/employee/">Input</a>
+												<a href="/dashboard/employee/coming-soon">Product Sales</a>
 											</li>
 											<li>
-												<a href="/dashboard/employee/">Output</a>
+												<a href="/dashboard/employee/coming-soon">Service Sales</a>
 											</li>
+											<li>
+												<a href="/dashboard/employee/coming-soon">Facility</a>
+											</li>
+
 										</ul>
 									</li>
-									<li class="side-nav-item">
-										<a href="/dashboard/employee/">Tracking and Report
-										</a>
-									</li>
-
 								</ul>
+							</li>
+
+							<li class="side-nav-item">
+								<a href="/dashboard/employee/coming-soon" class="side-nav-link">
+									<i class="uil-home-alt"></i>
+									<span>
+										Chat
+									</span>
+								</a>
+							</li>
+							<li class="side-nav-item">
+								<a href="/dashboard/employee/faq" class="side-nav-link">
+									<i class="uil-home-alt"></i>
+									<span>
+										FAQ
+									</span>
+								</a>
 							</li>
 
 
@@ -922,7 +998,7 @@
 					<a href="https://themes.getbootstrap.com/product/hyper-responsive-admin-dashboard-template/" class="btn btn-danger btn-block mt-3" target="_blank">
 						<i class="mdi mdi-basket mr-1"></i>
 						Purchase
-																																																																																																                        Now</a>
+																																																																																																						                        Now</a>
 				</div>
 				<!-- end padding-->
 

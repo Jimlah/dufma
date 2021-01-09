@@ -190,7 +190,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/activity/edit', {'id': item.id})}}" method="post">
+							<form action="{{url('/dashboard/employee/activity/edit', {'id': item.id})}}" method="post">
 								<div class="form-group">
 									<label for="time">Date</label>
 									<input type="date" id="time" class="form-control" name="time" value="{{item.time}}">
@@ -257,7 +257,7 @@
 							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
 						</div>
 						<div class="modal-body">
-							<form action="{{url('/dashboard/organization/activity/delete')}}" method="post">
+							<form action="{{url('/dashboard/employee/activity/delete')}}" method="post">
 
 								<div class="form-group">
 									<p>Are you sure you want to delete?</p>
