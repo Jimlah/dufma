@@ -1,0 +1,306 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %} Report {% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">{{ time | capitalize }}ly
+							{{ name | capitalize }}s Report</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
+										<i class="mdi mdi-plus-circle mr-2"></i>
+										Add New Report</a>
+									<!-- Standard modal -->
+									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="standard-modalLabel">Add Field</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												</div>
+												<div class="modal-body">
+													<form action="" method="post">
+														<div class="form-group">
+															<label for="time">{{ time | capitalize }}</label>
+															<input type="{{time}}" id="time" class="form-control" name="time">
+														</div>
+														<div class="form-group">
+															<label for="assetid">{{ name | capitalize }}</label>
+															<select id="assetid" class="form-control" name="assetid">
+																{% for key in asset %}
+																	<option value="{{key.id}}">{{key.name}}</option>
+																{% endfor %}
+															</select>
+														</div>
+														<div class="form-group">
+															<label for="usage_hr">Usage Hours</label>
+															<input type="number" id="usage_hr" class="form-control" name="usage_hr" min="1">
+														</div>
+
+														<div class="form-group">
+															<label for="activity">Activity</label>
+															<input type="text" id="activity" class="form-control" name="activity">
+														</div>
+
+														<div class="form-group">
+															<label for="activity_status">Activity Status</label>
+															<select id="activity_status" class="form-control" name="activity_status">
+																{% for key, value in status %}
+																	<option value="{{key}}">{{value}}</option>
+																{% endfor %}
+															</select>
+														</div>
+
+														<div class="form-group">
+															<label for="asset_status">{{ name | capitalize }}
+																Rating</label>
+															<input type="number" id="asset_status" class="form-control" name="asset_status" min="1" max="5">
+														</div>
+
+														<div class="form-group">
+															<label for="manager">Manager</label>
+															<input type="text" id="manager" class="form-control" name="manager">
+														</div>
+
+
+														<button type="submit" class="btn btn-primary btn-block">Submit</button>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="btn btn-success mb-2 mr-1">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+										<button type="button" class="btn btn-light mb-2">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>{{ time | capitalize }}</th>
+											<th>{{ name | capitalize }}</th>
+											<th>Usage hours</th>
+											<th>Activity</th>
+											<th>Activity Status</th>
+											<th>{{ name | capitalize }} Rating</th>
+											<th>Manager</th>
+											<td>Action</td>
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+										{% for item in report %}
+											<tr>
+												<td>{{item.date | date('d M Y')}}</td>
+												<td>{{item.getAsset().name}}</td>
+												<td>{{item.usage_hr}}</td>
+												<td>{{item.activity}}</td>
+												<td>{{item.activity_status}}</td>
+												<td>{{item.asset_status}}</td>
+												<td>{{item.manager}}</td>
+												<td>
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
+														<i class="mdi mdi-square-edit-outline"></i>
+													</a>
+
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#delete{{item.id}}">
+														<i class="mdi mdi-delete"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		{% for item in report %}
+			<!-- edit modal -->
+			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Edit Field</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/activity/edit', {'id': item.id})}}" method="post">
+								<div class="form-group">
+									<label for="time">{{ time | capitalize }}</label>
+									<input type="{{time}}" id="time" class="form-control" name="time" value="{{item.time}}">
+								</div>
+								<div class="form-group">
+									<label for="assetid">{{ name | capitalize }}</label>
+									<input type="text" id="assetid" class="form-control" name="assetid" value="{{item.assetid}}">
+								</div>
+								<div class="form-group">
+									<label for="usage_hr">Usage Hours</label>
+									<input type="number" id="usage_hr" class="form-control" name="usage_hr" min="1" value="{{item.usage_hr}}">
+								</div>
+
+								<div class="form-group">
+									<label for="activity">Activity</label>
+									<input type="text" id="activity" class="form-control" name="activity" value="{{item.activity}}">
+								</div>
+
+								<div class="form-group">
+									<label for="activity_status">Activity Status</label>
+									<select id="activity_status" class="form-control" name="activity_status" value="{{item.activty_status}}">
+										{% for key, value in status %}
+											<option value="{{key}}" {{ item.activity_status == key ? "SELECTED" : "" }}>{{value}}</option>
+										{% endfor %}
+									</select>
+								</div>
+
+								<div class="form-group">
+									<label for="asset_status">{{ name | capitalize }}
+										Rating</label>
+									<input type="number" id="asset_status" class="form-control" name="asset_status" min="1" max="5" value="{{item.asset_status}}">
+								</div>
+
+								<div class="form-group">
+									<label for="manager">Manager</label>
+									<input type="text" id="manager" class="form-control" name="manager">
+								</div>
+
+
+								<button type="submit" class="btn btn-primary btn-block">Submit</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+			<!-- Delete Modal -->
+			<div id="delete{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Delete
+								{{name}}
+								Activty Log</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/activity/delete')}}" method="post">
+
+								<div class="form-group">
+									<p>Are you sure you want to delete?</p>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
+								<button type="submit" class="btn btn-danger btn-block" name="id" value="{{item.id}}">yes</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+		{% endfor %}
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}

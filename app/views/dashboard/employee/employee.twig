@@ -1,0 +1,253 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %} Employee {% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div
+						class="page-title-box"><h4 class="page-title">Employee</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									<a href="javascript:void(0);" class="btn btn-danger mb-2" data-toggle="modal" data-target="#standard-modal">
+										<i class="mdi mdi-plus-circle mr-2"></i>
+										Add Employee</a>
+									<!-- Standard modal -->
+									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="standard-modalLabel">Add Employee</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												</div>
+												<div class="modal-body">
+													<form action="" method="post">
+
+														<div class="form-group">
+															<label for="firstname">First Name</label>
+															<input type="text" id="firstname" class="form-control" name="firstname">
+														</div>
+														<div class="form-group">
+															<label for="lastname">Last Name</label>
+															<input type="text" id="lastname" class="form-control" name="lastname">
+														</div>
+
+														<div class="form-group">
+															<label for="username">User Name</label>
+															<input type="text" id="username" class="form-control" name="username">
+														</div>
+
+														<div class="form-group">
+															<label for="email">Email</label>
+															<input type="email" id="example-email" name="email" class="form-control" placeholder="Email">
+														</div>
+
+														<div class="form-group">
+															<label for="password">Show/Hide Password</label>
+															<div class="input-group input-group-merge">
+																<input type="password" id="password" class="form-control" placeholder="Enter your password" name="password">
+																<div class="input-group-append" data-password="false">
+																	<div class="input-group-text">
+																		<span class="password-eye"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+
+														<div class="form-group">
+															<label for="password1">Show/Hide Password</label>
+															<div class="input-group input-group-merge">
+																<input type="password" id="password1" class="form-control" name="password1" placeholder="Enter your password">
+																<div class="input-group-append" data-password="false">
+																	<div class="input-group-text">
+																		<span class="password-eye"></span>
+																	</div>
+																</div>
+															</div>
+														</div>
+														<button type="submit" class="btn btn-primary btn-block">Submit</button>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="btn btn-success mb-2 mr-1">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+										<button type="button" class="btn btn-light mb-2">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Firstname</th>
+											<th>Lastname</th>
+											<th>Email</th>
+											<th>Username</th>
+											<th>Status</th>
+											<th>Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+										{% for item in emp %}
+											<tr>
+												<td>{{item.firstname}}</td>
+												<td>{{item.firstname}}</td>
+												<td>{{item.lastname}}</td>
+												<td>{{item.email}}</td>
+												<td>{{item.username}}</td>
+												<td>{{item.status == 0 ? 'INACTIVE' : 'ACTIVE' }}</td>
+												<td>{{item.created_at | date('d M Y')}}</td>
+												<td>
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.username}}">
+														<i class="mdi mdi-square-edit-outline"></i>
+													</a>
+
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#delete{{item.username}}">
+														<i class="mdi mdi-delete"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		{% for item in emp %}
+			<!-- edit modal -->
+			<div id="edit{{item.username}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Edit Employee</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/employee/edit')}}" method="post">
+
+								<div class="form-group">
+									<label for="firstname">First Name</label>
+									<input type="text" id="firstname" class="form-control" name="firstname" value="{{item.firstname}}">
+								</div>
+								<div class="form-group">
+									<label for="lastname">Last Name</label>
+									<input type="text" id="lastname" class="form-control" name="lastname" value="{{item.lastname}}">
+								</div>
+								<button type="submit" class="btn btn-primary btn-block" name="id" value="{{item.id}}">Submit</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+			<!-- Delete Modal -->
+			<div id="delete{{item.username}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Edit Employee</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/employee/delete')}}" method="post">
+
+								<div class="form-group">
+									<p>Are you sure you want to delete? it is advisable to deactivate the account if th user as used this account</p>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
+								<button type="submit" class="btn btn-danger btn-block" name="id" value="{{item.id}}">yes</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+		{% endfor %}
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer><!-- end Footer --></div><!-- content-page -->{% endblock %}
+{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}<!-- third party js ends --><!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}

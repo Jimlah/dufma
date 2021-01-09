@@ -1,0 +1,101 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %} Inventory {% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+
+						<h4 class="page-title">Inventory Summary</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				{% for item in items %}
+					<div class="col-xl-3 col-lg-6">
+						<div class="card widget-flat">
+							<div class="card-body">
+								<div class="float-right">
+									<i class="mdi mdi-currency-btc widget-icon bg-danger rounded-circle text-white"></i>
+								</div>
+								<h5 class="text-muted font-weight-normal mt-0" title="Revenue">
+									{% if item.table_type == 0 %}
+										BUILDING
+									{% elseif item.table_type == 1  %}
+										MACHINERY
+									{% elseif item.table_type == 2  %}
+										VEHICLE
+									{% elseif item.table_type == 3  %}
+										LAND
+									{% elseif item.table_type == 4  %}
+										PRODUCT
+									{% elseif item.table_type == 5  %}
+										OTHER_ASSET
+									{% elseif item.table_type == 6  %}
+										EQUIPMENT
+									{% else   %}
+										GOODS
+									{% endif %}
+
+								</h5>
+								<h3 class="mt-3 mb-3">{{item.sum}}</h3>
+								<p class="mb-0 text-muted">
+									<span class="badge badge-info mr-1">
+										{{ (100 * item.sum / total.sum) | round(1, 'ceil')}}%</span>
+									<span class="text-nowrap">of All Asset in Total</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				{% endfor %}
+
+				<!-- end col-->
+
+
+				<!-- end col-->
+			</div>
+			<!-- end row-->
+
+
+		</div>
+		<!-- End Content -->
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}
