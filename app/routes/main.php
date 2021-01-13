@@ -38,3 +38,10 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
     $router->get('/logout', 'FunctionController.logout');
 });
+
+$router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function (Router $router) {
+    $router->get('/wallet', 'FunctionController.displayTransaction');
+
+    $router->get('/wallet/pay', 'FunctionController.addTransaction');
+});
+

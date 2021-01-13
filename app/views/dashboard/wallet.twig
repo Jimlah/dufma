@@ -1,0 +1,329 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Wallet
+{% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+
+						<h4 class="page-title">Wallet</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="card text-white ">
+						<div class="card-body">
+							<p class="h3">Wallet</p>
+							<!-- .progress-md -->
+							<div class="progress progress-md">
+								<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<p class="h3">
+										<small><button type="button" class="btn btn-secondary" onClick="makePayment()">Fund</button></small>
+									</p>
+								</div>
+								<div class="col-sm-8">
+									<p class="h3 text-sm-right">
+										10000 |
+										<small>UIC</small>
+									</p>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col-->
+
+				<div class="col-md-4">
+					<div class="card text-white ">
+						<div class="card-body">
+							<p class="h3">Sudo Wallet</p>
+							<!-- .progress-md -->
+							<div class="progress progress-md">
+								<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<p class="h3">
+										<small><button type="button" class="btn btn-secondary">Fund</button></small>
+									</p>
+								</div>
+								<div class="col-sm-8">
+									<p class="h3 text-sm-right">
+										10000 |
+										<small>UIC</small>
+									</p>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col-->
+
+				<div class="col-md-4">
+					<div class="card text-white ">
+						<div class="card-body">
+							<p class="h3">Transfer</p>
+							<!-- .progress-md -->
+							<div class="progress progress-md">
+								<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<p class="h3">
+										<small><button type="button" class="btn btn-secondary">Transfer</button></small>
+									</p>
+								</div>
+								<div class="col-sm-8">
+									<p class="h3 text-sm-right">
+										10000 |
+										<small>UIC</small>
+									</p>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col-->
+			</div>
+			<!-- end row -->
+
+			<div class="row">
+
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									<button type="button" class="btn btn-secondary">Withdraw</button>
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<div class="btn-group mb-3">
+											<button type="button" class="btn btn-primary">All</button>
+										</div>
+										<div class="btn-group mb-3 ml-1">
+											<button type="button" class="btn btn-light">Credit</button>
+											<button type="button" class="btn btn-light">Debit</button>
+										</div>
+										<div class="btn-group mb-3 ml-2 d-none d-sm-inline-block">
+											<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#bs-example-modal-sm">Range</i>
+										</button>
+									</div>
+
+									<div class="modal fade" id="bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<form class="modal-body">
+													<div class="form-group">
+														<label for="example-date">From</label>
+														<input class="form-control" id="example-date" type="date" name="date1">
+													</div>
+													<div class="form-group">
+														<label for="example-date">To</label>
+														<input class="form-control" id="example-date" type="date" name="date2">
+													</div>
+													<div class="form-group">
+														<button type="button" class="btn btn-block btn-primary">Submit</button>
+													</div>
+												</form>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+								</div>
+							</div>
+							<!-- end col-->
+						</div>
+						<!-- end row-->
+						<div class="table-responsive">
+							<table class="table table-centered mb-0 dt-responsive nowrap w-100" id="datatable-buttons">
+								<thead class="thead-dark">
+									<tr>
+										<th>Transaction Refrence Number</th>
+										<th>Date</th>
+										<th>Sender</th>
+										<th>Type</th>
+										<th>Amount</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Risa D. Pearson</td>
+										<td>336-508-2157</td>
+										<td>July 24, 1950</td>
+										<td>Sender</td>
+									</tr>
+									<tr>
+										<td>Ann C. Thompson</td>
+										<td>646-473-2057</td>
+										<td>January 25, 1959</td>
+										<td>
+											<!-- Switch-->
+											<div>
+												<input type="checkbox" id="switch2" checked data-switch="success"/>
+												<label for="switch2" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>Paul J. Friend</td>
+										<td>281-308-0793</td>
+										<td>September 1, 1939</td>
+										<td>
+											<!-- Switch-->
+											<div>
+												<input type="checkbox" id="switch3" data-switch="success"/>
+												<label for="switch3" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+											</div>
+										</td>
+									</tr>
+									<tr>
+										<td>Linda G. Smith</td>
+										<td>606-253-1207</td>
+										<td>May 3, 1962</td>
+										<td>
+											<!-- Switch-->
+											<div>
+												<input type="checkbox" id="switch4" data-switch="success"/>
+												<label for="switch4" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
+											</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<!-- end card-body-->
+				</div>
+				<!-- end card-->
+			</div>
+			<!-- end col -->
+		</div>
+		<!-- end row -->
+
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+			<footer class="footer"> <div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+ <form>
+        <button type="button" onClick="makePayment()">Pay Now</button>
+    </form>
+
+    <script src="https://checkout.flutterwave.com/v3.js"></script>
+
+    <script>
+        function makePayment() {
+            FlutterwaveCheckout({
+                public_key: "FLWPUBK-6aab6960b0a4cb02ee0f16767d942ebf-X",
+                tx_ref: "hooli-tx-1920bbtyt1",
+                amount: 1,
+                currency: "NGN",
+                payment_options: "card,mobilemoney,ussd",
+                redirect_url: "{{url('dashboard/wallet/pay')}}",
+                meta: {
+                    consumer_id: 23,
+                    consumer_mac: "92a3-912ba-1192a",
+                },
+                customer: {
+                    email: "{{req.user.email}}",
+                    name: "{{req.user.firstname}}",
+                },
+                callback: function (data) {
+                    $.ajax({
+						url: "{{url('/dashboard/wallet')}}",
+						data: {
+							dataquery: data,
+						},
+						success: function(){
+							//Success code
+						},
+					timeout: 5000 // sets timeout to 5 seconds
+					});
+                },
+                onclose: function() {
+                    // close modal
+                },
+                customizations: {
+                    title: "Dufma",
+                    description: "Payment for items in cart",
+                    logo: "https://dufma.ng/images/icons/favicon.png",
+                },
+            });
+        }
+    </script>
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}
+	<!-- end demo js-->
+{% endblock %}

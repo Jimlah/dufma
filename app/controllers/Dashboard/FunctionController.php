@@ -2,16 +2,19 @@
 
 namespace App\Controllers\Dashboard;
 
-use App\Core\Http\Response;
-use App\Core\Http\Request;
-use App\Core\Http\Controller;
-use App\Core\Misc\InputValidator;
-use App\Core\Tools\Auth;
-use App\Models\UsersModel;
-use App\Providers\UsersProvider;
+use Exception;
 use Swift_Mailer;
 use Swift_Message;
+use App\Core\Tools\Auth;
 use Swift_SmtpTransport;
+use App\Core\Http\Request;
+use App\Models\UsersModel;
+use App\Core\Http\Response;
+use App\Core\Http\Controller;
+use App\Providers\UsersProvider;
+use App\Core\Misc\InputValidator;
+use App\Models\TransactionModel;
+use App\Providers\TransactionProvider;
 
 class FunctionController extends Controller
 {
@@ -141,7 +144,7 @@ class FunctionController extends Controller
      */
     public function genColor($num)
     {
-        $colors =[];
+        $colors = [];
         for ($i = 0; $i < $num; $i++) {
             $hex = '#';
 
@@ -163,5 +166,94 @@ class FunctionController extends Controller
         };
 
         return $colors;
+    }
+
+    public function addTransaction(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $userid = $user->id();
+        $orgid = $user->id();
+        $status = $request->url()->getQuery('status');
+        $tx_ref = $request->url()->getQuery('tx_ref');
+        $transaction_id = $request->url()->getQuery('transaction_id');
+
+
+        function flutterWavePaymentVerification($trans_id)
+        {
+            try {
+                $curl = curl_init();
+                $secret_key  = 'FLWSECK-2744e4ff3bbf1a18e9721ca713a90719-X';
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://api.flutterwave.com/v3/transactions/$trans_id/verify",
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => [
+                        "accept: application/json",
+                        "authorization: Bearer $secret_key",
+                        "cache-control: no-cache"
+                    ],
+                ));
+
+                return curl_exec($curl);
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+
+        function payStackPaymentVerification($reference)
+        {
+            try {
+                $curl = curl_init();
+                $api_key  = '';
+
+                curl_setopt_array($curl, array(
+                    CURLOPT_URL => "https://api.paystack.co/transaction/verify/" . rawurlencode($reference),
+                    CURLOPT_RETURNTRANSFER => true,
+                    CURLOPT_HTTPHEADER => [
+                        "accept: application/json",
+                        "authorization: Bearer $api_key",
+                        "cache-control: no-cache"
+                    ],
+                ));
+
+                return curl_exec($curl);
+            } catch (Exception $e) {
+                return $e->getMessage();
+            }
+        }
+
+        if (isset($tx_ref) && isset($transaction_id)) {
+            if ($status == 'successful') {
+                $verification = flutterWavePaymentVerification($transaction_id);
+                // echo $verification;
+            } else
+                $status;
+        } else
+            echo "Error occurs";
+
+        $verification = json_decode($verification);
+        $amount = $verification->data->amount;
+        $pay_type = $verification->data->payment_type;
+        $trans_type = TransactionProvider::CREDIT_TRANS; 
+
+        
+
+        TransactionModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'transaction_id' => $transaction_id,
+            'status' => $status,
+            'amount' => $amount,
+            'pay_type' => $pay_type,
+            'trans_type' => $trans_type,
+        ]);
+
+        return $response->redirect('/dashboard/wallet');
+    }
+
+    public function displayTransaction(Request $request, Response $response)
+    {
+        return $response->view('dashboard/wallet');
     }
 }
