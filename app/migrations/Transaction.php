@@ -27,6 +27,7 @@ class Transaction implements MigrationInterface
                 $table->field('amount')->varchar();
                 $table->field('pay_type')->varchar();
                 $table->field('trans_type')->varchar();
+                $table->field('naration')->varchar();
             });
     }
 

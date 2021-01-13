@@ -21,7 +21,8 @@ class TransactionModel extends Model
         'status', 
         'amount', 
         'pay_type', 
-        'trans_type', 
+        'trans_type',
+        'naration',
         'created_at',
         'updated_at'
     );

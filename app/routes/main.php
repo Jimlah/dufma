@@ -43,5 +43,8 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
     $router->get('/wallet', 'FunctionController.displayTransaction');
 
     $router->get('/wallet/pay', 'FunctionController.addTransaction');
+    $router->post('/wallet/transfer', 'FunctionController.transferTransaction');
+    $router->post('/wallet/fund', 'FunctionController.fundTransaction');
+
 });
 

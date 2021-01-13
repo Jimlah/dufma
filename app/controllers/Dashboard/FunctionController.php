@@ -13,6 +13,7 @@ use App\Core\Http\Response;
 use App\Core\Http\Controller;
 use App\Providers\UsersProvider;
 use App\Core\Misc\InputValidator;
+use App\Models\ProfileModel;
 use App\Models\TransactionModel;
 use App\Providers\TransactionProvider;
 
@@ -180,12 +181,29 @@ class FunctionController extends Controller
         $sudo_debit = 0;
         $wallet = 0;
 
+        $users = UsersModel::select()
+            ->where('id', $userid)
+            ->orWhere('userid', $userid)
+            ->fetchAll();
+
+
         $trans_type = [
             TransactionProvider::CREDIT_TRANS => 'Credit',
             TransactionProvider::DEBIT_TRANS => 'Debit',
             TransactionProvider::SUDO_CREDIT_TRANS => 'Sudo Credit',
             TransactionProvider::SUDO_DEBIT_TRANS => 'Sudo Debit',
         ];
+
+        $tran_type = [
+            TransactionProvider::DEBIT_TRANS => 'Wallet',
+            TransactionProvider::SUDO_DEBIT_TRANS => 'Sudo Wallet',
+        ];
+
+        $transfer = TransactionModel::select('sum(amount) sum, userid')
+                    ->where('userid', $userid)
+                    ->where('pay_type', 'Transfer')
+                    ->fetchOne()->sum;
+
 
         foreach ($transact as $key) {
 
@@ -198,9 +216,10 @@ class FunctionController extends Controller
         }
 
         $wallet = $credit - $debit;
-        $sudo_wallet = $sudo_credit- $sudo_debit;
+        $sudo_wallet = $sudo_credit - $sudo_debit;
 
         return $response->view('dashboard/wallet', [
+            'users' => $users,
             'transact' => $transact,
             'wallet' => $wallet,
             'credit' => $credit,
@@ -208,6 +227,8 @@ class FunctionController extends Controller
             'sudo_wallet' => $sudo_wallet,
             'sudo_credit' => $sudo_credit,
             'sudo_debit' => $sudo_debit,
+            'tran_type' => $tran_type,
+            'transfer' => $transfer,
         ]);
     }
 
@@ -271,17 +292,105 @@ class FunctionController extends Controller
                 $verification = flutterWavePaymentVerification($transaction_id);
             } else
                 $status;
-        } else{
+        } else {
             return $response->withSession('msg', ['Error occurs', 'alert'])->redirect('/dashboard/wallet');
         }
 
         $verification = json_decode($verification);
         $amount = $verification->data->amount;
         $pay_type = $verification->data->payment_type;
-        $trans_type = TransactionProvider::CREDIT_TRANS; 
+        $trans_type = TransactionProvider::CREDIT_TRANS;
 
-        
 
+
+        TransactionModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'transaction_id' => "F" . $transaction_id,
+            'status' => $status,
+            'amount' => $amount,
+            'pay_type' => $pay_type,
+            'trans_type' => $trans_type,
+        ]);
+
+        return $response->redirect('/dashboard/wallet');
+    }
+
+    public function transferTransaction(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $userid = $user->id();
+        $orgid = $user->id();
+        $transfer_id = $request->input('transfer_id');
+        $trans_type = $request->input('trans_type');
+        $amount = $request->input('amount');
+        $recieve_type = $trans_type->getValue() == TransactionProvider::SUDO_DEBIT_TRANS ?
+            TransactionProvider::SUDO_CREDIT_TRANS : TransactionProvider::CREDIT_TRANS;
+
+        InputValidator::init();
+
+        $amount->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+            return $response->withSession('msg', [$errors, 'error'])->redirect('/dashboard/wallet');
+        }
+
+        function getGUIDnoHash()
+        {
+            mt_srand((float)microtime() * 10000);
+            $charid = md5(uniqid(rand(), true));
+            $c = unpack("C*", $charid);
+            $c = implode("", $c);
+
+            return 'T' . substr($c, 0, 9);
+        }
+
+        if ($userid == $transfer_id->getValue()) {
+            return $response->withSession('msg', ['Unautorized transaction', 'alert'])->redirect('/dashboard/wallet');
+        }
+
+        if ($recieve_type == TransactionProvider::SUDO_CREDIT_TRANS) {
+            $credit = TransactionModel::select('sum(amount) sum, userid')
+                ->where('userid', $userid)
+                ->andWhere('trans_type', TransactionProvider::SUDO_CREDIT_TRANS)
+                ->fetchOne();
+
+            $debit = TransactionModel::select('sum(amount) sum, userid')
+                ->where('userid', $userid)
+                ->andWhere('trans_type', TransactionProvider::SUDO_DEBIT_TRANS)
+                ->fetchOne();
+
+            $balance = $credit->sum - $debit->sum;
+        }
+
+
+        if ($recieve_type == TransactionProvider::CREDIT_TRANS) {
+            $credit = TransactionModel::select('sum(amount) sum, userid')
+                ->where('userid', $userid)
+                ->andWhere('trans_type', TransactionProvider::CREDIT_TRANS)
+                ->fetchOne();
+
+            $debit = TransactionModel::select('sum(amount) sum, userid')
+                ->where('userid', $userid)
+                ->andWhere('trans_type', TransactionProvider::DEBIT_TRANS)
+                ->fetchOne();
+
+            $balance = $credit->sum - $debit->sum;
+        }
+
+        if ($balance < $amount->getValue()) {
+            return $response->withSession('msg', ['Insufficient Fund', 'alert'])->redirect('/dashboard/wallet');
+        }
+
+
+        $status = "success";
+        $transaction_id = getGUIDnoHash();
+        $pay_type = "Transfer";
+
+        $naration = $transfer_id;
+        // Removing Money
         TransactionModel::createEntry([
             'userid' => $userid,
             'orgid' => $orgid,
@@ -290,7 +399,76 @@ class FunctionController extends Controller
             'amount' => $amount,
             'pay_type' => $pay_type,
             'trans_type' => $trans_type,
+            'naration' => $naration,
         ]);
+
+
+
+        $pay_type = "Recieve";
+        $naration = $userid;
+        // Dropping the money
+        TransactionModel::createEntry([
+            'userid' => $transfer_id,
+            'orgid' => $orgid,
+            'transaction_id' => $transaction_id,
+            'status' => $status,
+            'amount' => $amount,
+            'pay_type' => $pay_type,
+            'trans_type' => $recieve_type,
+            'naration' => $naration,
+        ]);
+
+        return $response->redirect('/dashboard/wallet');
+    }
+
+
+    public function fundTransaction(Request $request, Response $response)
+    {
+        Auth::user();
+        $user = $request->user();
+        $userid = $user->id();
+        $orgid = $user->id();
+        $trans_type = TransactionProvider::SUDO_CREDIT_TRANS;
+        $amount = $request->input('amount');
+
+        InputValidator::init();
+
+        $amount->validate('required');
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+            return $response->withSession('msg', [$errors, 'error'])->redirect('/dashboard/wallet');
+        }
+
+        function getGUIDnoHash1()
+        {
+            mt_srand((float)microtime() * 10000);
+            $charid = md5(uniqid(rand(), true));
+            $c = unpack("C*", $charid);
+            $c = implode("", $c);
+
+            return 'S' . substr($c, 0, 9);
+        }
+
+
+        $status = "success";
+        $transaction_id = getGUIDnoHash1();
+        $pay_type = "Fund";
+
+        $naration = $userid;
+        // Removing Money
+        TransactionModel::createEntry([
+            'userid' => $userid,
+            'orgid' => $orgid,
+            'transaction_id' => $transaction_id,
+            'status' => $status,
+            'amount' => $amount,
+            'pay_type' => $pay_type,
+            'trans_type' => $trans_type,
+            'naration' => $naration,
+        ]);
+
+
 
         return $response->redirect('/dashboard/wallet');
     }
