@@ -10,6 +10,8 @@ class TransactionProvider
     
     const DEBIT_TRANS = 0;
     const CREDIT_TRANS = 1;
+    const SUDO_DEBIT_TRANS = 2;
+    const SUDO_CREDIT_TRANS = 3;
 
     
     /**

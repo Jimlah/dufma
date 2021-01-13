@@ -168,6 +168,49 @@ class FunctionController extends Controller
         return $colors;
     }
 
+    public function displayTransaction(Request $request, Response $response)
+    {
+        $user = $request->user();
+        $userid = $user->id();
+
+        $transact = TransactionModel::findAllBy('userid', $userid);
+        $credit = 0;
+        $debit = 0;
+        $sudo_credit = 0;
+        $sudo_debit = 0;
+        $wallet = 0;
+
+        $trans_type = [
+            TransactionProvider::CREDIT_TRANS => 'Credit',
+            TransactionProvider::DEBIT_TRANS => 'Debit',
+            TransactionProvider::SUDO_CREDIT_TRANS => 'Sudo Credit',
+            TransactionProvider::SUDO_DEBIT_TRANS => 'Sudo Debit',
+        ];
+
+        foreach ($transact as $key) {
+
+            $credit += $key->trans_type == TransactionProvider::CREDIT_TRANS ? $key->amount : 0;
+            $debit += $key->trans_type == TransactionProvider::DEBIT_TRANS ? $key->amount : 0;
+            $sudo_credit += $key->trans_type == TransactionProvider::SUDO_CREDIT_TRANS ? $key->amount : 0;
+            $sudo_debit += $key->trans_type == TransactionProvider::SUDO_DEBIT_TRANS ? $key->amount : 0;
+
+            $key->trans_type = $trans_type[$key->trans_type];
+        }
+
+        $wallet = $credit - $debit;
+        $sudo_wallet = $sudo_credit- $sudo_debit;
+
+        return $response->view('dashboard/wallet', [
+            'transact' => $transact,
+            'wallet' => $wallet,
+            'credit' => $credit,
+            'debit' => $debit,
+            'sudo_wallet' => $sudo_wallet,
+            'sudo_credit' => $sudo_credit,
+            'sudo_debit' => $sudo_debit,
+        ]);
+    }
+
     public function addTransaction(Request $request, Response $response)
     {
         Auth::user();
@@ -226,11 +269,11 @@ class FunctionController extends Controller
         if (isset($tx_ref) && isset($transaction_id)) {
             if ($status == 'successful') {
                 $verification = flutterWavePaymentVerification($transaction_id);
-                // echo $verification;
             } else
                 $status;
-        } else
-            echo "Error occurs";
+        } else{
+            return $response->withSession('msg', ['Error occurs', 'alert'])->redirect('/dashboard/wallet');
+        }
 
         $verification = json_decode($verification);
         $amount = $verification->data->amount;
@@ -250,10 +293,5 @@ class FunctionController extends Controller
         ]);
 
         return $response->redirect('/dashboard/wallet');
-    }
-
-    public function displayTransaction(Request $request, Response $response)
-    {
-        return $response->view('dashboard/wallet');
     }
 }

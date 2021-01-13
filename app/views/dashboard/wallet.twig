@@ -38,17 +38,21 @@
 							<p class="h3">Wallet</p>
 							<!-- .progress-md -->
 							<div class="progress progress-md">
-								<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-success" role="progressbar" style="width: {{100 * credit / wallet}}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: {{100 * debit / wallet}}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-4">
 									<p class="h3">
-										<small><button type="button" class="btn btn-secondary" onClick="makePayment()">Fund</button></small>
+										<small>
+											<button type="button" class="btn btn-secondary" onclick="makePayment()">Fund</button>
+										</small>
 									</p>
 								</div>
 								<div class="col-sm-8">
 									<p class="h3 text-sm-right">
-										10000 |
+										{{wallet}}
+										|
 										<small>UIC</small>
 									</p>
 								</div>
@@ -68,17 +72,46 @@
 							<p class="h3">Sudo Wallet</p>
 							<!-- .progress-md -->
 							<div class="progress progress-md">
-								<div class="progress-bar bg-info" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-success" role="progressbar" style="width: {{100 * sudo_credit / sudo_wallet}}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+								<div class="progress-bar bg-danger" role="progressbar" style="width: {{100 * sudo_debit / sudo_wallet}}%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
 							</div>
 							<div class="row">
 								<div class="col-sm-4">
 									<p class="h3">
-										<small><button type="button" class="btn btn-secondary">Fund</button></small>
+										<small>
+											<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#sudo-wallet">Fund</button>
+										</small>
 									</p>
+									<div class="modal fade" id="sudo-wallet" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<form class="modal-body">
+													<div class="form-group">
+														<label for="trans_type">Select</label>
+														<select class="form-control" id="trans_type" class="trans_type">
+															<option>1</option>
+															<option>2</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label for="amount">Amount</label>
+														<input class="form-control" id="amount" type="number" name="amount" min="1">
+													</div>
+													<div class="form-group">
+														<button type="button" class="btn btn-block btn-primary">Submit</button>
+													</div>
+												</form>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
 								</div>
 								<div class="col-sm-8">
 									<p class="h3 text-sm-right">
-										10000 |
+										{{sudo_wallet}}
+										|
 										<small>UIC</small>
 									</p>
 								</div>
@@ -103,8 +136,42 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<p class="h3">
-										<small><button type="button" class="btn btn-secondary">Transfer</button></small>
+										<small>
+											<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#transfer">Transfer</button>
+										</small>
 									</p>
+									<div class="modal fade" id="transfer" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<form class="modal-body">
+													<div class="form-group">
+														<label for="trans_type">Select</label>
+														<select class="form-control" id="trans_type" class="trans_type">
+															<option>1</option>
+															<option>2</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label for="trans_type">To</label>
+														<select class="form-control" id="trans_type" class="trans_type">
+															<option>1</option>
+															<option>2</option>
+														</select>
+													</div>
+													<div class="form-group">
+														<label for="amount">Amount</label>
+														<input class="form-control" id="amount1" type="number" name="amount" min="1">
+													</div>
+													<div class="form-group">
+														<button type="button" class="btn btn-block btn-primary">Submit</button>
+													</div>
+												</form>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
 								</div>
 								<div class="col-sm-8">
 									<p class="h3 text-sm-right">
@@ -152,12 +219,12 @@
 											<div class="modal-content">
 												<form class="modal-body">
 													<div class="form-group">
-														<label for="example-date">From</label>
-														<input class="form-control" id="example-date" type="date" name="date1">
+														<label for="example-date1">From</label>
+														<input class="form-control" id="example-date1" type="date" name="date1">
 													</div>
 													<div class="form-group">
-														<label for="example-date">To</label>
-														<input class="form-control" id="example-date" type="date" name="date2">
+														<label for="example-date2">To</label>
+														<input class="form-control" id="example-date2" type="date" name="date2">
 													</div>
 													<div class="form-group">
 														<button type="button" class="btn btn-block btn-primary">Submit</button>
@@ -178,56 +245,38 @@
 							<table class="table table-centered mb-0 dt-responsive nowrap w-100" id="datatable-buttons">
 								<thead class="thead-dark">
 									<tr>
-										<th>Transaction Refrence Number</th>
+										<th>Transaction Id</th>
 										<th>Date</th>
-										<th>Sender</th>
-										<th>Type</th>
+										<th>Status</th>
 										<th>Amount</th>
+										<th>Payment Type</th>
+										<th>Transaction Type</th>
+										<th>Narration</th>
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Risa D. Pearson</td>
-										<td>336-508-2157</td>
-										<td>July 24, 1950</td>
-										<td>Sender</td>
-									</tr>
-									<tr>
-										<td>Ann C. Thompson</td>
-										<td>646-473-2057</td>
-										<td>January 25, 1959</td>
-										<td>
-											<!-- Switch-->
-											<div>
-												<input type="checkbox" id="switch2" checked data-switch="success"/>
-												<label for="switch2" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>Paul J. Friend</td>
-										<td>281-308-0793</td>
-										<td>September 1, 1939</td>
-										<td>
-											<!-- Switch-->
-											<div>
-												<input type="checkbox" id="switch3" data-switch="success"/>
-												<label for="switch3" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
-											</div>
-										</td>
-									</tr>
-									<tr>
-										<td>Linda G. Smith</td>
-										<td>606-253-1207</td>
-										<td>May 3, 1962</td>
-										<td>
-											<!-- Switch-->
-											<div>
-												<input type="checkbox" id="switch4" data-switch="success"/>
-												<label for="switch4" data-on-label="Yes" data-off-label="No" class="mb-0 d-block"></label>
-											</div>
-										</td>
-									</tr>
+									{% for item in transact %}
+										<tr>
+											<td>{{item.transaction_id}}</td>
+											<td>
+												{{item.created_at | date('D M y H:i')}}
+											</td>
+											<td>{{item.status}}</td>
+											<td>{{item.amount}}</td>
+											<td>{{item.pay_type}}</td>
+											<td>
+
+												{% if (item.trans_type == 'Credit') or (item.trans_type == 'Sudo Credit') %}
+													<span class="badge badge-success-lighten badge-pill">{{item.trans_type}}
+													</span>
+												{% else %}
+													<span class="badge badge-danger-lighten badge-pill">{{item.trans_type}}
+													</span>
+												{% endif %}
+											</td>
+											<td>{{item.trans_type}}</td>
+										</tr>
+									{% endfor %}
 								</tbody>
 							</table>
 						</div>
@@ -264,52 +313,50 @@
 	<!-- content-page -->
 {% endblock %}
 {% block js %}
- <form>
-        <button type="button" onClick="makePayment()">Pay Now</button>
-    </form>
+	<form>
+		<button type="button" onclick="makePayment()">Pay Now</button>
+	</form>
 
-    <script src="https://checkout.flutterwave.com/v3.js"></script>
+	<script src="https://checkout.flutterwave.com/v3.js"></script>
 
-    <script>
-        function makePayment() {
-            FlutterwaveCheckout({
-                public_key: "FLWPUBK-6aab6960b0a4cb02ee0f16767d942ebf-X",
-                tx_ref: "hooli-tx-1920bbtyt1",
-                amount: 1,
-                currency: "NGN",
-                payment_options: "card,mobilemoney,ussd",
-                redirect_url: "{{url('dashboard/wallet/pay')}}",
-                meta: {
-                    consumer_id: 23,
-                    consumer_mac: "92a3-912ba-1192a",
-                },
-                customer: {
-                    email: "{{req.user.email}}",
-                    name: "{{req.user.firstname}}",
-                },
-                callback: function (data) {
-                    $.ajax({
-						url: "{{url('/dashboard/wallet')}}",
-						data: {
-							dataquery: data,
-						},
-						success: function(){
-							//Success code
-						},
-					timeout: 5000 // sets timeout to 5 seconds
-					});
-                },
-                onclose: function() {
-                    // close modal
-                },
-                customizations: {
-                    title: "Dufma",
-                    description: "Payment for items in cart",
-                    logo: "https://dufma.ng/images/icons/favicon.png",
-                },
-            });
-        }
-    </script>
+	<script>
+		function makePayment() {
+FlutterwaveCheckout({
+public_key: "FLWPUBK-6aab6960b0a4cb02ee0f16767d942ebf-X",
+tx_ref: "hooli-tx-1920bbtyt1",
+amount: 1,
+currency: "NGN",
+payment_options: "card,mobilemoney,ussd",
+redirect_url: "{{ url('dashboard/wallet/pay') }}",
+meta: {
+consumer_id: 23,
+consumer_mac: "92a3-912ba-1192a"
+},
+customer: {
+email: "{{ req.user.email }}",
+name: "{{ req.user.firstname }}"
+},
+callback: function (data) {
+$.ajax({
+url: "{{ url('/dashboard/wallet') }}",
+data: {
+dataquery: data
+},
+success: function () { // Success code
+},
+timeout: 5000 // sets timeout to 5 seconds
+});
+},
+onclose: function () { // close modal
+},
+customizations: {
+title: "Dufma",
+description: "Payment for items in cart",
+logo: "https://dufma.ng/images/icons/favicon.png"
+}
+});
+}
+	</script>
 	<!-- third party js -->
 	{{jscript('vendor/jquery.dataTables.min')}}
 	{{jscript('vendor/dataTables.bootstrap4')}}
