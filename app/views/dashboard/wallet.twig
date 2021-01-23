@@ -45,9 +45,26 @@
 								<div class="col-sm-4">
 									<p class="h3">
 										<small>
-											<button type="button" class="btn btn-secondary" onclick="makePayment()">Fund</button>
+											<button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#wallet">Fund</button>
 										</small>
 									</p>
+									<div class="modal fade" id="wallet" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+										<div class="modal-dialog modal-sm">
+											<div class="modal-content">
+												<form class="modal-body" action="" method="POST">
+													<div class="form-group">
+														<label for="amount">Amount</label>
+														<input class="form-control" id="wallet-amount" type="number" name="amount" min="1">
+													</div>
+													<div class="form-group">
+														<button type="button" class="btn btn-block btn-primary" onclick="makePayment()">Submit</button>
+													</div>
+												</form>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
 								</div>
 								<div class="col-sm-8">
 									<p class="h3 text-sm-right">
@@ -319,7 +336,7 @@
 FlutterwaveCheckout({
 public_key: "FLWPUBK-6aab6960b0a4cb02ee0f16767d942ebf-X",
 tx_ref: "hooli-tx-1920bbtyt1",
-amount: 1,
+amount: document.getElementById('wallet-amount').value,
 currency: "NGN",
 payment_options: "card,mobilemoney,ussd",
 redirect_url: "{{ url('dashboard/wallet/pay') }}",
