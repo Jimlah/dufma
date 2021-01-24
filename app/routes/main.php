@@ -35,13 +35,14 @@ $router->group()->namespace('Landing')->use('checkAuth')->register(function (Rou
 
 
 $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function (Router $router) {
-
+    $router->post('/employee', 'FunctionController.registerEmp');
     $router->get('/logout', 'FunctionController.logout');
 });
 
 $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(function (Router $router) {
+    
+    
     $router->get('/wallet', 'FunctionController.displayTransaction');
-
     $router->get('/wallet/pay', 'FunctionController.addTransaction');
     $router->post('/wallet/transfer', 'FunctionController.transferTransaction');
     $router->post('/wallet/fund', 'FunctionController.fundTransaction');
