@@ -8,7 +8,8 @@ $router = new Router();
 
 #Add routes
 
-$router->any('/', 'CubeController.home')->use('checkAuth');
+$router->get('/', 'CubeController.home')->use('checkAuth');
+$router->post('/', 'CubeController.homeAction')->use('checkAuth');
 
 $router->group()->namespace('Auth')->use('checkAuth')->register(function (Router $router) {
     $router->any('/404', 'CubeController._404');
