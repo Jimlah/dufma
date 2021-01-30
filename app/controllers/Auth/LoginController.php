@@ -2,13 +2,14 @@
 
 namespace App\Controllers\Auth;
 
-use App\Core\Exceptions\AuthException;
-use App\Core\Http\Response;
-use App\Core\Http\Request;
-use App\Core\Http\Controller;
 use App\Core\Tools\Auth;
+use App\Core\Http\Request;
 use App\Models\UsersModel;
+use App\Core\Http\Response;
+use App\Core\Http\Controller;
 use App\Providers\UsersProvider;
+use App\Core\Misc\InputValidator;
+use App\Core\Exceptions\AuthException;
 
 class LoginController extends Controller
 {
@@ -68,6 +69,17 @@ class LoginController extends Controller
     public function recover(Request $request, Response $response)
     {
         $email = $request->input('email');
+
+        InputValidator::init();
+
+        $email->validate('required');
+        
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getErrors();
+
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
 
         $user = UsersModel::findBy('email', $email);
 

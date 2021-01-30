@@ -6,9 +6,9 @@ use App\Core\Interfaces\MigrationInterface;
 use App\Core\Modules\DB;
 use App\Core\Modules\Db\DBTableBuilder;
 
-class Password_recovery implements MigrationInterface
+class Subscribers implements MigrationInterface
 {
-    private const NAME = 'password_recovery';
+    private const NAME = 'subscribers';
 
     /**
      * Action to create migration
@@ -21,7 +21,7 @@ class Password_recovery implements MigrationInterface
             ->create(function (DBTableBuilder $table) {
                 $table->field('id')->int()->increment();
                 $table->field('email')->varchar();
-                $table->field('recovery_token')->varchar();
+                $table->field('status')->varchar();
             });
     }
 

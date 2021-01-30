@@ -7,7 +7,9 @@ use App\Core\Http\Response;
 use App\Core\Http\Controller;
 use App\Core\Misc\InputValidator;
 use App\Models\DemoModel;
+use App\Models\SubscribersModel;
 use App\Providers\DemoProvider;
+use App\Providers\SubscribersProvider;
 
 class CubeController extends Controller
 {
@@ -70,6 +72,41 @@ class CubeController extends Controller
 
             return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
 
+    }
+
+    public function subscribe(Request $request, Response $response)
+    {
+        $email = $request->input('email');
+
+        InputValidator::init([
+            "uniqueField" => function (InputValidator $validator, string $field, string $message) {
+                if ($validator->getValue() == '') {
+                    return null;
+                }
+                if (SubscribersModel::findby($field, $validator->getValue())) {
+
+                    $validator->attachError($message);
+                }
+            }
+
+        ]);
+
+        $email->validate('required')->uniqueField('email', 'Email has already been registered');
+        
+
+        if (!InputValidator::isValid()) {
+            $errors = InputValidator::getListedErrors();
+
+            return $response->withSession('msg', $errors)->redirect($request->url()->getPath());
+        }
+
+        SubscribersModel::createEntry([
+            'email' => $email,
+            'status' => SubscribersProvider::SUBSCRIBE
+        ]);
+
+        $msg = "You have successfully subscribe to our newsletter";
+        return $response->withSession('msg', $msg)->redirect('/');
     }
 
     public function _404(Request $request, Response $response)

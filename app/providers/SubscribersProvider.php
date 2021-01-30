@@ -2,20 +2,24 @@
 
 namespace App\Providers;
 
-use App\Models\Password_recoveryModel;
+use App\Models\SubscribersModel;
 
-class Password_recoveryProvider
+class SubscribersProvider
 {
     private $_model;
 
+    const SUBSCRIBE = 1;
+    const UNSUBSCRIBE = 0;
+
+
     /**
-     * Password_recoveryProvider constructor
+     * SubscribersProvider constructor
      *
      * @param mixed $id
      */
     public function __construct($id)
     {
-        $this->_model = Password_recoveryModel::findByPrimaryKey($id);
+        $this->_model = SubscribersModel::findByPrimaryKey($id);
     }
 
     /**
