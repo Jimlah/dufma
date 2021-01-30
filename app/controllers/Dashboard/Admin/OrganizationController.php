@@ -19,9 +19,8 @@ class OrganizationController extends Controller
     public function display(Request $request, Response $response)
     {
         Auth::user();
-        $org = UsersModel::select()
-            ->where('access', UsersProvider::ACCESS_ORGANIZATION)
-            ->fetchAll();
+        $org = UsersModel::findAllBy('access', UsersProvider::ACCESS_ORGANIZATION);
+
         return $response->view('/dashboard/admin/organization', [
             'org' => $org
         ]);
@@ -34,20 +33,14 @@ class OrganizationController extends Controller
         $firstname = $request->input('firstname');
         $lastname = $request->input('lastname');
         $email = $request->input('email');
-        $password = $request->input('password');
-        $password1 = $request->input('password1');
         $access = UsersProvider::ACCESS_ORGANIZATION;
         $status = UsersProvider::STATUS_ACTIVE;
-
-
-
 
 
         InputValidator::init([
             "uniqueField" => function (InputValidator $validator, string $field, string $message) {
                 if ($validator->getValue() == '') {
                     return null;
-                    // die();
                 }
                 if (UsersModel::findby($field, $validator->getValue())) {
 
@@ -57,11 +50,12 @@ class OrganizationController extends Controller
 
         ]);
 
+
         $username->validate('required')->uniqueField('username', 'Username has already been registered');
         $lastname->validate('required');
         $firstname->validate('required');
         $email->validate('required')->uniqueField('email', 'Email has already been registered');
-        $password->validate('required')->equals($password1, "Password does not match");
+
 
         if (!InputValidator::isValid()) {
             $errors = InputValidator::getErrors();
@@ -69,22 +63,11 @@ class OrganizationController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
-        $message = "Thank you for applying to for this Application.
-                    Username: $username 
-                    Email: $email 
-                    Password: $password  
-                    goto http://fmcdufma.demisho.com.ng/sign_in to login
-                    and make sure you change your password immediately";
+
+        $password = generate_token(4);
 
 
-        $msgerror = $mail = SendMailController::send(
-            $email,
-            $message
-        );
-
-
-
-        UsersModel::createEntry([
+        $id = UsersModel::createEntry([
             'userid' => $user->id(),
             'username' => $username,
             'firstname' => $firstname,
@@ -95,12 +78,17 @@ class OrganizationController extends Controller
             'status' => $status
         ]);
 
-        $msg = 'You have successfully loggedd in';
+        $user = UsersModel::findByPrimaryKey($id);
 
-        if ($msgerror) {
+        $context = array(
+            'user' => $user,
+            'password' => $password
+        );
+        $message = view('dashboard.emails.account-details', $context, false, true);
+        mailer($email, 'Login Details', $message);
 
-            $msg = $msgerror;
-        }
+        $msg = 'Registered a new user';
+
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
     }

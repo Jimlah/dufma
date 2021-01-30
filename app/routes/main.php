@@ -50,3 +50,4 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
 });
 
+$router->any('/email', '@dashboard.emails.account-details');

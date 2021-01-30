@@ -55,6 +55,18 @@ class UsersProvider
         return concat($this->firstname(), ' ', $this->lastname());
     }
 
+     /**
+     * Send email to this user
+     *
+     * @param string $subject
+     * @param string $message
+     * @return boolean
+     */
+    public function sendEmail(string $subject, string $message): bool
+    {
+        return mailer($this->email(), $subject, $message);
+    }
+
     /**
     * Model mapper
     *
