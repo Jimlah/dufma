@@ -7,8 +7,6 @@ use App\Core\Http\Response;
 use App\Core\Http\Request;
 use App\Core\Http\Controller;
 use App\Core\Tools\Auth;
-use App\Core\Interfaces\InputInterface;
-use App\Core\Misc\InputValidator;
 use App\Models\UsersModel;
 use App\Providers\UsersProvider;
 
@@ -67,4 +65,34 @@ class LoginController extends Controller
         
     }
 
+    public function recover(Request $request, Response $response)
+    {
+        $email = $request->input('email');
+
+        $user = UsersModel::findBy('email', $email);
+
+        if(!$user){
+            $msg = "Account not found";
+            return $response->withSession('msg', [$msg, 'error'])->redirect($request->url()->getPath());
+        }
+
+        $password = generate_token(4);
+
+        UsersModel::findByPrimaryKeyAndUpdate($user->id, [
+            'password' => password_hash($password, PASSWORD_DEFAULT)
+        ]);
+
+        $context = array(
+            'user' => $user,
+            'password' => $password
+        );
+
+        $message = view('dashboard.emails.password-recovery', $context, false, true);
+        mailer($email, 'Password Recovery', $message);
+
+        $msg = 'Check your email to see your recovery password';
+
+
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
 }

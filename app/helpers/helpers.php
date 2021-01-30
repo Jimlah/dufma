@@ -17,7 +17,7 @@ function dnd($data, $d = true)
     echo '<pre>';
     var_dump($data);
     echo '</pre>';
-    if($d) die();
+    if ($d) die();
 }
 
 
@@ -62,10 +62,15 @@ function get_alert(): ?string
 
     $par = '';
     if ($type == 'error') {
-        foreach ($message as $key) {
-            $par .= h('div', ['class' => $classlist], [$btn, $key[0]]);
+        if (is_array($message)) {
+            foreach ($message as $key) {
+                $par .= h('div', ['class' => $classlist], [$btn, $key[0]]);
+            }
+            echo $par;
+            return '';
         }
-        echo $par;
+        $parent = h('div', ['class' => $classlist], [$btn, $message]);
+        echo $parent;
         return '';
     }
 

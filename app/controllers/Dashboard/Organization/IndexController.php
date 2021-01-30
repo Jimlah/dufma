@@ -125,17 +125,6 @@ class IndexController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($referer_uri, [], true);
         }
 
-        $message = "You have successfully Updated your profile. If it was not done by you pls contact the admin immediately.
-                    goto http://fmcdufma.demisho.com.ng/sign_in to login
-                    and make sure you change your password immediately";
-
-
-        $msgerror = $mail = SendMailController::send(
-            $email,
-            $message
-        );
-
-
 
         UsersModel::findByPrimaryKeyAndUpdate($user->id(), [
             'firstname' => $firstname,
@@ -143,12 +132,17 @@ class IndexController extends Controller
             'password' => password_hash($password, PASSWORD_DEFAULT)
         ]);
 
+        $context = array(
+            'user' => $user,
+        );
+
+
+        $message = view('dashboard.emails.alert', $context, false, true);
+        mailer($email, 'Profile change notification', $message);
+
         $msg = 'You have successfully changed your password';
 
-        if ($msgerror) {
 
-            $msg = $msgerror;
-        }
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($referer_uri, [], true);
     }

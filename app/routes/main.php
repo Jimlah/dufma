@@ -25,6 +25,8 @@ $router->group()->namespace('Auth')->use('checkAuth')->register(function (Router
 
 
     $router->get('/smart-farming', '@landing.smartFarming');
+
+    $router->post('/password-recovery', 'LoginController.recover');
 });
 
 
@@ -50,4 +52,5 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
 });
 
-$router->any('/email', '@dashboard.emails.account-details');
+$router->get('/password-recovery', '@landing.forget_password');
+
