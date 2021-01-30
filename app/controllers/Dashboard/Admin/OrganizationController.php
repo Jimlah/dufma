@@ -87,7 +87,7 @@ class OrganizationController extends Controller
         $message = view('dashboard.emails.account-details', $context, false, true);
         mailer($email, 'Login Details', $message);
 
-        $msg = 'Registered a new user';
+        $msg = 'You have successfully registered a new user';
 
 
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
