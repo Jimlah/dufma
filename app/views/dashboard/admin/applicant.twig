@@ -1,0 +1,128 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %} Gallery {% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div
+						class="page-title-box">
+						<h4 class="page-title">ERP Appllicants</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="btn btn-success mb-2 mr-1">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+										<button type="button" class="btn btn-light mb-2">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>Email</th>
+											<th>Phone</th>
+											<th>Message</th>
+											<th>Date</th>
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+										{% for item in appllicants %}
+											<tr>
+												<td>{{item.email}}</td>
+												<th>{{item.phone}}</th>
+												<td>{{item.message}}</td>
+												<td>{{item.created_at | date('d M Y')}}</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}
+	<!-- init js -->
+	<!-- end demo js-->
+{% endblock %}

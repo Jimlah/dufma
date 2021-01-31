@@ -20,6 +20,9 @@ $router->group('/dashboard/admin')->namespace('Dashboard\Admin')->use(['auth', '
     // Gallery
     $router->get('/gallery', 'GalleryController.display');
     $router->post('/gallery', 'GalleryController.addGallery');
+    
+    $router->any('/erp', 'AppllicantController.erp');
+
 
    
 });

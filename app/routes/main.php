@@ -54,5 +54,4 @@ $router->group('/dashboard')->namespace('Dashboard')->use('auth')->register(func
 
 });
 
-$router->get('/password-recovery', '@landing.forget_password');
 
