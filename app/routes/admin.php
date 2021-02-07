@@ -8,8 +8,11 @@ $router->group('/dashboard/admin')->namespace('Dashboard\Admin')->use(['auth', '
     
     
     $router->get('/', 'IndexController.display');
+
+    $router->get('/pricing', 'PriceController.price');
+    $router->post('/pricing', 'PriceController.priceAction');
+
     
-    // dnd($router);
     // organization
     $router->get('/organization', 'OrganizationController.display');
     $router->post('/organization', 'OrganizationController.registerOrg');
