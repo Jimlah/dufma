@@ -16,6 +16,7 @@ $router->group('/dashboard/admin')->namespace('Dashboard\Admin')->use(['auth', '
     // organization
     $router->get('/organization', 'OrganizationController.display');
     $router->post('/organization', 'OrganizationController.registerOrg');
+    $router->get('/organization/{id}/disable/{status}', 'OrganizationController.disable');
 
     // Investor
     $router->get('/investor', 'InvestorController.display');

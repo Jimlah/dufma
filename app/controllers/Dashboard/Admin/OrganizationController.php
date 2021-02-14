@@ -88,8 +88,27 @@ class OrganizationController extends Controller
         mailer($email, 'Login Details', $message);
 
         $msg = 'You have successfully registered a new user';
-
-
         return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function disable(Request $request, Response $response)
+    {
+        $id = $request->id;
+        $status = $request->status;
+
+        UsersModel::findByPrimaryKeyAndUpdate($id, [
+            'status' => !$status
+        ]);
+
+        $employees = UsersModel::findAllBy('userid', $id);
+
+        foreach ($employees as $employee) {
+            UsersModel::findByPrimaryKeyAndUpdate($employee->id, [
+                'status' => !$status
+            ]);
+        }
+
+        $msg = 'You have successfully changed the user';
+        return $response->withSession('msg', [$msg, 'alert'])-redirect('/dashboard/admin/organization');
     }
 }

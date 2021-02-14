@@ -19,8 +19,16 @@ class Authentication implements MiddlewareInterface
     {   
         $user = Auth::user();
         if(!$user){
-            return redirect('/login');
+            Auth::logout();
+            return redirect('/sign_in');
         }
+
+        if(!$user->status()){
+            Auth::logout();
+            $msg = 'You have been disabled contact the customer care for more info';
+            return response()->withSession('msg', $msg)->redirect('/sign_in');
+        }
+
         $request->setCustomMethod('user', fn() => $user);
 
         return $request;

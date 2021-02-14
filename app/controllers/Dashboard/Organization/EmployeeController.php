@@ -124,18 +124,31 @@ class EmployeeController extends Controller
         return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
     }
 
-    public function deleteEmpl(Request $request, Response $response)
+    // public function deleteEmpl(Request $request, Response $response)
+    // {
+    //     $id = $request->input('id');
+    //     UsersModel::findByPrimaryKeyAndRemove($id);
+
+    //     $url = explode('/', $request->url()->getPath());
+    //     array_pop($url);
+    //     $url = implode('/', $url);
+
+    //     $msg = "You have successfully deleted";
+
+    //     return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+    // }
+
+    public function disable(Request $request, Response $response)
     {
-        $id = $request->input('id');
-        UsersModel::findByPrimaryKeyAndRemove($id);
+        $id = $request->id;
+        $status = $request->status;
 
-        $url = explode('/', $request->url()->getPath());
-        array_pop($url);
-        $url = implode('/', $url);
+        UsersModel::findByPrimaryKeyAndUpdate($id, [
+            'status' => !$status
+        ]);
 
-        $msg = "You have successfully deleted";
-
-        return $response->withSession('msg', [$msg, 'alert'])->redirect($url);
+        $msg = 'You have successfully changed the user';
+        return $response->withSession('msg', [$msg, 'alert'])-redirect('/dashboard/organization/employee');
     }
 
     public function displayWorker(Request $request, Response $response)

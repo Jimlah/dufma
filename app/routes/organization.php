@@ -186,8 +186,8 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // Employee => Users Table
     $router->get('/employee', 'EmployeeController.employee');
     $router->post('/employee', 'EmployeeController.registerEmp');
-    $router->post('/employee/edit', 'EmployeeController.edit');
-    $router->post('/employee/delete', 'EmployeeController.deleteEmp');
+    $router->post('/employee/edit', 'EmployeeController.edit');  
+    $router->get('/employee/{id}/disable/{status}', 'EmployeeController.disable');
 
 
 
