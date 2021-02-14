@@ -19,4 +19,14 @@ class AppllicantController extends Controller
         ]);
 
     }
+
+    public function smartFarming(Request $request, Response $response)
+    {   
+        $appllicants =  DemoModel::findAllBy('demo_type', DemoProvider::SMART_FARMING);
+
+        $response->view('/dashboard/admin/applicant',[
+            'appllicants' => $appllicants
+        ]);
+
+    }
 }

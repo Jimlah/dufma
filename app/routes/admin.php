@@ -20,6 +20,9 @@ $router->group('/dashboard/admin')->namespace('Dashboard\Admin')->use(['auth', '
     // Investor
     $router->get('/investor', 'InvestorController.display');
 
+    $router->get('/erp', 'AppllicantController.erp');
+    $router->get('/smartFarming', 'AppllicantController.smartFarming');
+
     // Gallery
     $router->get('/gallery', 'GalleryController.display');
     $router->post('/gallery', 'GalleryController.addGallery');
