@@ -263,4 +263,34 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     // security
     $router->get('/security', 'ExpLogController.security');
     $router->post('/security', 'ExpLogController.addExpLog');
+
+
+
+    // Risk management 
+
+    // Pest and diseases Glossary
+    // Pest
+    $router->get('/pests-glossary', 'PestGlossaryController.index');
+    $router->post('/pests-glossary', 'PestGlossaryController.store');
+    $router->post('/pests-glossary/{id}', 'PestGlossaryController.update');
+    $router->post('/pests-glossary/{id}/delete', 'PestGlossaryController.destroy');
+
+    // Disease
+    $router->get('/diseases-glossary', 'DiseaseGlossaryController.index');
+    $router->post('/diseases-glossary', 'DiseaseGlossaryController.store');
+    $router->post('/diseases-glossary/{id}', 'DiseaseGlossaryController.update');
+    $router->post('/diseases-glossary/{id}/delete', 'DiseaseGlossaryController.destroy');
+
+    // Pest and diseases
+    // Pest
+    $router->get('/pests', 'PestController.index');
+    $router->post('/pests', 'PestController.store');
+    $router->post('/pests/{id}', 'PestController.update');
+    $router->post('/pests/{id}/delete', 'PestController.destroy');
+
+    // Disease
+    $router->get('/diseases', 'DiseaseController.index');
+    $router->post('/diseases', 'DiseaseController.store');
+    $router->post('/diseases/{id}', 'DiseaseController.update');
+    $router->post('/diseases/{id}/delete', 'DiseaseController.destroy');
 });
