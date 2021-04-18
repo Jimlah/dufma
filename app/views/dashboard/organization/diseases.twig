@@ -1,0 +1,307 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Farm Diseases
+{% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Farm Diseases</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="mb-2 row">
+								<div class="col-sm-4">
+									<a href="javascript:void(0);" class="mb-2 btn btn-danger" data-toggle="modal" data-target="#standard-modal">
+										<i class="mr-2 mdi mdi-plus-circle"></i>
+										Add Disease</a>
+									<!-- Standard modal -->
+									<div id="standard-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+										<div class="modal-dialog">
+											<div class="modal-content">
+												<div class="modal-header">
+													<h4 class="modal-title" id="standard-modalLabel">Add Disease</h4>
+													<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+												</div>
+												<div class="modal-body">
+													<form action="" method="post">
+														<div class="form-group">
+															<label for="date_detected">Date Detected</label>
+															<input type="date" id="date_detected" class="form-control" name="date_detected">
+														</div>
+														<div class="form-group">
+															<label for="time_detected">Time Detected</label>
+															<input type="time" id="name" class="form-control" name="time_detected">
+														</div>
+														<div class="form-group">
+															<label for="name">Common Name</label>
+															<input type="text" id="name" class="form-control" name="name">
+														</div>
+														<div class="form-group">
+															<label for="sci_name">Scientific Name</label>
+															<input type="text" id="sci_name" class="form-control" name="sci_name">
+														</div>
+
+														<div class="form-group">
+															<label for="description">Description</label>
+															<input type="text" id="description" class="form-control" name="description">
+														</div>
+
+														<div class="form-group">
+															<label for="detected_by">Detected By</label>
+															<input type="text" id="detected_by" name="detected_by" class="form-control">
+														</div>
+														<div class="form-group">
+															<label for="steps">Steps</label>
+															<input type="text" id="steps" name="steps" class="form-control">
+														</div>
+														<div class="form-group">
+															<label for="week1">Week 1</label>
+															<input type="text" id="week1" name="week1" class="form-control">
+														</div>
+														<div class="form-group">
+															<label for="week2">Week 2</label>
+															<input type="text" id="week2" name="week2" class="form-control">
+														</div>
+														<div class="form-group">
+															<label for="week3">Week 3</label>
+															<input type="text" id="week3" name="week3" class="form-control">
+														</div>
+														<div class="form-group">
+															<label for="remark">Remark</label>
+															<input type="text" id="remark" name="remark" class="form-control">
+														</div>
+														<button type="submit" class="btn btn-primary btn-block">Submit</button>
+													</form>
+												</div>
+												<div class="modal-footer">
+													<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+													<button type="button" class="btn btn-primary">Save changes</button>
+												</div>
+											</div>
+											<!-- /.modal-content -->
+										</div>
+										<!-- /.modal-dialog -->
+									</div>
+									<!-- /.modal -->
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="mb-2 mr-1 btn btn-success">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="mb-2 mr-1 btn btn-light">Import</button>
+										<button type="button" class="mb-2 btn btn-light">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>Date Detected</th>
+											<th>Time Detected</th>
+											<th>Common Name</th>
+											<th>Scientific Name</th>
+											<th>Description</th>
+											<th>Detected By</th>
+											<th>Steps</th>
+											<th>Week1</th>
+											<th>Week2</th>
+											<th>Week3</th>
+											<th>Remark</th>
+											<th>Date</th>
+											<th>Action</th>
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+										{% for item in diseases %}
+											<tr>
+												<td>{{item.date_detected | date('d M Y')}}</td>
+												<td>{{item.time_detected | date('H:i:s')}}</td>
+												<td>{{item.name}}</td>
+												<td>{{item.sci_name}}</td>
+												<td>{{item.description}}</td>
+												<td>{{item.detected_by}}</td>
+												<td>{{item.steps}}</td>
+												<td>{{item.week1}}</td>
+												<td>{{item.week2}}</td>
+												<td>{{item.week3}}</td>
+												<td>{{item.remark}}</td>
+												<td>{{item.created_at | date('d M Y')}}</td>
+												<td>
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#edit{{item.id}}">
+														<i class="mdi mdi-square-edit-outline"></i>
+													</a>
+
+													<a href="javascript:void(0);" class="action-icon" data-toggle="modal" data-target="#delete{{item.id}}">
+														<i class="mdi mdi-delete"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		{% for item in diseases %}
+			<!-- edit modal -->
+			<div id="edit{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Edit Disease</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/diseases/'~item.id)}}" method="post">
+								<div class="form-group">
+									<label for="date_detected">Date Detected</label>
+									<input type="date" id="date_detected" class="form-control" name="date_detected" value="{{item.date_detected}}">
+								</div>
+								<div class="form-group">
+									<label for="time_detected">Common Name</label>
+									<input type="time" id="name" class="form-control" name="time_detected" value="{{item.time_detected}}">
+								</div>
+								<div class="form-group">
+									<label for="name">Common Name</label>
+									<input type="text" id="name" class="form-control" name="name" value="{{item.name}}">
+								</div>
+								<div class="form-group">
+									<label for="sci_name">Scientific Name</label>
+									<input type="text" id="sci_name" class="form-control" name="sci_name" value="{{item.sci_name}}">
+								</div>
+								<div class="form-group">
+									<label for="description">Description</label>
+									<input type="text" id="description" class="form-control" name="description" value="{{item.description}}">
+								</div>
+
+								<div class="form-group">
+									<label for="detected_by">Detected By</label>
+									<input type="text" id="detected_by" name="detected_by" class="form-control" value="{{item.detected_by}}">
+								</div>
+								<div class="form-group">
+									<label for="steps">Steps</label>
+									<input type="text" id="steps" name="steps" class="form-control" value="{{item.steps}}">
+								</div>
+								<div class="form-group">
+									<label for="week1">Week 1</label>
+									<input type="text" id="week1" name="week1" class="form-control" value="{{item.week1}}">
+								</div>
+								<div class="form-group">
+									<label for="week2">Week 2</label>
+									<input type="text" id="week2" name="week2" class="form-control" value="{{item.week2}}">
+								</div>
+								<div class="form-group">
+									<label for="week3">Week 3</label>
+									<input type="text" id="week3" name="week3" class="form-control" value="{{item.week3}}">
+								</div>
+								<div class="form-group">
+									<label for="remark">Remark</label>
+									<input type="text" id="remark" name="remark" class="form-control" value="{{item.remark}}">
+								</div>
+								<button type="submit" class="btn btn-primary btn-block">Submit</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+			<!-- Delete Modal -->
+			<div id="delete{{item.id}}" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="standard-modalLabel" aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content">
+						<div class="modal-header">
+							<h4 class="modal-title" id="standard-modalLabel">Edit Diseases</h4>
+							<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						</div>
+						<div class="modal-body">
+							<form action="{{url('/dashboard/organization/diseases/'~item.id~'/delete')}}" method="post">
+
+								<div class="form-group">
+									<p>Are you sure you want to delete?
+									</p>
+								</div>
+								<button type="submit" class="btn btn-primary btn-block" data-dismiss="modal">No</button>
+								<button type="submit" class="btn btn-danger btn-block" name="id" value="{{item.id}}">yes</button>
+							</form>
+						</div>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-light" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Save changes</button>
+						</div>
+					</div>
+					<!-- /.modal-content -->
+				</div>
+				<!-- /.modal-dialog -->
+			</div>
+			<!-- /.modal -->
+
+		{% endfor %}
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer><!-- end Footer --></div><!-- content-page -->{% endblock %}
+{% block js %}<!-- third party js -->{{jscript('vendor/jquery.dataTables.min')}}{{jscript('vendor/dataTables.bootstrap4')}}{{jscript('vendor/dataTables.responsive.min')}}{{jscript('vendor/responsive.bootstrap4.min')}}{{jscript('vendor/dataTables.buttons.min')}}{{jscript('vendor/buttons.bootstrap4.min')}}{{jscript('vendor/buttons.html5.min')}}{{jscript('vendor/buttons.flash.min')}}{{jscript('vendor/buttons.print.min')}}{{jscript('vendor/dataTables.keyTable.min')}}{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}
