@@ -293,4 +293,22 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/diseases', 'DiseaseController.store');
     $router->post('/diseases/{id}', 'DiseaseController.update');
     $router->post('/diseases/{id}/delete', 'DiseaseController.destroy');
+
+    // Insurance
+    $router->get('/biodata-insurance', 'InsuranceController.index');
+    $router->post('/biodata-insurance', 'InsuranceController.store');
+    $router->post('/biodata-insurance/{id}', 'InsuranceController.update');
+    $router->post('/biodata-insurance/{id}/delete', 'InsuranceController.destroy');
+
+    // Insurance
+    $router->get('/product-insurance', 'InsuranceController.index');
+    $router->post('/product-insurance', 'InsuranceController.store');
+    $router->post('/product-insurance/{id}', 'InsuranceController.update');
+    $router->post('/product-insurance/{id}/delete', 'InsuranceController.destroy');
+
+    // Insurance
+    $router->get('/service-insurance', 'InsuranceController.index');
+    $router->post('/service-insurance', 'InsuranceController.store');
+    $router->post('/service-insurance/{id}', 'InsuranceController.update');
+    $router->post('/service-insurance/{id}/delete', 'InsuranceController.destroy');
 });
