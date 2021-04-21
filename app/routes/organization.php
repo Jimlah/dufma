@@ -181,6 +181,11 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/facilitymonth', 'ReportController.addReport');
 
 
+    // Mapping and tagging
+    $router->get('/map', 'MapController.index');
+    $router->post('/map', 'MapController.store');
+    $router->post('/map/{id}', 'MapController.update');
+    $router->post('/map/{id}/destroy', 'MapController.destroy');
 
 
     // Employee => Users Table
@@ -265,7 +270,6 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/security', 'ExpLogController.addExpLog');
 
 
-
     // Risk management 
 
     // Pest and diseases Glossary
@@ -300,14 +304,14 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/biodata-insurance/{id}', 'InsuranceController.update');
     $router->post('/biodata-insurance/{id}/delete', 'InsuranceController.destroy');
 
-    // Insurance
-    $router->get('/product-insurance', 'InsuranceController.index');
+    // Product Insurancee
+    $router->get('/product-insurance', 'InsuranceController.product');
     $router->post('/product-insurance', 'InsuranceController.store');
     $router->post('/product-insurance/{id}', 'InsuranceController.update');
     $router->post('/product-insurance/{id}/delete', 'InsuranceController.destroy');
 
-    // Insurance
-    $router->get('/service-insurance', 'InsuranceController.index');
+    // Service Insurance
+    $router->get('/service-insurance', 'InsuranceController.service');
     $router->post('/service-insurance', 'InsuranceController.store');
     $router->post('/service-insurance/{id}', 'InsuranceController.update');
     $router->post('/service-insurance/{id}/delete', 'InsuranceController.destroy');

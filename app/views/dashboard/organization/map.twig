@@ -1,0 +1,160 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Map
+{% endblock %}
+
+{% block style %}
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Mapping</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+
+			<!-- end row -->
+			<!-- start page title -->
+				<div class="row"> <div class="col-12">
+					<div class="page-title-box">
+						<div class="page-title-right">
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">Hyper</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">Maps</a>
+								</li>
+								<li class="breadcrumb-item active">Google Maps</li>
+							</ol>
+						</div>
+						<h4 class="page-title">Google Maps</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			<div
+				class="row">
+				<!-- end col-->
+				<div class="col-xl-6">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="header-title mb-3">Markers Google Map</h4>
+							<div id='map' style='width: 100%; height: 300px;'></div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+
+					<button type="button" class="btn btn-success fade" id="map-btn" data-toggle="modal" data-target="#bs-example-modal-sm">Small Modal</button>
+					<div class="modal fade" id="bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+						<div class="modal-dialog modal-sm">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h4 class="modal-title" id="mySmallModalLabel">Small modal</h4>
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+								</div>
+								<div class="modal-body">
+									<form action="" method="post">
+										<div class="form-group">
+											<label for="asset" class="col-form-label">Asset</label>
+											<select id="asset" class="form-control" name="asset">
+												<option disabled>Choose</option>
+												{% for item in assets %}
+													<option value="{{item.id}}">{{item.name}} - {{item.category}}</option>
+												{% endfor %}
+											</select>
+										</div>
+										<div class="form-group">
+											<label for="longitude">longitude</label>
+											<input type="text" id="longitude" class="form-control" name="longitude" readonly>
+										</div>
+										<div class="form-group">
+											<label for="latitude">latitude</label>
+											<input type="text" id="latitude" class="form-control" name="latitude" readonly>
+										</div>
+										<button type="submit" class="btn btn-primary">Submit</button>
+									</form>
+								</div>
+							</div>
+							<!-- /.modal-content -->
+						</div>
+						<!-- /.modal-dialog -->
+					</div>
+					<!-- /.modal -->
+				</div>
+				<!-- end col-->
+			</div>
+			<!-- end row-->
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor.min')}}
+	{{jscript('app.min')}}
+	<script>
+		mapboxgl.accessToken = 'pk.eyJ1IjoiamltbGFoIiwiYSI6ImNrbnJhNWhuczBtc2UybnF3eWN0YjV2NmMifQ.tpXIfQoIYQqQDAjB2Y_c6w';
+		var map = new mapboxgl.Map({container: 'map', style: 'mapbox://styles/mapbox/streets-v11'});
+		map.on('click', function (e) {
+			var btn = document.getElementById('map-btn');
+			btn.click();
+			var long = document.getElementById('longitude');
+			var lat = document.getElementById('latitude');
+			long.value = e.lngLat.lng
+			lat.value = e.lngLat.lat
+		})
+
+		{% for item in display_assets %}
+			var pop = new mapboxgl.Popup().setHTML('<p>{{item.name}} <br /> {{item.description}}</p>')
+
+			var marker = new mapboxgl.Marker()
+			.setLngLat([{{item.longitude}}, {{item.latitude}}])
+			.setPopup(pop)
+			.addTo(map); 
+
+			marker.togglePopup();
+		{% endfor %}
+
+	</script>
+
+{% endblock %}

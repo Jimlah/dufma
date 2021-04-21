@@ -6,6 +6,9 @@ class InsuranceProvider
 {
     private $_model;
 
+    const PRODUCT_CATEGORY = 1;
+    const SERVICE_CATEGORY = 0;
+
     /**
      * InsuranceProvider constructor
      *
