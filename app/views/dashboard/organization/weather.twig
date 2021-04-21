@@ -1,0 +1,161 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Weather
+{% endblock %}
+
+{% block style %}
+	<script src='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.js'></script>
+	<link href='https://api.mapbox.com/mapbox-gl-js/v2.1.1/mapbox-gl.css' rel='stylesheet'/>
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Weather</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+
+			<!-- end row -->
+			<!-- start page title -->
+				<div class="row"> <div class="col-12">
+					<div class="page-title-box">
+						<div class="page-title-right">
+							<ol class="breadcrumb m-0">
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">Hyper</a>
+								</li>
+								<li class="breadcrumb-item">
+									<a href="javascript: void(0);">weather</a>
+								</li>
+								<li class="breadcrumb-item active">Weather</li>
+							</ol>
+						</div>
+						<h4 class="page-title">Weather</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+
+			<div class="row">
+
+
+				<div class="col-md-6 col-xl-3">
+					<div class="card">
+						<div class="card-body">
+							<div class="row align-items-center">
+								<div class="col-6">
+									<h5 class="text-muted font-weight-normal mt-0 text-truncate" title="Booked Revenue">Current</h5>
+									<h3 class="my-2 py-1">{{weather.current.weather[0].main}}</h3>
+									<p class="mb-0 text-muted">
+										<span class="text-success mr-2">{{weather.current.weather[0].description}}</span>
+									</p>
+								</div>
+								<div class="col-6">
+									<div class="text-right">
+										<div>
+											<img src="http://openweathermap.org/img/wn/{{weather.current.weather[0].icon}}@2x.png"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- end row-->
+						</div>
+						<!-- end card-body -->
+					</div>
+					<!-- end card -->
+				</div>
+				<!-- end col -->
+
+
+			</div>
+
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Daily</h4>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				{% for item in weather.daily %}
+					<div class="col-md-6 col-xl-3">
+						<div class="card">
+							<div class="card-body">
+								<div class="row align-items-center">
+									<div class="col-6">
+										<h5 class="text-muted font-weight-normal mt-0 text-truncate" title="Booked Revenue">{{item.dt | date('M d Y')}}</h5>
+										<h3 class="my-2 py-1">{{item.weather[0].main}}</h3>
+										<p class="mb-0 text-muted">
+											<span class="text-success mr-2">{{item.weather[0].description}}</span>
+										</p>
+									</div>
+									<div class="col-6">
+										<div class="text-right">
+											<div>
+												<img src="http://openweathermap.org/img/wn/{{item.weather[0].icon}}@2x.png"/>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- end row-->
+							</div>
+							<!-- end card-body -->
+						</div>
+						<!-- end card -->
+					</div>
+					<!-- end col -->
+				{% endfor %}
+
+
+			</div>
+
+
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor.min')}}
+	{{jscript('app.min')}}
+	{{jscript('pages/demo.widgets')}}
+
+{% endblock %}

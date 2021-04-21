@@ -204,6 +204,8 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/worker/delete', 'EmployeeController.delete');
 
 
+    // Weather
+    $router->get('/weather', 'WeatherController.index');
 
     // Expenditure Log
 
