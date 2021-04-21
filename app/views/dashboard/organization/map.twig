@@ -135,6 +135,7 @@
 	<script>
 		mapboxgl.accessToken = 'pk.eyJ1IjoiamltbGFoIiwiYSI6ImNrbnJhNWhuczBtc2UybnF3eWN0YjV2NmMifQ.tpXIfQoIYQqQDAjB2Y_c6w';
 		var map = new mapboxgl.Map({container: 'map', style: 'mapbox://styles/mapbox/streets-v11'});
+		var x = 0;
 		map.on('click', function (e) {
 			var btn = document.getElementById('map-btn');
 			btn.click();
@@ -143,6 +144,7 @@
 			long.value = e.lngLat.lng
 			lat.value = e.lngLat.lat
 		})
+
 
 		{% for item in display_assets %}
 			var pop = new mapboxgl.Popup().setHTML('<p>{{item.name}} <br /> {{item.description}}</p>')

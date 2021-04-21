@@ -20,6 +20,7 @@ class MapController extends Controller
         
         $display_assets = AssetModel::select()
             ->where('orgid', $user->id())
+            ->andWhere('longitude', "!=", '')
             ->fetchAll();
 
         return $response->view('dashboard.organization.map', [
