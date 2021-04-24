@@ -5,45 +5,182 @@ namespace App\Controllers\Dashboard\Organization;
 use App\Core\Http\Response;
 use App\Core\Http\Request;
 use App\Core\Http\Controller;
-use App\Migrations\Insurance;
+use App\Core\Misc\InputValidator;
 use App\Models\InsuranceModel;
 use App\Providers\InsuranceProvider;
 
 class InsuranceController extends Controller
 {
     public function index(Request $request, Response $response)
-    {   
+    {
         $user = $request->user();
         $insurance = InsuranceModel::findAllBy('orgid', $user->id());
 
-        return $response->view('dashboard.admin.insurance', [
+        return $response->view('dashboard.organization.insurance', [
             'insurance' => $insurance
         ]);
     }
 
-    public function product(Request $request, Response $response)
+    public function create(Request $request, Response $response)
     {
-        $user = $request->user();
-        $insurance = InsuranceModel::select()
-                                    ->where('orgid', $user->id())
-                                    ->and('category', InsuranceProvider::PRODUCT_CATEGORY)
-                                    ->fetchAll();
-
-        return $response->view('dashboard.admin.insurance', [
-            'insurance' => $insurance
+        $category = [
+            InsuranceProvider::PRODUCT_CATEGORY => 'Product',
+            InsuranceProvider::SERVICE_CATEGORY => 'Service'
+        ];
+        return $response->view('dashboard.organization.insurance-edit', [
+            'category' => $category
         ]);
     }
 
-    public function service(Request $request, Response $response)
+    public function store(Request $request, Response $response)
     {
         $user = $request->user();
-        $insurance = InsuranceModel::select()
-                                    ->where('orgid', $user->id())
-                                    ->and('category', InsuranceProvider::SERVICE_CATEGORY)
-                                    ->fetchAll();
+        list(
+            $name,
+            $insurance_parameter,
+            $quantity,
+            $content,
+            $start_date,
+            $end_date,
+            $expected_number_inspection,
+            $insurance_cost,
+            $insurance_terms,
+            $category,
+            $officer_name,
+            $company_name,
+            $purpose,
+            $total_cost,
+            $application_date,
+            $inspection_date,
+            $insurance_approval_date,
+            $insurance_state,
+            $insurance_branch,
+            $insurance_relationship_officer,
+            $duration
+        ) = $request->input('name, insurance_parameter, quantity, content, start_date, end_date, expected_number_inspection, insurance_cost, insurance_terms, category, officer_name, company_name, purpose, total_cost, application_date, inspection_date, insurance_approval_date, insurance_state, insurance_branch, insurance_relationship_officer, duration');
 
-        return $response->view('dashboard.admin.insurance', [
-            'insurance' => $insurance
+        InputValidator::init([]);
+
+        $name->validate('required');
+
+        if (!Inputvalidator::isValid()) {
+            $errors = InputValidator::getErrors();
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        InsuranceModel::createEntry([
+            'userid' => $user->id(),
+            'orgid' => $user->id(),
+            'name' => $name,
+            'insurance_parameter' => $insurance_parameter,
+            "quantity" => $quantity,
+            "content" => $content,
+            "start_date" => $start_date,
+            "end_date" => $end_date,
+            "expected_number_inspection" => $expected_number_inspection,
+            "insurance_cost" => $insurance_cost,
+            "insurance_terms" => $insurance_terms,
+            "category" => $category,
+            "officer_name" => $officer_name,
+            "company_name" => $company_name,
+            "purpose" => $purpose,
+            "total_cost" => $total_cost,
+            "application_date" => $application_date,
+            "inspection_date" => $inspection_date,
+            "insurance_approval_date" => $insurance_approval_date,
+            "insurance_state" => $insurance_state,
+            "insurance_branch" => $insurance_branch,
+            "insurance_relationship_officer" => $insurance_relationship_officer,
+            "duration" => $duration
         ]);
+
+        $msg = "Insurance uploaded successfully";
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function edit(Request $request, Response $response)
+    {
+        $id = $request->id;
+        $insurance = InsuranceModel::findByPrimaryKey($id);
+        $category = [
+            InsuranceProvider::PRODUCT_CATEGORY => 'Product',
+            InsuranceProvider::SERVICE_CATEGORY => 'Service'
+        ];
+        return $response->view('dashboard.organization.insurance-edit', [
+            "insurance" => $insurance,
+            "category" => $category
+        ]);
+    }
+
+    public function update(Request $request, Response $response)
+    {
+        $id = $request->id;
+        list(
+            $name,
+            $insurance_parameter,
+            $quantity,
+            $content,
+            $start_date,
+            $end_date,
+            $expected_number_inspection,
+            $insurance_cost,
+            $insurance_terms,
+            $category,
+            $officer_name,
+            $company_name,
+            $purpose,
+            $total_cost,
+            $application_date,
+            $inspection_date,
+            $insurance_approval_date,
+            $insurance_state,
+            $insurance_branch,
+            $insurance_relationship_officer,
+            $duration
+        ) = $request->input('name, insurance_parameter, quantity, content, start_date, end_date, expected_number_inspection, insurance_cost, insurance_terms, category, officer_name, company_name, purpose, total_cost, application_date, inspection_date, insurance_approval_date, insurance_state, insurance_branch, insurance_relationship_officer, duration');
+
+        InputValidator::init([]);
+
+        $name->validate('required');
+
+        if (!Inputvalidator::isValid()) {
+            $errors = InputValidator::getListedErrors();
+            return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
+        }
+
+        InsuranceModel::update($id, [
+            'name' => $name,
+            'insurance_parameter' => $insurance_parameter,
+            "quantity" => $quantity,
+            "content" => $content,
+            "start_date" => $start_date,
+            "end_date" => $end_date,
+            "expected_number_inspection" => $expected_number_inspection,
+            "insurance_cost" => $insurance_cost,
+            "insurance_terms" => $insurance_terms,
+            "category" => $category,
+            "officer_name" => $officer_name,
+            "company_name" => $company_name,
+            "purpose" => $purpose,
+            "total_cost" => $total_cost,
+            "application_date" => $application_date,
+            "inspection_date" => $inspection_date,
+            "insurance_approval_date" => $insurance_approval_date,
+            "insurance_state" => $insurance_state,
+            "insurance_branch" => $insurance_branch,
+            "insurance_relationship_officer" => $insurance_relationship_officer,
+            "duration" => $duration
+        ]);
+
+        $msg = "Insurance uploaded successfully";
+        return $response->withSession('msg', [$msg, 'alert'])->redirect($request->url()->getPath());
+    }
+
+    public function destroy(Request $request, Response $response)
+    {
+        $id = $request->id();
+        InsuranceModel::findByPrimaryKeyAndRemove($id);
+
+        return $response->redirect('dashboard/organization/insurance');
     }
 }

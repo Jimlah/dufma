@@ -263,8 +263,8 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
 
 
     // insurance
-    $router->get('/insurance', 'ExpLogController.insurance');
-    $router->post('/insurance', 'ExpLogController.addExpLog');
+    // $router->get('/insurance', 'ExpLogController.insurance');
+    // $router->post('/insurance', 'ExpLogController.addExpLog');
 
 
     // security
@@ -301,20 +301,22 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->post('/diseases/{id}/delete', 'DiseaseController.destroy');
 
     // Insurance
-    $router->get('/biodata-insurance', 'InsuranceController.index');
-    $router->post('/biodata-insurance', 'InsuranceController.store');
-    $router->post('/biodata-insurance/{id}', 'InsuranceController.update');
-    $router->post('/biodata-insurance/{id}/delete', 'InsuranceController.destroy');
+    $router->get('/insurance', 'InsuranceController.index');
+    $router->get('/insurance/create', 'InsuranceController.create');
+    $router->post('/insurance/create', 'InsuranceController.store');
+    $router->get('/insurance/{id}/edit', 'InsuranceController.edit');
+    $router->post('/insurance/{id}/edit', 'InsuranceController.update');
+    $router->post('/insurance/{id}/delete', 'InsuranceController.destroy');
 
     // Product Insurancee
-    $router->get('/product-insurance', 'InsuranceController.product');
-    $router->post('/product-insurance', 'InsuranceController.store');
-    $router->post('/product-insurance/{id}', 'InsuranceController.update');
-    $router->post('/product-insurance/{id}/delete', 'InsuranceController.destroy');
+    // $router->get('/product-insurance', 'InsuranceController.product');
+    // $router->post('/product-insurance', 'InsuranceController.store');
+    // $router->post('/product-insurance/{id}', 'InsuranceController.update');
+    // $router->post('/product-insurance/{id}/delete', 'InsuranceController.destroy');
 
-    // Service Insurance
-    $router->get('/service-insurance', 'InsuranceController.service');
-    $router->post('/service-insurance', 'InsuranceController.store');
-    $router->post('/service-insurance/{id}', 'InsuranceController.update');
-    $router->post('/service-insurance/{id}/delete', 'InsuranceController.destroy');
+    // // Service Insurance
+    // $router->get('/service-insurance', 'InsuranceController.service');
+    // $router->post('/service-insurance', 'InsuranceController.store');
+    // $router->post('/service-insurance/{id}', 'InsuranceController.update');
+    // $router->post('/service-insurance/{id}/delete', 'InsuranceController.destroy');
 });

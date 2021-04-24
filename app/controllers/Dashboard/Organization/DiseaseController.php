@@ -5,13 +5,19 @@ namespace App\Controllers\Dashboard\Organization;
 use App\Core\Http\Request;
 use App\Core\Http\Response;
 use App\Core\Http\Controller;
-use App\Models\PestdiseaseModel;
 use App\Core\Misc\InputValidator;
 use App\Models\FarmpestdiseaseModel;
 use App\Providers\FarmpestdiseaseProvider;
 
 class DiseaseController extends Controller
-{
+{    
+    /**
+     * index
+     *
+     * @param  mixed $request
+     * @param  mixed $response
+     * @return void
+     */
     public function index(Request $request, Response $response)
     {
         $diseases = FarmpestdiseaseModel::findAllBy('type', FarmpestdiseaseProvider::DISEASE);
@@ -19,7 +25,14 @@ class DiseaseController extends Controller
             "diseases" => $diseases
         ]);
     }
-
+    
+    /**
+     * store
+     *
+     * @param  mixed $request
+     * @param  mixed $response
+     * @return void
+     */
     public function store(Request $request, Response $response)
     {
         $user = $request->user();
@@ -58,7 +71,7 @@ class DiseaseController extends Controller
 
         FarmpestdiseaseModel::createEntry([
             'userid' => $user->id(),
-            'orgid' => $user->userid(),
+            'orgid' => $user->id(),
             "date_detected" => $date_detected,
             "time_detected" => $time_detected,
             "name" => $name,
@@ -76,7 +89,14 @@ class DiseaseController extends Controller
         $message = "You have successfully added to the diseases Database";
         return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/organization/diseases');
     }
-
+    
+    /**
+     * update
+     *
+     * @param  mixed $request
+     * @param  mixed $response
+     * @return void
+     */
     public function update(Request $request, Response $response)
     {
         $id = $request->id;

@@ -6,7 +6,6 @@ use App\Core\Http\Request;
 use App\Models\AssetModel;
 use App\Core\Http\Response;
 use App\Core\Http\Controller;
-use App\Providers\AssetProvider;
 
 class MapController extends Controller
 {
@@ -31,7 +30,6 @@ class MapController extends Controller
 
     public function store(Request $request, Response $response)
     {   
-        $user = $request->user();
         list(
             $asset_id,
             $longitude,

@@ -57,7 +57,7 @@ class PestController extends Controller
 
         FarmpestdiseaseModel::createEntry([
             'userid' => $user->id(),
-            'orgid' => $user->userid(),
+            'orgid' => $user->id(),
             "date_detected" => $date_detected,
             "time_detected" => $time_detected,
             "name" => $name,

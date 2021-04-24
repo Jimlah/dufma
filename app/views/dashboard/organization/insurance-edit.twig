@@ -1,0 +1,186 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Insurance
+{% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Insurance</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<form action="" method="POST">
+								<div class="row">
+									<div class="col-lg-6 form-group mb-3">
+										<label for="category">Category</label>
+										<select id="category" class="form-control" name="name">
+											<option disabled>Select Option</option>
+											{% for key, value in category %}
+												<option value="{{key}}" {{key == insurance.category ? "SELECTED" : ''}}>{{value}}</option>
+											{% endfor %}
+										</select>
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="name">Name</label>
+										<input type="text" id="name" class="form-control" name="name" value="{{insurance.quantity ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="quantity">Quantity</label>
+										<input type="number" id="quantity" class="form-control" name="quantity" value="{{insurance.quantity ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_parameter">Insurance Parameter</label>
+										<input type="text" id="insurance_parameter" class="form-control" name="insurance_parameter" value="{{insurance.insurance_parameter ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="content">Content</label>
+										<input type="text" id="content" class="form-control" name="content" value="{{insurance.content ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="start_date">Start Date</label>
+										<input type="text" id="start_date" class="form-control" name="start_date" value="{{insurance.start_date ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="end_date">End Date</label>
+										<input type="text" id="end_date" class="form-control" name="end_date" value="{{insurance.end_date ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="expected_number_inspection">Expected_Number Inspection</label>
+										<input type="text" id="expected_number_inspection" class="form-control" name="expected_number_inspection" value="{{insurance.expected_number_inspection ?? ''}}">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_cost">Insurance Cost</label>
+										<input type="text" id="insurance_cost" class="form-control" name="insurance_cost">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_terms">insurance_terms</label>
+										<input type="text" id="insurance_terms" class="form-control" name="insurance_terms">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="officer_name">Officer Name</label>
+										<input type="text" id="officer_name" class="form-control" name="officer_name">
+									</div>
+
+									<div class="col-lg-6 form-group mb-3">
+										<label for="company_name">company_name</label>
+										<input type="text" id="company_name" class="form-control" name="company_name">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="purpose">purpose</label>
+										<input type="text" id="purpose" class="form-control" name="purpose">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="total_cost">Total Cost</label>
+										<input type="text" id="total_cost" class="form-control" name="total_cost">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="application_date">Application Date</label>
+										<input type="date" id="application_date" class="form-control" name="application_date">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="inspection_date">Inspection Date</label>
+										<input type="date" id="inspection_date" class="form-control" name="inspection_date">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_approval_date">Insurance Approval Date</label>
+										<input type="text" id="insurance_approval_date" class="form-control" name="insurance_approval_date">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="total_cost">Insurance State</label>
+										<input type="text" id="insurance_state" class="form-control" name="insurance_state">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_branch">Insurance Branch</label>
+										<input type="text" id="insurance_branch" class="form-control" name="insurance_branch">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="insurance_relationship_officer">Insurance Relationship Officer</label>
+										<input type="text" id="insurance_relationship_officer" class="form-control" name="insurance_relationship_officer">
+									</div>
+									<div class="col-lg-6 form-group mb-3">
+										<label for="duration">Duration</label>
+										<input type="text" id="duration" class="form-control" name="duration">
+									</div>
+
+								</div>
+								<button type="submit" class="btn btn-primary">Submit</button>
+							</form>
+							<!-- end col -->
+
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}
+	<!-- end demo js-->
+{% endblock %}
