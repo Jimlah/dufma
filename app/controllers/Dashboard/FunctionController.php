@@ -22,7 +22,7 @@ class FunctionController extends Controller
     public function logout(Request $request, Response $response)
     {
         Auth::logout();
-        return $response->redirect('/login');
+        return $response->redirect('/sign_in');
     }
 
 
