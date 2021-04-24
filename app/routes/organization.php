@@ -307,16 +307,4 @@ $router->group('/dashboard/organization')->namespace('Dashboard\Organization')->
     $router->get('/insurance/{id}/edit', 'InsuranceController.edit');
     $router->post('/insurance/{id}/edit', 'InsuranceController.update');
     $router->post('/insurance/{id}/delete', 'InsuranceController.destroy');
-
-    // Product Insurancee
-    // $router->get('/product-insurance', 'InsuranceController.product');
-    // $router->post('/product-insurance', 'InsuranceController.store');
-    // $router->post('/product-insurance/{id}', 'InsuranceController.update');
-    // $router->post('/product-insurance/{id}/delete', 'InsuranceController.destroy');
-
-    // // Service Insurance
-    // $router->get('/service-insurance', 'InsuranceController.service');
-    // $router->post('/service-insurance', 'InsuranceController.store');
-    // $router->post('/service-insurance/{id}', 'InsuranceController.update');
-    // $router->post('/service-insurance/{id}/delete', 'InsuranceController.destroy');
 });

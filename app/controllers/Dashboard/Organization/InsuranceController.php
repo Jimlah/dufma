@@ -148,7 +148,7 @@ class InsuranceController extends Controller
             return $response->withSession('msg', [$errors, 'error'])->redirect($request->url()->getPath());
         }
 
-        InsuranceModel::update($id, [
+        InsuranceModel::findByPrimaryKeyAndUpdate($id, [
             'name' => $name,
             'insurance_parameter' => $insurance_parameter,
             "quantity" => $quantity,

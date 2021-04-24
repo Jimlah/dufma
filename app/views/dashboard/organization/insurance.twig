@@ -1,6 +1,8 @@
 {% extends "layouts/dashboard.twig" %}
 
-{% block title %} Insurance {% endblock %}
+{% block title %}
+	Insurance
+{% endblock %}
 
 {% block style %}
 	{{css('vendor/dataTables.bootstrap4')}}
@@ -33,7 +35,7 @@
 						<div class="card-body">
 							<div class="row mb-2">
 								<div class="col-sm-4">
-									<a href="" class="btn btn-danger mb-2">
+									<a href="/dashboard/organization/insurance/create" class="btn btn-danger mb-2">
 										<i class="mdi mdi-plus-circle mr-2"></i>
 										Add Insurance</a>
 								</div>
@@ -69,17 +71,19 @@
 										{% for item in insurance %}
 											<tr>
 												<td>{{item.name}}</td>
-												<td>{{item.category}}</td>
+												<td>{{item.category == 2 ? "Service" : "Product"}}</td>
 												<td>{{item.start_date | date('d M Y')}}</td>
 												<td>{{item.end_date | date('d M Y')}}</td>
 												<td>{{item.officer_name}}</td>
 												<td>{{item.created_at | date('d M Y')}}</td>
 												<td>
-													<a href="" class="action-icon" >
+													<a href="/dashboard/organization/insurance/{{item.id}}" class="action-icon">
+														<i class="mdi mdi-eye-outline"></i>
+													</a>
+													<a href="/dashboard/organization/insurance/{{item.id}}/edit" class="action-icon">
 														<i class="mdi mdi-square-edit-outline"></i>
 													</a>
-
-													<a href="" class="action-icon">
+													<a href="/dashboard/organization/insurance/{{item.id}}/delete" class="action-icon">
 														<i class="mdi mdi-delete"></i>
 													</a>
 												</td>

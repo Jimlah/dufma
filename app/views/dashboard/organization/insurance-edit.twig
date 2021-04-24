@@ -37,7 +37,7 @@
 								<div class="row">
 									<div class="col-lg-6 form-group mb-3">
 										<label for="category">Category</label>
-										<select id="category" class="form-control" name="name">
+										<select id="category" class="form-control" name="category">
 											<option disabled>Select Option</option>
 											{% for key, value in category %}
 												<option value="{{key}}" {{key == insurance.category ? "SELECTED" : ''}}>{{value}}</option>
@@ -46,7 +46,7 @@
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="name">Name</label>
-										<input type="text" id="name" class="form-control" name="name" value="{{insurance.quantity ?? ''}}">
+										<input type="text" id="name" class="form-control" name="name" value="{{insurance.name ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="quantity">Quantity</label>
@@ -62,11 +62,11 @@
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="start_date">Start Date</label>
-										<input type="text" id="start_date" class="form-control" name="start_date" value="{{insurance.start_date ?? ''}}">
+										<input type="date" id="start_date" class="form-control" name="start_date" value="{{insurance.start_date | date('d/m/y')}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="end_date">End Date</label>
-										<input type="text" id="end_date" class="form-control" name="end_date" value="{{insurance.end_date ?? ''}}">
+										<input type="date" id="end_date" class="form-control" name="end_date" value="{{insurance.end_date | date('d/m/y')}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="expected_number_inspection">Expected_Number Inspection</label>
@@ -74,56 +74,56 @@
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="insurance_cost">Insurance Cost</label>
-										<input type="text" id="insurance_cost" class="form-control" name="insurance_cost">
+										<input type="text" id="insurance_cost" class="form-control" name="insurance_cost" value="{{insurance.insurance_cost ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="insurance_terms">insurance_terms</label>
-										<input type="text" id="insurance_terms" class="form-control" name="insurance_terms">
+										<input type="text" id="insurance_terms" class="form-control" name="insurance_terms" value="{{insurance.insurance_terms ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="officer_name">Officer Name</label>
-										<input type="text" id="officer_name" class="form-control" name="officer_name">
+										<input type="text" id="officer_name" class="form-control" name="officer_name" value="{{insurance.officer_name ?? ''}}">
 									</div>
 
 									<div class="col-lg-6 form-group mb-3">
 										<label for="company_name">company_name</label>
-										<input type="text" id="company_name" class="form-control" name="company_name">
+										<input type="text" id="company_name" class="form-control" name="company_name" value="{{insurance.company_name ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="purpose">purpose</label>
-										<input type="text" id="purpose" class="form-control" name="purpose">
+										<input type="text" id="purpose" class="form-control" name="purpose" value="{{insurance.purpose ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="total_cost">Total Cost</label>
-										<input type="text" id="total_cost" class="form-control" name="total_cost">
+										<input type="text" id="total_cost" class="form-control" name="total_cost" value="{{insurance.total_cost ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="application_date">Application Date</label>
-										<input type="date" id="application_date" class="form-control" name="application_date">
+										<input type="date" id="application_date" class="form-control" name="application_date" value="{{insurance.application_date ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="inspection_date">Inspection Date</label>
-										<input type="date" id="inspection_date" class="form-control" name="inspection_date">
+										<input type="date" id="inspection_date" class="form-control" name="inspection_date" value="{{insurance.inspection_date ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="insurance_approval_date">Insurance Approval Date</label>
-										<input type="text" id="insurance_approval_date" class="form-control" name="insurance_approval_date">
+										<input type="text" id="insurance_approval_date" class="form-control" name="insurance_approval_date" value="{{insurance.insurance_approval_date ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="total_cost">Insurance State</label>
-										<input type="text" id="insurance_state" class="form-control" name="insurance_state">
+										<input type="text" id="insurance_state" class="form-control" name="insurance_state" value="{{insurance.insurance_state ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="insurance_branch">Insurance Branch</label>
-										<input type="text" id="insurance_branch" class="form-control" name="insurance_branch">
+										<input type="text" id="insurance_branch" class="form-control" name="insurance_branch" value="{{insurance.insurance_branch ?? ''}}" >
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="insurance_relationship_officer">Insurance Relationship Officer</label>
-										<input type="text" id="insurance_relationship_officer" class="form-control" name="insurance_relationship_officer">
+										<input type="text" id="insurance_relationship_officer" class="form-control" name="insurance_relationship_officer" value="{{insurance.insurance_relationship_officer ?? ''}}">
 									</div>
 									<div class="col-lg-6 form-group mb-3">
 										<label for="duration">Duration</label>
-										<input type="text" id="duration" class="form-control" name="duration">
+										<input type="text" id="duration" class="form-control" name="duration" value="{{insurance.duration ?? ''}}">
 									</div>
 
 								</div>
