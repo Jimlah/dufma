@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controllers\Dashboard\Organization;
+namespace App\Controllers\Dashboard\Employee;
 
 use App\Core\Http\Request;
 use App\Core\Http\Response;
@@ -14,7 +14,7 @@ class PestGlossaryController extends Controller
     public function index(Request $request, Response $response)
     {
         $pests = PestdiseaseModel::findAllBy('type', PestdiseaseProvider::PEST);
-        return $response->view("dashboard.organization.pest_glossary", [
+        return $response->view("dashboard.employee.pest_glossary", [
             "pests" => $pests
         ]);
     }
@@ -53,7 +53,7 @@ class PestGlossaryController extends Controller
 
         PestdiseaseModel::createEntry([
             'userid' => $user->id(),
-            'orgid' => $user->id(),
+            'orgid' => $user->userid(),
             "name" => $name,
             "sci_name" => $sci_name,
             "category" => $category,
@@ -67,7 +67,7 @@ class PestGlossaryController extends Controller
         ]);
 
         $message = "You have successfully added to the pests Database";
-        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/organization/pests-glossary');
+        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/employee/pests-glossary');
     }
 
     public function update(Request $request, Response $response)
@@ -118,7 +118,7 @@ class PestGlossaryController extends Controller
         ]);
 
         $message = "You have successfully updated the Pests Database";
-        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/organization/pests-glossary');
+        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/employee/pests-glossary');
     }
 
     public function destroy(Request $request, Response $response)
@@ -127,6 +127,6 @@ class PestGlossaryController extends Controller
 
         PestdiseaseModel::findByPrimaryKeyAndRemove($id);
         $message = "You have successfully deleted from the Pests Database";
-        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/organization/pests-glossary');
+        return $response->withSession('msg', [$message, 'alert'])->redirect('/dashboard/employee/pests-glossary');
     }
 }

@@ -56,7 +56,7 @@ class DiseaseGlossaryController extends Controller
 
         PestdiseaseModel::createEntry([
             'userid' => $user->id(),
-            'orgid' => $user->userid(),
+            'orgid' => $user->id(),
             "name" => $name,
             "sci_name" => $sci_name,
             "category" => $category,

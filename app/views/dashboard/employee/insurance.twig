@@ -1,0 +1,145 @@
+{% extends "layouts/dashboard.twig" %}
+
+{% block title %}
+	Insurance
+{% endblock %}
+
+{% block style %}
+	{{css('vendor/dataTables.bootstrap4')}}
+	{{css('vendor/responsive.bootstrap4')}}
+	{{css('vendor/buttons.bootstrap4')}}
+	{{css('vendor/select.bootstrap4')}}
+{% endblock %}
+
+{% block main %}
+
+
+	<div class="content-page">
+		<div
+			class="content">
+
+			<!-- start page title -->
+			<div class="row">
+				<div class="col-12">
+					<div class="page-title-box">
+						<h4 class="page-title">Insurance</h4>
+					</div>
+				</div>
+			</div>
+			<!-- end page title -->
+
+			{{get_alert()}}
+			<div class="row">
+				<div class="col-12">
+					<div class="card">
+						<div class="card-body">
+							<div class="row mb-2">
+								<div class="col-sm-4">
+									<a href="/dashboard/employee/insurance/create" class="btn btn-danger mb-2">
+										<i class="mdi mdi-plus-circle mr-2"></i>
+										Add Insurance</a>
+								</div>
+								<div class="col-sm-8">
+									<div class="text-sm-right">
+										<button type="button" class="btn btn-success mb-2 mr-1">
+											<i class="mdi mdi-cog-outline"></i>
+										</button>
+										<button type="button" class="btn btn-light mb-2 mr-1">Import</button>
+										<button type="button" class="btn btn-light mb-2">Export</button>
+									</div>
+								</div>
+								<!-- end col-->
+							</div>
+
+							<div class="table-responsive">
+								<table id="datatable-buttons" class="table table-striped dt-responsive nowrap w-100">
+									<thead>
+										<tr>
+											<th>Name</th>
+											<th>Category</th>
+											<th>Start Date</th>
+											<th>End Date</th>
+											<th>Officer Name</th>
+											<th>Date</th>
+											<td>Action</td>
+										</tr>
+									</thead>
+
+
+									<tbody>
+
+										{% for item in insurance %}
+											<tr>
+												<td>{{item.name}}</td>
+												<td>{{item.category == 2 ? "Service" : "Product"}}</td>
+												<td>{{item.start_date | date('d M Y')}}</td>
+												<td>{{item.end_date | date('d M Y')}}</td>
+												<td>{{item.officer_name}}</td>
+												<td>{{item.created_at | date('d M Y')}}</td>
+												<td>
+													<a href="/dashboard/employee/insurance/{{item.id}}" class="action-icon">
+														<i class="mdi mdi-eye-outline"></i>
+													</a>
+													<a href="/dashboard/employee/insurance/{{item.id}}/edit" class="action-icon">
+														<i class="mdi mdi-square-edit-outline"></i>
+													</a>
+													<a href="/dashboard/employee/insurance/{{item.id}}/delete" class="action-icon">
+														<i class="mdi mdi-delete"></i>
+													</a>
+												</td>
+											</tr>
+										{% endfor %}
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<!-- end card-body-->
+					</div>
+					<!-- end card-->
+				</div>
+				<!-- end col -->
+			</div>
+			<!-- end row -->
+
+		</div>
+		<!-- End Content -->
+
+		<!-- Footer Start -->
+		<footer class="footer">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-6">
+						2018 - 2020 © Hyper - Coderthemes.com
+					</div>
+					<div class="col-md-6">
+						<div class="text-md-right footer-links d-none d-md-block">
+							<a href="javascript: void(0);">About</a>
+							<a href="javascript: void(0);">Support</a>
+							<a href="javascript: void(0);">Contact Us</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</footer>
+
+
+		<!-- end Footer -->
+	</div>
+	<!-- content-page -->
+{% endblock %}
+{% block js %}
+	<!-- third party js -->
+	{{jscript('vendor/jquery.dataTables.min')}}
+	{{jscript('vendor/dataTables.bootstrap4')}}
+	{{jscript('vendor/dataTables.responsive.min')}}
+	{{jscript('vendor/responsive.bootstrap4.min')}}
+	{{jscript('vendor/dataTables.buttons.min')}}
+	{{jscript('vendor/buttons.bootstrap4.min')}}
+	{{jscript('vendor/buttons.html5.min')}}
+	{{jscript('vendor/buttons.flash.min')}}
+	{{jscript('vendor/buttons.print.min')}}
+	{{jscript('vendor/dataTables.keyTable.min')}}
+	{{jscript('vendor/dataTables.select.min')}}
+	<!-- third party js ends -->
+	<!-- demo app -->
+{{jscript('pages/demo.datatable-init')}}<!-- end demo js-->{% endblock %}
